@@ -1,0 +1,96 @@
+
+    <div id="container" class="cls-container">
+
+
+		<!-- BACKGROUND IMAGE -->
+		<!--===================================================-->
+	<div id="bg-overlay" class="bg-img" style="background-image: url('assets/img/bg-img/financas.jpg')"></div>
+    <div [ngClass]="classCss" role="alert" *ngIf="message">
+      <strong>{{ message.text }}</strong>
+    </div>
+		<!-- REGISTRATION FORM -->
+		<!--===================================================-->
+		<div class="cls-content">
+		    <div class="cls-content-lg panel">
+
+		        <div class="panel-body">
+		            <div class="mar-ver pad-btm">
+		                <h1 class="h3">ControlMe</h1>
+		                <p>Seja bem vindo ao ControlMe! Vamos configurar sua conta.</p>
+		            </div>
+
+                <form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+		                <div class="row">
+		                    <div class="col-sm-6">
+		                        <div class="form-group">
+                              <input type="text"
+                                     [(ngModel)]="usuario.dsNome"
+                                     name="dsNome"
+                                     class="form-control"
+                                     id="inputDsNome"
+                                     placeholder="Nome completo"
+                                     #dsNome="ngModel"
+                                     maxlength="100"
+                                     required>
+		                        </div>
+		                        <div class="form-group">
+		                            <input type="email"
+		          					               [(ngModel)]="usuario.dsEmail"
+		                                   name="dsEmail"
+		                                   class="form-control"
+		                                   id="inputDsEmail"
+		                                   placeholder="E-mail"
+		                                   #dsEmail="ngModel"
+												               maxlength="150"
+                                       ngModel email
+		                                   required>
+		                        </div>
+		                    </div>
+		                    <div class="col-sm-6">
+		                        <div class="form-group">
+		                            <input type="password"
+                                       [(ngModel)]="usuario.dsSenha"
+                                       name="dsSenha"
+                                       id="inputDsSenha"
+                                       #dsSenha="ngModel"
+                                       maxlength="50"
+                                       class="form-control"
+                                       placeholder="Senha"
+                                       required>
+		                        </div>
+		                        <div class="form-group">
+                              <input type="password"
+                                     [(ngModel)]="usuario.dsConfirmarSenha"
+                                     name="dsConfirmarSenha"
+                                     id="inputDsConfirmarSenha"
+                                     #dsConfirmaSenha="ngModel"
+                                     maxlength="50"
+                                     class="form-control"
+                                     placeholder="Confirme sua senha"
+                                     required>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="checkbox pad-btm text-left">
+		                    <input [(ngModel)]="fgCheck.selected" name="fgCheck" #fgCheck="ngModel" id="demo-form-checkbox" class="magic-checkbox" type="checkbox" required>
+		                    <label for="demo-form-checkbox">Eu concordo com os <a href="#" class="btn-link text-bold">Termos de Uso e Politica de Privacidade</a></label>
+		                </div>
+		                <button class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid" type="submit">Registrar</button>
+                  </form>
+		        </div>
+		        <div class="pad-all">
+		            Já possui uma conta? Realize o <a href="#" [routerLink]="['/login']" class="btn-link mar-rgt text-bold">Login.</a>
+
+		            <div class="media pad-top bord-top">
+
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<!--===================================================-->
+
+
+
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
