@@ -15,7 +15,10 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from './components/shared/shared.module';
 import { RegisterComponent } from './components/security/register/register.component';
 import { UsuarioService } from './services/usuario/usuario.service';
-
+import { ConfirmComponent } from './components/security/confirm/confirm.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatMenuModule, MatToolbarModule} from '@angular/material';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 
 @NgModule({
@@ -23,13 +26,22 @@ import { UsuarioService } from './services/usuario/usuario.service';
     AppComponent,
     LoginComponent,
     TemplateComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    Ng4LoadingSpinnerModule.forRoot(),
     HttpClientModule
   ],
   providers: [

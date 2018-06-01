@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpHandler, HttpEvent, HttpRequest, HttpResponse, Htt
 import { Observable } from "rxjs/Observable";
 import { UtilService } from '../../services/util.service';
 import { TokenService } from '../../services/token/token.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/do';
 
@@ -12,12 +13,15 @@ export class AuthInterceptor implements HttpInterceptor {
     util : UtilService;
 
     constructor(private tokenService: TokenService,
+      private spinnerService: Ng4LoadingSpinnerService,
                 private router: Router) {
         this.util = UtilService.getInstance();
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>  {
         let authRequest : any;
+
+        this.spinnerService.show();
 
         if(this.util.isLoggedIn()){
 
@@ -31,7 +35,11 @@ export class AuthInterceptor implements HttpInterceptor {
             });
             return next.handle(authRequest).do((event: HttpEvent<any>) => {
               if (event instanceof HttpResponse) {
+
                 //token ok.. continua o processo (pode ser implementado a logica de sempre atualizar o token)
+
+                //desativando loading
+                this.spinnerService.hide();
               }
             }, (err: any) => {
               if (err instanceof HttpErrorResponse) {
@@ -40,11 +48,27 @@ export class AuthInterceptor implements HttpInterceptor {
                   localStorage.removeItem("cmUsr");
                   localStorage.removeItem("cmTkm");
                   this.router.navigate(['/login']);
+
+                  //desativando loading
+                  this.spinnerService.hide();
+
                 }
               }
             });
         } else {
-            return next.handle(req);
+          return next.handle(req).do((event: HttpEvent<any>) => {
+            if (event instanceof HttpResponse) {
+              //desativando loaging
+              this.spinnerService.hide();
+            }
+          }, (err: any) => {
+            if (err instanceof HttpErrorResponse) {
+
+                this.spinnerService.hide();
+
+              
+            }
+          });
         }
     }
 

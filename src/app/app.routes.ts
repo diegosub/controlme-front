@@ -6,13 +6,14 @@ import { AuthGuard } from './components/security/auth.guard';
 import { TemplateComponent } from './components/shared/template/template.component';
 import { CONTENT_ROUTES } from './components/shared/shared.routes';
 import { RegisterComponent } from './components/security/register/register.component';
+import { ConfirmComponent } from './components/security/confirm/confirm.component';
 
 const appRoutes : Routes = [
 
 
     { path : 'login', component: LoginComponent },
     { path : 'registrar', component: RegisterComponent },
-
+    { path : 'confirm', component: ConfirmComponent },
     {
       path: '',
       redirectTo: 'home',

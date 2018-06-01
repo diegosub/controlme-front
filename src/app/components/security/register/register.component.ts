@@ -4,7 +4,9 @@ import { Base } from '../../generic/base';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { ResponseApi } from '../../../model/response-api';
-import { Md5 } from 'ts-md5/dist/md5';
+import { MatDialog, MatDialogConfig } from "@angular/material";
+import { LoginComponent } from '../login/login.component';
+import { ConfirmComponent } from '../confirm/confirm.component';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +19,7 @@ export class RegisterComponent extends Base {
   private fgCheck: boolean = true;
 
   constructor(public router: Router,
+              private dialog: MatDialog,
               private usuarioService: UsuarioService) {
     super(router);
   }
@@ -25,6 +28,7 @@ export class RegisterComponent extends Base {
 
   //REGISTRAR USUARIO
   salvar(){
+
     this.message = {};
 
     //VALIDAR SENHA MIN 5 CARACTERES
@@ -47,12 +51,12 @@ export class RegisterComponent extends Base {
       return false;
     }
 
-    //REGISTRAR USUARIO
+    // //REGISTRAR USUARIO
     this.usuarioService.registrar(this.usuario).subscribe((responseApi:ResponseApi) => {
       this.usuario = responseApi.data;
 
       //ABRIR MODAL COM MENSAGEM DE EMAIL ENVIADO E REDIRECIONAR PRO LOGIN
-
+      this.openConfirmCadastro();
 
     } , err => {
       this.showMessage({
@@ -61,6 +65,12 @@ export class RegisterComponent extends Base {
       });
     });
 
+  }
+
+  openConfirmCadastro() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    this.dialog.open(ConfirmComponent, dialogConfig);
   }
 
 }
