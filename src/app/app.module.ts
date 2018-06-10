@@ -19,6 +19,7 @@ import { ConfirmComponent } from './components/security/confirm/confirm.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatMenuModule, MatToolbarModule} from '@angular/material';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { RegisterConfirmComponent } from './components/security/register-confirm/register-confirm.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     LoginComponent,
     TemplateComponent,
     RegisterComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    RegisterConfirmComponent
   ],
   imports: [
     BrowserModule,

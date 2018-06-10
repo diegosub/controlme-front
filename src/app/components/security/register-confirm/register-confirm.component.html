@@ -1,0 +1,37 @@
+
+    <div id="container" class="cls-container">
+
+
+		<!-- BACKGROUND IMAGE -->
+		<!--===================================================-->
+	<div id="bg-overlay" class="bg-img" style="background-image: url('assets/img/bg-img/financas.jpg')"></div>
+    <div [ngClass]="classCss" role="alert" *ngIf="message">
+      <strong>{{ message.text }}</strong>
+    </div>
+		<!-- REGISTRATION FORM -->
+		<!--===================================================-->
+		<div class="cls-content">
+		    <div class="cls-content-lg panel" *ngIf="sucesso">
+		        <div class="panel-body">
+		            <div class="mar-ver pad-btm">
+		                <h1 class="h3">ControlMe</h1>
+		                <p style="color:green;">Seu cadastro foi ativado com sucesso. Agora você já pode usar nossos serviços.</p>
+		            </div>
+		        </div>
+
+		        <div class="pad-all">
+		            Vamos conhecer a plataforma ControlMe? <a href="#" [routerLink]="['/']" class="btn-link mar-rgt text-bold">Entrar</a>
+
+		            <div class="media pad-top bord-top">
+
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<!--===================================================-->
+
+
+
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->

@@ -7,21 +7,18 @@ import { TemplateComponent } from './components/shared/template/template.compone
 import { CONTENT_ROUTES } from './components/shared/shared.routes';
 import { RegisterComponent } from './components/security/register/register.component';
 import { ConfirmComponent } from './components/security/confirm/confirm.component';
+import { NotfoundComponent } from './components/shared/notfound/notfound.component';
+import { RegisterConfirmComponent } from './components/security/register-confirm/register-confirm.component';
+
 
 const appRoutes : Routes = [
-
 
     { path : 'login', component: LoginComponent },
     { path : 'registrar', component: RegisterComponent },
     { path : 'confirm', component: ConfirmComponent },
-    {
-      path: '',
-      redirectTo: 'home',
-      pathMatch: 'full',
-    },
-
-    { path: '', component: TemplateComponent, data: { title: 'full Views' }, children: CONTENT_ROUTES }
-
+    { path : 'register-confirm', component: RegisterConfirmComponent },
+    { path : '', component: TemplateComponent, data: { title: 'full Views' }, children: CONTENT_ROUTES },
+    { path : '**', component: NotfoundComponent }
 
 ];
 

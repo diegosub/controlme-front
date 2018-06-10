@@ -14,6 +14,7 @@ import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { CategoriaTitleComponent } from '../categoria/title/categoria-title.component';
 import { CategoriaListComponent } from '../categoria/list/categoria-list.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
     exports: [
@@ -37,7 +38,8 @@ import { CategoriaListComponent } from '../categoria/list/categoria-list.compone
         MenuComponent,
         CategoriaListComponent,
         CategoriaTitleComponent,
-        FooterComponent
+        FooterComponent,
+        NotfoundComponent
     ],
     providers: [
       DialogService,

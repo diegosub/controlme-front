@@ -7,7 +7,7 @@ import { CategoriaListComponent } from '../categoria/list/categoria-list.compone
 export const CONTENT_ROUTES: Routes = [
 
         { path : '', component: HomeComponent, canActivate: [AuthGuard] },
-        { path : 'categoria-list', component: CategoriaListComponent, canActivate: [AuthGuard]},
+        { path : 'categoria-list', component: CategoriaListComponent, canActivate: [AuthGuard]}
 
 
 ]
