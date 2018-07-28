@@ -42,6 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 this.spinnerService.hide();
               }
             }, (err: any) => {
+
               if (err instanceof HttpErrorResponse) {
                 if (err.status === 401) {
                   //token expirado, realize o logout
@@ -53,6 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
                   this.spinnerService.hide();
 
                 }
+
               }
             });
         } else {
@@ -66,7 +68,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
                 this.spinnerService.hide();
 
-              
+
             }
           });
         }

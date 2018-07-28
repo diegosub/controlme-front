@@ -16,7 +16,7 @@ const appRoutes : Routes = [
     { path : 'login', component: LoginComponent },
     { path : 'registrar', component: RegisterComponent },
     { path : 'confirm', component: ConfirmComponent },
-    { path : 'register-confirm', component: RegisterConfirmComponent },
+    { path : 'confirmarCadastro', component: RegisterConfirmComponent },
     { path : '', component: TemplateComponent, data: { title: 'full Views' }, children: CONTENT_ROUTES },
     { path : '**', component: NotfoundComponent }
 

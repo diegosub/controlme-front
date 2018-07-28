@@ -5,7 +5,7 @@
 		<!-- BACKGROUND IMAGE -->
 		<!--===================================================-->
 	<div id="bg-overlay" class="bg-img" style="background-image: url('assets/img/bg-img/financas.jpg')"></div>
-    <div [ngClass]="classCss" role="alert" *ngIf="message">
+    <div [ngClass]="classCss" role="alert" *ngIf="message != null">
       <strong>{{ message.text }}</strong>
     </div>
 		<!-- REGISTRATION FORM -->

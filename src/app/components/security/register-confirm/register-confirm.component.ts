@@ -14,6 +14,8 @@ export class RegisterConfirmComponent extends Base {
 
   tokenCadastro = new TokenCadastro(null,null,'',false);
 
+  controle = 'N';
+
   constructor(private route: ActivatedRoute,
               public router: Router,
               private usuarioService: UsuarioService) {
