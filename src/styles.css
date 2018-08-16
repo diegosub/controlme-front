@@ -1,2 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import '~ngx-toastr/toastr.css';
+
+
+.mat-dialog-container {
+    padding: 1px !important;
+}
+
+.cdk-overlay-container {
+    z-index: 10000;
+}
+
+.spinner {
+    z-index: 10001 !important;
+}

@@ -44,17 +44,16 @@ export class AuthInterceptor implements HttpInterceptor {
             }, (err: any) => {
 
               if (err instanceof HttpErrorResponse) {
+
+                //desativando loading
+                this.spinnerService.hide();
+                
                 if (err.status === 401) {
                   //token expirado, realize o logout
                   localStorage.removeItem("cmUsr");
                   localStorage.removeItem("cmTkm");
                   this.router.navigate(['/login']);
-
-                  //desativando loading
-                  this.spinnerService.hide();
-
                 }
-
               }
             });
         } else {

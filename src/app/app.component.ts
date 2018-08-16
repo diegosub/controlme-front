@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  template = '<div><img src="../assets/img/loading-icon.gif" /></div>';
 }

@@ -2,7 +2,6 @@ import { TokenService } from './services/token/token.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AuthInterceptor } from './components/security/auth.interceptor';
 import { AuthGuard } from './components/security/auth.guard';
 
 import { AppComponent } from './app.component';

@@ -1,0 +1,41 @@
+<form #form="ngForm" class="form-horizontal" (ngSubmit)="inserir()" novalidate>
+<div class="panel panel-trans">
+  <div class="panel-body demo-nifty-modal">
+
+      <!--Static Examplel-->
+      <div class="modal">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" (click)="fechar()"><i class="pci-cross pci-circle"></i></button>
+                      <h4 class="modal-title">Cadastrar Categoria de {{tipo}}</h4>
+                  </div>
+
+                  <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Descrição</label>                                    
+                                    <input type="text"
+	          					    [(ngModel)]="objeto.dsCategoria"
+                                           name="dsCategoria"
+                                          class="form-control"
+                                             id="inputDsCategoria"
+                                    placeholder="Informe a descrição da categoria"
+                                   #dsCategoria="ngModel" required>
+                                </div>
+                            </div>                           
+                        </div>                        
+                  </div>
+
+                  <div class="modal-footer">
+                      <button class="btn btn-default" (click)="fechar()" data-dismiss="modal" type="button">Fechar</button>
+                      <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Salvar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
+</form>

@@ -7,7 +7,6 @@ import { DialogService } from '../../dialog-service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../security/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TemplateComponent } from './template/template.component';
 import { HomeComponent } from '../home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
@@ -15,13 +14,18 @@ import { FooterComponent } from './footer/footer.component';
 import { CategoriaTitleComponent } from '../categoria/title/categoria-title.component';
 import { CategoriaListComponent } from '../categoria/list/categoria-list.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { CategoriaService } from '../../services/categoria/categoria.service';
+import { CategoriaFormComponent } from '../categoria/form/categoria-form.component';
+import { MatDialogModule, MatToolbarModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
+import { ToastrModule } from 'ngx-toastr';
+import { PagerService } from '../../services/pager.service';
+
 
 @NgModule({
     exports: [
       HeaderComponent,
-      MenuComponent,
-      FooterComponent,
-      CategoriaTitleComponent,
+      MenuComponent,      
+      FooterComponent,    
       CommonModule
     ],
     imports: [
@@ -29,8 +33,16 @@ import { NotfoundComponent } from './notfound/notfound.component';
         RouterModule,
         FormsModule,
         HttpClientModule,
-        CommonModule,
-        BrowserAnimationsModule
+        CommonModule,        
+        MatDialogModule,
+        MatToolbarModule,
+        MatCardModule,
+        MatMenuModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot()
     ],
     declarations: [
         HomeComponent,
@@ -38,11 +50,14 @@ import { NotfoundComponent } from './notfound/notfound.component';
         MenuComponent,
         CategoriaListComponent,
         CategoriaTitleComponent,
+        CategoriaFormComponent,
         FooterComponent,
         NotfoundComponent
     ],
     providers: [
+      PagerService,
       DialogService,
+      CategoriaService,
       {
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,

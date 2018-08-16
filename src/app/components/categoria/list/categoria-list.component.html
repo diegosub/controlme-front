@@ -2,59 +2,87 @@
 
 <div id="page-content">
 
+	
+
   <div class="row">
-	   <div class="col-sm-6">
-        <div class="panel">
+		<div class="col-sm-12">
+				<div class="panel">							
+						<div class="panel-body">
+							<div class="eq-height clearfix"	>
 
-            <div class="panel-heading">
-              <h3 class="panel-title">Despesas</h3>
-            </div>
+								<div class="col-sm-6">	
+									
+										<div class="panel-heading">
+												<h3 class="panel-title"><b>Despesas</b></h3>
+											</div>
+											<hr>
 
-      	    <!--Data Table-->
-      	    <!--===================================================-->
-      	    <div class="panel-body">
-      	        <div class="pad-btm form-inline">
-      	            <div class="row">
-                      <div class="col-sm-7 table-toolbar-left">
-                          <div class="form-group" style="width:100%">
-                              <input id="demo-input-search2" style="width:100%" type="text" placeholder="Pesquisar" class="form-control" autocomplete="off">
-                          </div>
+									<div class="panel bord-hor">
+												
+												<!--Data Table-->
+												<!--===================================================-->
+												<div class="panel-body">
+														<div class="pad-btm form-inline">
+																<div class="row">
+																	<div class="col-sm-7 table-toolbar-left">
+																			<div class="form-group" style="width:100%">
+																				<input id="demo-input-search2" style="width:100%" type="text" placeholder="Pesquisar" class="form-control" autocomplete="off">
+																			</div>
 
-                      </div>
-                        <div class="col-sm-5 table-toolbar-right">
-      	                    <button id="demo-btn-addrow" class="btn btn-primary" title="Adicionar Categoria de Despesa"><i class="demo-pli-add"></i></button>
-      	                </div>
-      	            </div>
-      	        </div>
-      	        <div class="table-responsive">
-      	            <table class="table table-striped">
-      	                <thead>
-      	                    <tr>
-      	                        <th class="text-center" width="80%">Descrição</th>
-      	                        <th></th>
-      	                    </tr>
-      	                </thead>
-      	                <tbody>
-      	                    <tr>
-      	                        <td>Alimentação</td>
-      	                        <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-      	                    </tr>
-                            <tr>
-                                <td>Transportes</td>
-      	                        <td>-</td>
-      	                        <td>-</td>
-                                <td>-</td>
-      	                    </tr>
-      	                </tbody>
-      	            </table>
-      	        </div>
-      	    </div>
-      	    <!--===================================================-->
-      	    <!--End Data Table-->
-          </div>
-        </div>
+																	</div>
+																		<div class="col-sm-5 table-toolbar-right">
+																				<button (click)="abrirModalInserir('Despesa')" id="demo-btn-addrow" class="btn btn-primary" title="Adicionar Categoria de Despesa"><i class="demo-pli-add"></i></button>
+																		</div>
+																</div>
+														</div>
+														<div class="table-responsive">
+																<table class="table table-striped" *ngIf="listaDespesa.length>0">
+																		<thead>
+																				<tr>
+																						<th class="text-center" width="80%">Descrição</th>
+																						<th></th>
+																				</tr>
+																		</thead>
+																		<tbody>
+																				<tr *ngFor="let categoria of pagedItemsDespesa">
+																						<td>{{categoria.dsCategoria}}</td>
+																						<td>-</td>
+																						<td>-</td>
+																						<td>-</td>
+																				</tr>																				
+																		</tbody>
+																</table>
+														</div>
+
+
+														<div style="text-align:center;" class="fixed-table-pagination">																													
+															<ul *ngIf="pagerDespesa.pages && pagerDespesa.pages.length && listaDespesa.length>0" class="pagination" style="font-size:10px; cursor: pointer;">
+																	<li [ngClass]="{disabled:pagerDespesa.currentPage === 1}">
+																			<a (click)="setPageDespesa(1)"><b><<</b></a>
+																	</li>
+																	<li [ngClass]="{disabled:pagerDespesa.currentPage === 1}">
+																			<a (click)="setPageDespesa(pagerDespesa.currentPage - 1)"><</a>
+																	</li>
+																	<li *ngFor="let page of pagerDespesa.pages" [ngClass]="{active:pagerDespesa.currentPage === page}">
+																			<a (click)="setPageDespesa(page)">{{page}}</a>
+																	</li>
+																	<li [ngClass]="{disabled:pagerDespesa.currentPage === pagerDespesa.totalPages}">
+																			<a (click)="setPageDespesa(pagerDespesa.currentPage + 1)">></a>
+																	</li>
+																	<li [ngClass]="{disabled:pagerDespesa.currentPage === pagerDespesa.totalPages}">
+																			<a (click)="setPageDespesa(pagerDespesa.totalPages)"> >> </a>
+																	</li>
+															</ul>
+														
+															<div style="text-align: center;" *ngIf="listaDespesa.length<=0">
+																Não existe categoria de despesa cadastrada.
+															</div>
+														</div>
+												<!--===================================================-->
+												<!--End Data Table-->
+											</div>
+										</div>
+										</div>
 
 
         <!-- ----------------------- -->
@@ -62,12 +90,15 @@
         <!-- RECEITAS -->
 
         <div class="col-sm-6">
-           <div class="panel">
 
-               <div class="panel-heading">
-                 <h3 class="panel-title">Receitas</h3>
-               </div>
+						<div class="panel-heading">
+								<h3 class="panel-title"><b>Receitas</b></h3>
+							</div>
+							 <hr>
 
+           <div class="panel  bord-hor" >
+
+               
          	    <!--Data Table-->
          	    <!--===================================================-->
          	    <div class="panel-body">
@@ -80,47 +111,67 @@
 
                          </div>
                            <div class="col-sm-5 table-toolbar-right">
-         	                    <button id="demo-btn-addrow" class="btn btn-primary" title="Adicionar Categoria de Receita"><i class="demo-pli-add"></i></button>
+														<button (click)="abrirModalInserir('Receita')" id="demo-btn-addrow" class="btn btn-primary" title="Adicionar Categoria de Receita"><i class="demo-pli-add"></i></button>
          	                </div>
          	            </div>
          	        </div>
          	        <div class="table-responsive">
-         	            <table class="table table-striped">
-         	                <thead>
-         	                    <tr>
-         	                        <th class="text-center" width="80%">Descrição</th>
-         	                        <th></th>
-         	                    </tr>
-         	                </thead>
-         	                <tbody>
-         	                    <tr>
-         	                        <td>Alimentação uyguiyg iuyg iuyg iuy giuyg iyu g</td>
-         	                        <td>-</td>
-                                   <td>-</td>
-                                   <td>-</td>
-         	                    </tr>
-                               <tr>
-                                   <td>Transportes</td>
-         	                        <td>-</td>
-         	                        <td>-</td>
-                                   <td>-</td>
-         	                    </tr>
-         	                </tbody>
-         	            </table>
-         	        </div>
+										<table class="table table-striped" *ngIf="listaReceita.length>0">
+											<thead>
+													<tr>
+															<th class="text-center" width="80%">Descrição</th>
+															<th></th>
+													</tr>
+											</thead>
+											<tbody>
+													<tr *ngFor="let categoria of pagedItemsReceita">
+															<td>{{categoria.dsCategoria}}</td>
+															<td>-</td>
+															<td>-</td>
+															<td>-</td>
+													</tr>																				
+											</tbody>
+										</table>
+									 </div>
+									 
+									 <div style="text-align:center;" class="fixed-table-pagination">																													
+										<ul *ngIf="pagerReceita.pages && pagerReceita.pages.length && listaReceita.length>0" class="pagination" style="font-size:10px; cursor: pointer;">
+												<li [ngClass]="{disabled:pagerReceita.currentPage === 1}">
+														<a (click)="setPageReceita(1)"><b><<</b></a>
+												</li>
+												<li [ngClass]="{disabled:pagerReceita.currentPage === 1}">
+														<a (click)="setPageReceita(pagerReceita.currentPage - 1)"><</a>
+												</li>
+												<li *ngFor="let page of pagerReceita.pages" [ngClass]="{active:pagerReceita.currentPage === page}">
+														<a (click)="setPageReceita(page)">{{page}}</a>
+												</li>
+												<li [ngClass]="{disabled:pagerReceita.currentPage === pagerReceita.totalPages}">
+														<a (click)="setPageReceita(pagerReceita.currentPage + 1)">></a>
+												</li>
+												<li [ngClass]="{disabled:pagerReceita.currentPage === pagerReceita.totalPages}">
+														<a (click)="setPageDespesa(pagerReceita.totalPages)"> >> </a>
+												</li>
+										</ul>
+									
+										<div style="text-align: center;" *ngIf="listaReceita.length<=0">
+											Não existe categoria de despesa cadastrada.
+										</div>
+									</div>
+
+
          	    </div>
          	    <!--===================================================-->
          	    <!--End Data Table-->
              </div>
            </div>
+</div>
+
+</div>
 
 
+</div>
 
-
-
-
-
-
+</div>
 
 
 
