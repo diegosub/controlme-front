@@ -39,18 +39,15 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
     this.popularListaReceita();
   }
 
-  abrirModalInserir(tipo) { 
-
-    const dialogConfig = new MatDialogConfig();
-    
+  abrirModalInserir(tipo) {
+    const dialogConfig = new MatDialogConfig();    
     dialogConfig.data =  {tipo: tipo};
 
     this.dialog.open(CategoriaFormComponent, dialogConfig)
                .afterClosed().subscribe(() => {
       this.popularListaDespesa();
       this.popularListaReceita();
-    });
-  ;
+    });  
   }
 
   popularListaDespesa() {
@@ -66,7 +63,7 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
           this.pagedItemsDespesa = [];
         }
     } , err => {
-      this.tratarErro(err);
+      this.tratarErro(err);      
     });
   }  
 
@@ -84,7 +81,7 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
           this.pagedItemsReceita = [];
         }
     } , err => {
-      this.tratarErro(err);
+      this.tratarErro(err);      
     });
   }
 

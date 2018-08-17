@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 
@@ -19,6 +19,7 @@ import { CategoriaFormComponent } from '../categoria/form/categoria-form.compone
 import { MatDialogModule, MatToolbarModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { ToastrModule } from 'ngx-toastr';
 import { PagerService } from '../../services/pager.service';
+
 
 
 @NgModule({

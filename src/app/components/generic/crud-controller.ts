@@ -1,9 +1,7 @@
 import { OnInit } from '@angular/core';
-import { DialogService } from '../../dialog-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CrudService } from '../../services/shared/crud.service';
 import { ResponseApi } from '../../model/response-api';
-import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 
 export class CrudController<Entity, CT extends { new(item?: any): Entity }> implements OnInit {
@@ -81,7 +79,11 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
   executarPosInserir(){}
 
   tratarErro(err) {
-    this.toastr.error('Detalhes: ' + err['error']['errors'][0],'Erro inesperado!');
+    if(err['error']['errors'] != null) {      
+      this.toastr.error(err['error']['errors'][0], 'Erro!');
+    } else {
+      this.toastr.error('Ocorreu um erro insesperado em nosso servidor, favor tentar novamente.', 'Oops!');
+    }
   }
 
   msgSucesso() {
