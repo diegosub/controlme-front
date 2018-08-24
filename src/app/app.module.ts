@@ -28,7 +28,8 @@ import { RegisterConfirmComponent } from './components/security/register-confirm
     TemplateComponent,
     RegisterComponent,
     ConfirmComponent,
-    RegisterConfirmComponent
+    RegisterConfirmComponent,
+    
   ],
   imports: [
     BrowserModule,

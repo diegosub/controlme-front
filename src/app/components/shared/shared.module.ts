@@ -19,6 +19,7 @@ import { CategoriaFormComponent } from '../categoria/form/categoria-form.compone
 import { MatDialogModule, MatToolbarModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { ToastrModule } from 'ngx-toastr';
 import { PagerService } from '../../services/pager.service';
+import { FilterPipe } from '../generic/filter';
 
 
 
@@ -53,7 +54,8 @@ import { PagerService } from '../../services/pager.service';
         CategoriaTitleComponent,
         CategoriaFormComponent,
         FooterComponent,
-        NotfoundComponent
+        NotfoundComponent,
+        FilterPipe
     ],
     providers: [
       PagerService,

@@ -20,7 +20,7 @@ export class RegisterComponent extends CrudController<Usuario, {new(item?: any):
   constructor(public router: Router,
               private dialog: MatDialog,
               private usuarioService: UsuarioService) {
-    super(router, null, null, null);
+    super(router, null, null, null, null);
   }
 
   ngOnInit() { }

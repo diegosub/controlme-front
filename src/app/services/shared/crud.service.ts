@@ -9,8 +9,8 @@ export abstract class CrudService<Entity> implements GenericService<Entity> {
     
     constructor(private http: HttpClient) {}
     
-    get(entity: Entity) {
-        return this.http.get(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/get`, entity);
+    get(id: any) {
+        return this.http.get(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/${id}`);
     }
     
     inserir(entity: Entity) {
@@ -18,14 +18,16 @@ export abstract class CrudService<Entity> implements GenericService<Entity> {
     }
     
     alterar(entity: Entity) {
-        return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/alterar`, entity);
+        return this.http.put(`${HOST_CONTROLME}/api/`+this.strArtefato(), entity);
     }
 
     pesquisar(entity: Entity) {
         return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/pesquisar`, entity);
     }
 
+    ativarInativar(id:string, status:boolean) {
+        return this.http.delete(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/${id}/${status}`);
+    }
+
     strArtefato(): string { return null }
-
-
 }

@@ -26,58 +26,38 @@
 																<div class="row">
 																	<div class="col-sm-7 table-toolbar-left">
 																			<div class="form-group" style="width:100%">
-																				<input id="demo-input-search2" style="width:100%" type="text" placeholder="Pesquisar" class="form-control" autocomplete="off">
+																				<input id="demo-input-search2" 
+																					style="width:100%" 
+																					[(ngModel)]="filtroCategoriaDespesa"
+																					 type="text" placeholder="Filtrar despesa"
+																					 class="form-control" autocomplete="off">
 																			</div>
 
 																	</div>
 																		<div class="col-sm-5 table-toolbar-right">
-																				<button (click)="abrirModalInserir('Despesa')" id="demo-btn-addrow" class="btn btn-primary" title="Adicionar Categoria de Despesa"><i class="demo-pli-add"></i></button>
+																			<button (click)="abrirModalInserir('Despesa')" id="demo-btn-addrow" class="btn btn-default" title="Adicionar Categoria de Despesa"><i class="demo-pli-recycling"></i></button>
+																			<button (click)="abrirModalInserir('Despesa')" id="demo-btn-addrow" class="btn btn-primary" title="Adicionar Categoria de Despesa"><i class="demo-pli-add"></i></button>
 																		</div>
 																</div>
 														</div>
 														<div class="table-responsive">
-																<table class="table table-striped" *ngIf="listaDespesa.length>0">
+																<table class="table table-striped table-hover" *ngIf="listaDespesa.length>0">
 																		<thead>
 																				<tr>
-																						<th class="text-center" width="80%">Descrição</th>
+																						<th class="text-center" width="80%">Categorias de Despesa</th>
+																						<th></th>
 																						<th></th>
 																				</tr>
 																		</thead>
 																		<tbody>
-																				<tr *ngFor="let categoria of pagedItemsDespesa">
+																				<tr *ngFor="let categoria of listaDespesa | filter: filtroCategoriaDespesa">
 																						<td>{{categoria.dsCategoria}}</td>
-																						<td>-</td>
-																						<td>-</td>
-																						<td>-</td>
+																						<td><i class="fa fa-edit" (click)="abrirModalAlterar('Despesa', categoria.idCategoria)" style="font-size: 16px; cursor: pointer;" title="Editar"></i></td>
+																						<td><i class="fa fa-remove" (click)="inativar(categoria.idCategoria)" style="font-size: 16px; cursor: pointer;" title="Inativar"></i></td>
 																				</tr>																				
 																		</tbody>
 																</table>
-														</div>
-
-
-														<div style="text-align:center;" class="fixed-table-pagination">																													
-															<ul *ngIf="pagerDespesa.pages && pagerDespesa.pages.length && listaDespesa.length>0" class="pagination" style="font-size:10px; cursor: pointer;">
-																	<li [ngClass]="{disabled:pagerDespesa.currentPage === 1}">
-																			<a (click)="setPageDespesa(1)"><b><<</b></a>
-																	</li>
-																	<li [ngClass]="{disabled:pagerDespesa.currentPage === 1}">
-																			<a (click)="setPageDespesa(pagerDespesa.currentPage - 1)"><</a>
-																	</li>
-																	<li *ngFor="let page of pagerDespesa.pages" [ngClass]="{active:pagerDespesa.currentPage === page}">
-																			<a (click)="setPageDespesa(page)">{{page}}</a>
-																	</li>
-																	<li [ngClass]="{disabled:pagerDespesa.currentPage === pagerDespesa.totalPages}">
-																			<a (click)="setPageDespesa(pagerDespesa.currentPage + 1)">></a>
-																	</li>
-																	<li [ngClass]="{disabled:pagerDespesa.currentPage === pagerDespesa.totalPages}">
-																			<a (click)="setPageDespesa(pagerDespesa.totalPages)"> >> </a>
-																	</li>
-															</ul>
-														
-															<div style="text-align: center;" *ngIf="listaDespesa.length<=0">
-																Não existe categoria de despesa cadastrada.
-															</div>
-														</div>
+														</div>														
 												<!--===================================================-->
 												<!--End Data Table-->
 											</div>
@@ -106,59 +86,39 @@
          	            <div class="row">
                          <div class="col-sm-7 table-toolbar-left">
                              <div class="form-group" style="width:100%">
-                                 <input id="demo-input-search2" style="width:100%" type="text" placeholder="Pesquisar" class="form-control" autocomplete="off">
+								<input id="demo-input-search2" 
+								style="width:100%" 
+								[(ngModel)]="filtroCategoriaReceita"
+								 type="text" placeholder="Filtrar receita"
+								 class="form-control" autocomplete="off">
                              </div>
 
                          </div>
                            <div class="col-sm-5 table-toolbar-right">
-														<button (click)="abrirModalInserir('Receita')" id="demo-btn-addrow" class="btn btn-primary" title="Adicionar Categoria de Receita"><i class="demo-pli-add"></i></button>
-         	                </div>
+							    <button (click)="abrirModalInserir('Receita')" id="demo-btn-addrow" class="btn btn-default" title="Adicionar Categoria de Despesa"><i class="demo-pli-recycling"></i></button>
+								<button (click)="abrirModalInserir('Receita')" id="demo-btn-addrow" class="btn btn-primary" title="Adicionar Categoria de Receita"><i class="demo-pli-add"></i></button>
+         	               </div>
          	            </div>
          	        </div>
          	        <div class="table-responsive">
-										<table class="table table-striped" *ngIf="listaReceita.length>0">
+										<table class="table table-striped table-hover" *ngIf="listaReceita.length>0">
 											<thead>
 													<tr>
-															<th class="text-center" width="80%">Descrição</th>
+															<th class="text-center" width="80%">Categorias de Receita</th>
+															<th></th>
 															<th></th>
 													</tr>
 											</thead>
 											<tbody>
-													<tr *ngFor="let categoria of pagedItemsReceita">
+													<tr *ngFor="let categoria of listaReceita | filter : filtroCategoriaReceita">
 															<td>{{categoria.dsCategoria}}</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
+															<td><i class="fa fa-edit" (click)="abrirModalAlterar('Receita', categoria.idCategoria)" style="font-size: 16px; cursor: pointer;" title="Editar"></i></td>
+															<td><i class="fa fa-remove" (click)="inativar(categoria.idCategoria)" style="font-size: 16px; cursor: pointer;" title="Inativar"></i></td>
 													</tr>																				
 											</tbody>
 										</table>
 									 </div>
 									 
-									 <div style="text-align:center;" class="fixed-table-pagination">																													
-										<ul *ngIf="pagerReceita.pages && pagerReceita.pages.length && listaReceita.length>0" class="pagination" style="font-size:10px; cursor: pointer;">
-												<li [ngClass]="{disabled:pagerReceita.currentPage === 1}">
-														<a (click)="setPageReceita(1)"><b><<</b></a>
-												</li>
-												<li [ngClass]="{disabled:pagerReceita.currentPage === 1}">
-														<a (click)="setPageReceita(pagerReceita.currentPage - 1)"><</a>
-												</li>
-												<li *ngFor="let page of pagerReceita.pages" [ngClass]="{active:pagerReceita.currentPage === page}">
-														<a (click)="setPageReceita(page)">{{page}}</a>
-												</li>
-												<li [ngClass]="{disabled:pagerReceita.currentPage === pagerReceita.totalPages}">
-														<a (click)="setPageReceita(pagerReceita.currentPage + 1)">></a>
-												</li>
-												<li [ngClass]="{disabled:pagerReceita.currentPage === pagerReceita.totalPages}">
-														<a (click)="setPageDespesa(pagerReceita.totalPages)"> >> </a>
-												</li>
-										</ul>
-									
-										<div style="text-align: center;" *ngIf="listaReceita.length<=0">
-											Não existe categoria de despesa cadastrada.
-										</div>
-									</div>
-
-
          	    </div>
          	    <!--===================================================-->
          	    <!--End Data Table-->

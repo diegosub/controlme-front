@@ -1,4 +1,4 @@
-import { HOST_CONTROLME } from './../controlme.api';
+import { HOST_CONTROLME } from '../controlme.api';
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Usuario } from '../../model/usuario';

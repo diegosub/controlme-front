@@ -14,4 +14,5 @@
 
 .spinner {
     z-index: 10001 !important;
+    background: #0006 !important;
 }

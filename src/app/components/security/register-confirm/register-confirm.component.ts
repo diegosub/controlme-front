@@ -20,7 +20,7 @@ export class RegisterConfirmComponent extends CrudController<Usuario, {new(item?
   constructor(private route: ActivatedRoute,
               public router: Router,
               private usuarioService: UsuarioService) {
-        super(router, null, null, null);
+        super(router, null, null, null, null);
   }
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { CrudController } from '../../generic/crud-controller';
 import { Categoria } from '../../../model/categoria/categoria';
 import { CategoriaService } from '../../../services/categoria/categoria.service';
@@ -9,6 +9,11 @@ import { ConfirmComponent } from '../../security/confirm/confirm.component';
 import { ToastrService } from 'ngx-toastr';
 import { ResponseApi } from '../../../model/response-api';
 import { PagerService } from '../../../services/pager.service';
+import { DialogService } from '../../../dialog-service';
+
+@Pipe({
+  name: 'searchfilter'
+ })
 
 @Component({
   selector: 'app-categoria-list',
@@ -20,6 +25,9 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
   listaDespesa = [];
   listaReceita = [];
 
+  filtroCategoriaDespesa: string;
+  filtroCategoriaReceita: string;
+
   pagerDespesa: any = {};
   pagedItemsDespesa: any[];
 
@@ -28,10 +36,10 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
 
   constructor(public router: Router,
               private dialog: MatDialog,
-              private pagerService: PagerService,
+              dialogService: DialogService,
               public toastr: ToastrService,
               private categoriaService: CategoriaService) {
-    super(router, Categoria, toastr, categoriaService);
+    super(router, Categoria, toastr, dialogService, categoriaService);
   }
 
   ngOnInit() {
@@ -42,7 +50,7 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
   abrirModalInserir(tipo) {
     const dialogConfig = new MatDialogConfig();    
     dialogConfig.data =  {tipo: tipo};
-
+    
     this.dialog.open(CategoriaFormComponent, dialogConfig)
                .afterClosed().subscribe(() => {
       this.popularListaDespesa();
@@ -50,57 +58,57 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
     });  
   }
 
+  abrirModalAlterar(tipo, codigo) {
+    if(codigo != undefined) {
+      this.categoriaService.get(codigo)
+                .subscribe((responseApi:ResponseApi) => {
+                  this.objeto = responseApi['data']; 
+                  const dialogConfig = new MatDialogConfig();    
+                  dialogConfig.data =  {tipo: tipo, objeto: this.objeto};
+    
+                  this.dialog.open(CategoriaFormComponent, dialogConfig)
+                            .afterClosed().subscribe(() => {
+                    this.popularListaDespesa();
+                    this.popularListaReceita();
+                  });  
+                  
+      } , err => {
+        this.tratarErro(err);
+      });
+    }
+
+  }
+
   popularListaDespesa() {
     //PESQUISAR DESPESA
+    let flag: boolean;    
     let categoriaDespesa = new Categoria();
-    categoriaDespesa.setTpCategoria = 'D';
+    categoriaDespesa.tpCategoria = 'D';
+    categoriaDespesa.fgAtivo = true;
     this.categoriaService.pesquisar(categoriaDespesa)
                          .subscribe((responseApi:ResponseApi) => {
         this.listaDespesa =  responseApi['data'];
-        if(this.listaDespesa.length > 0) {
-          this.setPageDespesa(1);
-        }else{
-          this.pagedItemsDespesa = [];
-        }
     } , err => {
-      this.tratarErro(err);      
+      this.tratarErro(err);
     });
   }  
 
   popularListaReceita() {
     //PESQUISAR RECEITA
     let categoriaReceita = new Categoria();
-    categoriaReceita.setTpCategoria = 'R';
+    categoriaReceita.tpCategoria = 'R';
+    categoriaReceita.fgAtivo = true;
     this.categoriaService.pesquisar(categoriaReceita)
                          .subscribe((responseApi:ResponseApi) => {
         this.listaReceita =  responseApi['data'];
-
-        if(this.listaReceita.length > 0) {
-          this.setPageReceita(1);
-        }else{
-          this.pagedItemsReceita = [];
-        }
     } , err => {
       this.tratarErro(err);      
     });
   }
 
-  setPageDespesa(page: number) {
-    if (page < 1 || page > this.pagerDespesa.totalPages) {
-        return;
-    }
-
-    this.pagerDespesa = this.pagerService.getPager(this.listaDespesa.length, page);
-    this.pagedItemsDespesa = this.listaDespesa.slice(this.pagerDespesa.startIndex, this.pagerDespesa.endIndex + 1);
-  }
-
-  setPageReceita(page: number) {
-    if (page < 1 || page > this.pagerReceita.totalPages) {
-        return;
-    }
-
-    this.pagerReceita = this.pagerService.getPager(this.listaReceita.length, page);
-    this.pagedItemsReceita = this.listaReceita.slice(this.pagerReceita.startIndex, this.pagerReceita.endIndex + 1);
+  executarPosInativar() {
+    this.popularListaDespesa();
+    this.popularListaReceita();
   }
 
 }
