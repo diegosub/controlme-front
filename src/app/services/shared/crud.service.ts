@@ -2,14 +2,14 @@ import { HOST_CONTROLME } from '../controlme.api';
 import { HttpClient} from '@angular/common/http';
 import { GenericService } from './generic.service';
 import { Injectable } from '@angular/core';
-import { Alert } from 'selenium-webdriver';
 
 @Injectable()
 export abstract class CrudService<Entity> implements GenericService<Entity> {
     
-    constructor(private http: HttpClient) {}
+    constructor(public http: HttpClient) {}
     
     get(id: any) {
+        alert(this.strArtefato());
         return this.http.get(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/${id}`);
     }
     

@@ -1,0 +1,60 @@
+<form #form="ngForm" class="form-horizontal" novalidate>
+<div class="panel panel-trans">
+  <div class="panel-body demo-nifty-modal">
+
+      <!--Static Examplel-->
+      <div class="modal">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" (click)="fechar()"><i class="pci-cross pci-circle"></i></button>
+                      <h4 class="modal-title">
+                        <span>Categorias inativas</span>                           
+                      </h4>
+                  </div>
+
+                  <div class="modal-body">
+                    <div class="table-responsive">
+                        <perfect-scrollbar style="max-width: 600px; max-height: 400px;" >
+                            <table class="table table-hover table-vcenter" *ngIf="lista.length>0">
+                                <thead>
+                                    <tr>
+                                        <th width="93%"></th>
+                                        <th></th>                                        
+                                    </tr>
+                                </thead>
+                                
+                                <tbody *ngFor="let categoria of lista">
+                                    <tr style="background: #f9f9f9;">
+                                        <td><b>{{categoria.dsCategoria}}</b></td>
+                                        <td>
+                                            <i class="fa fa-check" *ngIf="categoria.fgAtivo == false" (click)="ativar(categoria.idCategoria)" style="font-size: 16px; cursor: pointer;" title="Ativar categoria"></i>
+                                        </td> 
+                                    </tr>
+
+                                    <tr *ngFor="let subcategoria of categoria.listaSubcategoria">                                        
+                                        <td>
+                                            <i class="fa fa-share" style="padding-left: 10px; padding-right: 5px;"></i>
+                                            {{subcategoria.dsSubcategoria}}
+                                        </td>
+                                        <td><i class="fa fa-check" *ngIf="subcategoria.fgAtivo == false && categoria.fgAtivo == true" (click)="ativar(categoria.idCategoria)" style="font-size: 16px; cursor: pointer;" title="Ativar categoria"></i></td> 
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </perfect-scrollbar>
+
+                        <span style="text-align: center;" *ngIf="lista.length==0">Não existe categoria inativa</span>
+                    </div>		                       
+                  </div>
+
+                  <div class="modal-footer">
+                      <button class="btn btn-default" (click)="fechar()" data-dismiss="modal" type="button">Fechar</button>                      
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
+</form>

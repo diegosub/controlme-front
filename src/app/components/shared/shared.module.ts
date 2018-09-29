@@ -20,8 +20,17 @@ import { MatDialogModule, MatToolbarModule, MatCardModule, MatMenuModule, MatIco
 import { ToastrModule } from 'ngx-toastr';
 import { PagerService } from '../../services/pager.service';
 import { FilterPipe } from '../generic/filter';
+import { CategoriaIntvComponent } from '../categoria/intv/categoria-intv.component';
+import { CartaoService } from '../../services/cartao/cartao.service';
+import { SubcategoriaFormComponent } from '../subcategoria/form/subcategoria-form.component';
+import { SubcategoriaService } from '../../services/subcategoria/subcategoria.service';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
-
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+}; 
 
 @NgModule({
     exports: [
@@ -31,6 +40,7 @@ import { FilterPipe } from '../generic/filter';
       CommonModule
     ],
     imports: [
+        PerfectScrollbarModule,
         FormsModule,
         RouterModule,
         FormsModule,
@@ -53,6 +63,8 @@ import { FilterPipe } from '../generic/filter';
         CategoriaListComponent,
         CategoriaTitleComponent,
         CategoriaFormComponent,
+        CategoriaIntvComponent,
+        SubcategoriaFormComponent,
         FooterComponent,
         NotfoundComponent,
         FilterPipe
@@ -61,10 +73,16 @@ import { FilterPipe } from '../generic/filter';
       PagerService,
       DialogService,
       CategoriaService,
+      CartaoService,
+      SubcategoriaService,
       {
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,
         multi: true
+      },
+      {
+        provide: PERFECT_SCROLLBAR_CONFIG,
+        useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
       }
     ]
 })

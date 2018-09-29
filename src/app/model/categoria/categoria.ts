@@ -8,4 +8,6 @@ export class Categoria {
     dtAlteracao: Date;    
     tpCategoria: string;
 
+    listaSubcategoria: any[];
+
 }

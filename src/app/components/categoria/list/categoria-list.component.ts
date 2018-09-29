@@ -4,12 +4,13 @@ import { Categoria } from '../../../model/categoria/categoria';
 import { CategoriaService } from '../../../services/categoria/categoria.service';
 import { Router } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material';
-import { CategoriaFormComponent } from '../form/categoria-form.component';
-import { ConfirmComponent } from '../../security/confirm/confirm.component';
 import { ToastrService } from 'ngx-toastr';
 import { ResponseApi } from '../../../model/response-api';
-import { PagerService } from '../../../services/pager.service';
 import { DialogService } from '../../../dialog-service';
+import { CategoriaFormComponent } from '../form/categoria-form.component';
+import { CategoriaIntvComponent } from '../intv/categoria-intv.component';
+import { SubcategoriaFormComponent } from '../../subcategoria/form/subcategoria-form.component';
+import { SubcategoriaService } from '../../../services/subcategoria/subcategoria.service';
 
 @Pipe({
   name: 'searchfilter'
@@ -28,17 +29,15 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
   filtroCategoriaDespesa: string;
   filtroCategoriaReceita: string;
 
-  pagerDespesa: any = {};
-  pagedItemsDespesa: any[];
-
   pagerReceita: any = {};
   pagedItemsReceita: any[];
 
   constructor(public router: Router,
               private dialog: MatDialog,
-              dialogService: DialogService,
+              public dialogService: DialogService,
               public toastr: ToastrService,
-              private categoriaService: CategoriaService) {
+              private categoriaService: CategoriaService,
+              private subcategoriaService: SubcategoriaService) {
     super(router, Categoria, toastr, dialogService, categoriaService);
   }
 
@@ -76,7 +75,49 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
         this.tratarErro(err);
       });
     }
+  }
 
+  abrirModalAlterarSubcategoria(codigo) {    
+    if(codigo != undefined) {
+      this.subcategoriaService.get(codigo)
+                .subscribe((responseApi:ResponseApi) => {
+                  this.objeto = responseApi['data']; 
+                  const dialogConfig = new MatDialogConfig();    
+                  dialogConfig.data =  {objeto: this.objeto};
+    
+                  this.dialog.open(SubcategoriaFormComponent, dialogConfig)
+                            .afterClosed().subscribe(() => {
+                    this.popularListaDespesa();
+                    this.popularListaReceita();
+                  });  
+                  
+      } , err => {
+        this.tratarErro(err);
+      });
+    }
+  }
+
+  abrirModalInativos(tipo) {    
+    const dialogConfig = new MatDialogConfig();    
+    dialogConfig.data =  {tipo: tipo};    
+
+    this.dialog.open(CategoriaIntvComponent, dialogConfig)
+                          .afterClosed().subscribe(() => {
+      this.popularListaDespesa();
+      this.popularListaReceita();
+    });  
+  }
+
+  abrirModalSubcategoria(idCategoria, dsCategoria) {    
+    const dialogConfig = new MatDialogConfig();    
+    dialogConfig.data =  {dsCategoria: dsCategoria,
+                          idCategoria: idCategoria};
+
+    this.dialog.open(SubcategoriaFormComponent, dialogConfig)
+                          .afterClosed().subscribe(() => {
+      this.popularListaDespesa();
+      this.popularListaReceita();
+    });  
   }
 
   popularListaDespesa() {
@@ -109,6 +150,21 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
   executarPosInativar() {
     this.popularListaDespesa();
     this.popularListaReceita();
+  }
+
+  inativarSubcategoria(id:string){
+    this.dialogService.confirm('Tem certeza que deseja inativar este registro?')
+      .then((candelete:boolean) => {
+          if(candelete){            
+            let status = false;
+            this.subcategoriaService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
+              this.executarPosInativar();
+              this.msgSucesso('O registro foi inativado com sucesso.');             
+            } , err => {
+              this.tratarErro(err);              
+            });
+          }
+      });
   }
 
 }

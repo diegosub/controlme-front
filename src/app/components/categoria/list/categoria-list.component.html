@@ -1,141 +1,153 @@
 <app-categoria-title></app-categoria-title>
 
 <div id="page-content">
-
-	
-
   <div class="row">
-		<div class="col-sm-12">
-				<div class="panel">							
-						<div class="panel-body">
-							<div class="eq-height clearfix"	>
+	<div class="col-sm-12">
+		<div class="tab-base">							
+			<div class="panel-body">
+				<div class="eq-height clearfix"	>
+																
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#demo-bsc-tab-despesa" data-toggle="tab">Despesa</a></li>
+						<li><a href="#demo-bsc-tab-receita" data-toggle="tab">Receita</a></li>
+					</ul>
 
-								<div class="col-sm-6">	
-									
-										<div class="panel-heading">
-												<h3 class="panel-title"><b>Despesas</b></h3>
-											</div>
-											<hr>
-
-									<div class="panel bord-hor">
+					<form id="demo-bv-bsc-tabs" #form="ngForm" class="form-horizontal" novalidate>
+						<div class="tab-content">
+							<div class="tab-pane pad-btm fade in active" id="demo-bsc-tab-despesa">
+								<p class="text-main text-bold">Categorias de Despesa</p>
+								<hr>
 												
-												<!--Data Table-->
-												<!--===================================================-->
-												<div class="panel-body">
-														<div class="pad-btm form-inline">
-																<div class="row">
-																	<div class="col-sm-7 table-toolbar-left">
-																			<div class="form-group" style="width:100%">
-																				<input id="demo-input-search2" 
-																					style="width:100%" 
-																					[(ngModel)]="filtroCategoriaDespesa"
-																					 type="text" placeholder="Filtrar despesa"
-																					 class="form-control" autocomplete="off">
-																			</div>
+								<!--Data Table-->
+								<!--===================================================-->
+								<div class="panel-body">
+									<div class="pad-btm form-inline">
+										<div class="row">
+											<div class="col-sm-7 table-toolbar-left">
+												<div class="form-group" style="width:100%">
+													<input id="demo-input-search2"  autocomplete="off"
+														style="width:100%" name="filtroCategoriaDespesa"
+														[(ngModel)]="filtroCategoriaDespesa"
+															type="text" placeholder="Filtrar categoria"
+															class="form-control" autocomplete="off">
+												</div>
 
-																	</div>
-																		<div class="col-sm-5 table-toolbar-right">
-																			<button (click)="abrirModalInserir('Despesa')" id="demo-btn-addrow" class="btn btn-default" title="Adicionar Categoria de Despesa"><i class="demo-pli-recycling"></i></button>
-																			<button (click)="abrirModalInserir('Despesa')" id="demo-btn-addrow" class="btn btn-primary" title="Adicionar Categoria de Despesa"><i class="demo-pli-add"></i></button>
-																		</div>
-																</div>
-														</div>
-														<div class="table-responsive">
-																<table class="table table-striped table-hover" *ngIf="listaDespesa.length>0">
-																		<thead>
-																				<tr>
-																						<th class="text-center" width="80%">Categorias de Despesa</th>
-																						<th></th>
-																						<th></th>
-																				</tr>
-																		</thead>
-																		<tbody>
-																				<tr *ngFor="let categoria of listaDespesa | filter: filtroCategoriaDespesa">
-																						<td>{{categoria.dsCategoria}}</td>
-																						<td><i class="fa fa-edit" (click)="abrirModalAlterar('Despesa', categoria.idCategoria)" style="font-size: 16px; cursor: pointer;" title="Editar"></i></td>
-																						<td><i class="fa fa-remove" (click)="inativar(categoria.idCategoria)" style="font-size: 16px; cursor: pointer;" title="Inativar"></i></td>
-																				</tr>																				
-																		</tbody>
-																</table>
-														</div>														
-												<!--===================================================-->
-												<!--End Data Table-->
+											</div>
+												<div class="col-sm-5 table-toolbar-right">
+													<button (click)="abrirModalInativos('Despesa')" id="demo-btn-addrow" class="btn btn-default" title="Visualizar categorias inativas"><i class="demo-pli-recycling"></i></button>
+													<button (click)="abrirModalInserir('Despesa')" id="demo-btn-addrow" class="btn btn-primary" title="Adicionar categoria de despesa"><i class="demo-pli-add"></i></button>
+												</div>
+										</div>
+									</div>
+									<div class="table-responsive">
+										<table class="table table-hover table-vcenter" *ngIf="listaDespesa.length>0">
+											<thead>
+												<tr>
+													<th class="text-center" width="91%">Minhas Categorias</th>
+													<th width="3%"></th>
+													<th width="3%"></th>
+													<th width="3%"></th>													
+												</tr>
+											</thead>
+											
+											<tbody *ngFor="let categoria of listaDespesa | filter: filtroCategoriaDespesa">
+												<tr style="background: #f9f9f9;">
+													<td><b>{{categoria.dsCategoria}}</b></td>
+													<td><i class="fa fa-plus-square" (click)="abrirModalSubcategoria(categoria.idCategoria, categoria.dsCategoria)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Adicionar nova subcategoria"></i></td>
+													<td><i class="fa fa-edit" (click)="abrirModalAlterar('Despesa', categoria.idCategoria)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar esta categoria"></i></td>
+													<td><i class="fa fa-remove" (click)="inativar(categoria.idCategoria)" style="font-size: 18px; cursor: pointer;" title="Inativar esta categoria"></i></td>													
+												</tr>
+
+												<tr *ngFor="let subcategoria of categoria.listaSubcategoria">
+													<td>
+														<i class="fa fa-share" style="padding-left: 10px; padding-right: 5px;"></i>
+														{{subcategoria.dsSubcategoria}}
+													</td>
+													<td></td>
+													<td><i class="ion-edit" (click)="abrirModalAlterarSubcategoria(subcategoria.idSubcategoria)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar esta subcategoria"></i></td>
+													<td><i class="ion-close" (click)="inativarSubcategoria(subcategoria.idSubcategoria)" style="font-size: 14px; cursor: pointer;" title="Inativar esta subcategoria"></i></td>
+												</tr>
+											</tbody>
+
+										</table>
+									</div>
+									<br/>	
+									<div>
+										<span class="pagination-info" style="font-size: 11px; color: #9f9fa2;">Total: <b>{{listaDespesa.length}}</b> registro(s)</span>
+									</div>
+								<!--===================================================-->
+								<!--End Data Table-->
+								</div>
+							</div>
+
+
+							<div class="tab-pane pad-btm fade" id="demo-bsc-tab-receita">
+								<p class="text-main text-bold">Categorias de Receita</p>
+								<hr>
+
+								<div class="panel-body">
+									<div class="pad-btm form-inline">
+										<div class="row">
+										<div class="col-sm-7 table-toolbar-left">
+											<div class="form-group" style="width:100%">
+												<input id="demo-input-search2" 
+												style="width:100%"  autocomplete="off"
+												[(ngModel)]="filtroCategoriaReceita" name="filtroCategoriaReceita"
+												type="text" placeholder="Filtrar categoria"
+												class="form-control" autocomplete="off">
+											</div>
+				
+										</div>
+											<div class="col-sm-5 table-toolbar-right">
+												<button (click)="abrirModalInativos('Receita')" id="demo-btn-addrow" class="btn btn-default" title="Visualizar categorias inativas"><i class="demo-pli-recycling"></i></button>
+												<button (click)="abrirModalInserir('Receita')" id="demo-btn-addrow" class="btn btn-primary" title="Adicionar categoria de receita"><i class="demo-pli-add"></i></button>
 											</div>
 										</div>
-										</div>
-
-
-        <!-- ----------------------- -->
-
-        <!-- RECEITAS -->
-
-        <div class="col-sm-6">
-
-						<div class="panel-heading">
-								<h3 class="panel-title"><b>Receitas</b></h3>
-							</div>
-							 <hr>
-
-           <div class="panel  bord-hor" >
-
-               
-         	    <!--Data Table-->
-         	    <!--===================================================-->
-         	    <div class="panel-body">
-         	        <div class="pad-btm form-inline">
-         	            <div class="row">
-                         <div class="col-sm-7 table-toolbar-left">
-                             <div class="form-group" style="width:100%">
-								<input id="demo-input-search2" 
-								style="width:100%" 
-								[(ngModel)]="filtroCategoriaReceita"
-								 type="text" placeholder="Filtrar receita"
-								 class="form-control" autocomplete="off">
-                             </div>
-
-                         </div>
-                           <div class="col-sm-5 table-toolbar-right">
-							    <button (click)="abrirModalInserir('Receita')" id="demo-btn-addrow" class="btn btn-default" title="Adicionar Categoria de Despesa"><i class="demo-pli-recycling"></i></button>
-								<button (click)="abrirModalInserir('Receita')" id="demo-btn-addrow" class="btn btn-primary" title="Adicionar Categoria de Receita"><i class="demo-pli-add"></i></button>
-         	               </div>
-         	            </div>
-         	        </div>
-         	        <div class="table-responsive">
-										<table class="table table-striped table-hover" *ngIf="listaReceita.length>0">
+									</div>
+									<div class="table-responsive">
+										<table class="table table-hover table-vcenter" *ngIf="listaReceita.length>0">
 											<thead>
 													<tr>
-															<th class="text-center" width="80%">Categorias de Receita</th>
-															<th></th>
-															<th></th>
+															<th class="text-center" width="91%">Minhas Categorias</th>
+															<th width="3%"></th>
+															<th width="3%"></th>
+															<th width="3%"></th>
 													</tr>
 											</thead>
-											<tbody>
-													<tr *ngFor="let categoria of listaReceita | filter : filtroCategoriaReceita">
-															<td>{{categoria.dsCategoria}}</td>
-															<td><i class="fa fa-edit" (click)="abrirModalAlterar('Receita', categoria.idCategoria)" style="font-size: 16px; cursor: pointer;" title="Editar"></i></td>
-															<td><i class="fa fa-remove" (click)="inativar(categoria.idCategoria)" style="font-size: 16px; cursor: pointer;" title="Inativar"></i></td>
-													</tr>																				
+											<tbody *ngFor="let categoria of listaReceita | filter : filtroCategoriaReceita">
+													<tr style="background: #f9f9f9;">
+														<td><b>{{categoria.dsCategoria}}</b></td>														
+														<td><i class="fa fa-plus-square" (click)="abrirModalSubcategoria(categoria.idCategoria, categoria.dsCategoria)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Adicionar nova subcategoria"></i></td>
+														<td><i class="fa fa-edit" (click)="abrirModalAlterar('Receita', categoria.idCategoria)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar"></i></td>
+														<td><i class="fa fa-remove" (click)="inativar(categoria.idCategoria)" style="font-size: 18px; cursor: pointer;" title="Inativar"></i></td>
+													</tr>
+													
+													<tr *ngFor="let subcategoria of categoria.listaSubcategoria">
+														<td>
+															<i class="fa fa-share" style="padding-left: 10px; padding-right: 5px;"></i>
+															{{subcategoria.dsSubcategoria}}
+														</td>
+														<td></td>
+														<td><i class="ion-edit"></i></td>
+														<td><i class="ion-close" (click)="inativarSubcategoria(subcategoria.idSubcategoria)" style="font-size: 14px; cursor: pointer;" title="Inativar subcategoria"></i></td>
+													</tr>
 											</tbody>
 										</table>
-									 </div>
-									 
-         	    </div>
-         	    <!--===================================================-->
-         	    <!--End Data Table-->
-             </div>
-           </div>
+									</div>
+									<br/>
+									<div>
+									<span class="pagination-info" style="font-size: 11px; color: #9f9fa2;">Total: <b>{{listaReceita.length}}</b> registro(s)</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </div>
 
-</div>
-
-
-</div>
-
-</div>
-
-
-
-
-  	</div>
-
-</div>

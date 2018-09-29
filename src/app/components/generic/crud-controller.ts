@@ -19,7 +19,7 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
   constructor(public router: Router,
               private type: CT,                          
               public toastr: ToastrService,
-              private dialogService: DialogService,
+              public dialogService: DialogService,
               private service: CrudService<Entity>) {                
     this.objeto = this.getInstance();
   }
@@ -94,15 +94,27 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
           if(candelete){            
             let status = false;
             this.service.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {              
-              this.lista.forEach(function (value) {
-                if(value.idCategoria == id) {
-                  value.fgAtivo = false;
-                }
-              });
-
+             
               this.executarPosInativar();
 
               this.msgSucesso('O registro foi inativado com sucesso.');             
+            } , err => {
+              this.tratarErro(err);              
+            });
+          }
+      });
+  }
+
+  ativar(id:string){
+    this.dialogService.confirm('Tem certeza que deseja ativar este registro?')
+      .then((candelete:boolean) => {
+          if(candelete){            
+            let status = true;
+            this.service.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {              
+             
+              this.executarPosAtivar();
+
+              this.msgSucesso('O registro foi ativado com sucesso.');             
             } , err => {
               this.tratarErro(err);              
             });
@@ -130,6 +142,7 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
   completarAlterar(){}
   executarPosAlterar(){}
   executarPosInativar(){}
+  executarPosAtivar(){}
 
   tratarErro(err) {
     if (err.status != 401) {

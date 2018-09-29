@@ -16,17 +16,15 @@
 
                   <div class="modal-body">
                         <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label class="control-label">Descrição</label>                                    
-                                    <input type="text"
-	          					    [(ngModel)]="objeto.dsCategoria"
-                                           name="dsCategoria"
-                                          class="form-control"
-                                             id="inputDsCategoria"
-                                    placeholder="Informe a descrição da categoria"
-                                   #dsCategoria="ngModel" required>
-                                </div>
+                            <div class="col-sm-12">                                
+                                <label class="control-label">Descrição</label>                                    
+                                <input type="text" autocomplete="off"
+                                [(ngModel)]="objeto.dsCategoria"
+                                        name="dsCategoria"
+                                        class="form-control"
+                                            id="inputDsCategoria"
+                                placeholder="Informe a descrição da categoria"
+                                #dsCategoria="ngModel" required>                                
                             </div>                           
                         </div>                        
                   </div>
