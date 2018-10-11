@@ -30,8 +30,8 @@
                                             <img class="img-circle img-md" src="assets/img/profile-photos/1.png" alt="Profile Picture">
                                         </div>
                                         <a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
-                                            <p class="mnp-name">Aaron Chavez</p>
-                                            <span class="mnp-desc">aaron.cha@themeon.net</span>
+                                            <p class="mnp-name">{{nomeFormatado}}</p>
+                                            <span class="mnp-desc">{{email}}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
           						            </li>
 
                                   <li>
-          						                <a href="helper-classes.html">
+          						                <a [routerLink]="['/cartao-list']">
           						                    <i class="demo-pli-credit-card-2"></i>
           						                    <span class="menu-title">Cartões</span>
           						                </a>

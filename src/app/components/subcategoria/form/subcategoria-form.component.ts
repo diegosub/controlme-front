@@ -30,8 +30,6 @@ export class SubcategoriaFormComponent extends CrudController<Subcategoria, {new
   }
 
   ngOnInit() {
-    alert(this.objeto);
-
       this.lblCategoria = this.data.dsCategoria;
       this.idCategoria = this.data.idCategoria;
 

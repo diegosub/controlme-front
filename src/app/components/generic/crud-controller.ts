@@ -129,12 +129,6 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
       'has-error' : isInvalid  && isDirty,
       'has-success' : !isInvalid  && isDirty
     };
-  } 
-
-  logout() {
-    localStorage.removeItem("cmUsr");
-    localStorage.removeItem("cmTkn");
-    this.router.navigate(['/login']);
   }
 
   completarInserir(){}

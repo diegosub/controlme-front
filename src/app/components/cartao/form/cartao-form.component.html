@@ -1,0 +1,56 @@
+<form #form="ngForm" class="form-horizontal" novalidate>
+<div class="panel panel-trans">
+  <div class="panel-body demo-nifty-modal">
+
+      <!--Static Examplel-->
+      <div class="modal">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" (click)="fechar()"><i class="pci-cross pci-circle"></i></button>
+                      <h4 class="modal-title">
+                          <span *ngIf="objeto.idCartao == null">Cadastrar</span> 
+                          <span *ngIf="objeto.idCartao != null">Alterar</span> 
+                          Cartão</h4>
+                  </div>
+
+                  <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">                                
+                                <label class="control-label">Descrição</label>                                    
+                                <input type="text" autocomplete="off"
+                                       [(ngModel)]="objeto.dsCartao"
+                                        name="dsCartao" class="form-control"
+                                        id="inputDsCartao" placeholder="Informe a descrição do cartão"
+                                        #dsCategoria="ngModel" required>           
+                            </div>
+                            
+                            <div class="col-sm-12">                                
+                                <label class="control-label">Data de Fechamento da Fatura</label>                                    
+                                <input type="text"
+									   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+										 [(ngModel)]="objeto.dtCadastro"
+										 name="dtCadastro"
+										 #dtCadastro="ngModel"
+										 maxlength="10"
+					           class="form-control"
+										 placeholder="dd/mm/aaaa"
+										 required
+										 style="text-align:right;"
+					           bsDatepicker>
+                            </div>
+                        </div>                        
+                  </div>
+
+                  <div class="modal-footer">
+                      <button class="btn btn-default" (click)="fechar()" data-dismiss="modal" type="button">Fechar</button>
+                      <button class="btn btn-primary" (click)="inserir()" type="button" *ngIf="objeto.idCartao == null" [disabled]="!form.valid">Cadastrar</button>
+                      <button class="btn btn-primary" (click)="alterar()" type="button" *ngIf="objeto.idCartao != null" [disabled]="!form.valid">Alterar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
+</form>

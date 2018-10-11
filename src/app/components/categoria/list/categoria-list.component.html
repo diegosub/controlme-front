@@ -52,7 +52,10 @@
 											
 											<tbody *ngFor="let categoria of listaDespesa | filter: filtroCategoriaDespesa">
 												<tr style="background: #f9f9f9;">
-													<td><b>{{categoria.dsCategoria}}</b></td>
+													<td>
+														<i class="ion-pricetags" style="padding-left: 7px; padding-right: 5px;"></i>
+														<b>{{categoria.dsCategoria}}</b>
+													</td>
 													<td><i class="fa fa-plus-square" (click)="abrirModalSubcategoria(categoria.idCategoria, categoria.dsCategoria)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Adicionar nova subcategoria"></i></td>
 													<td><i class="fa fa-edit" (click)="abrirModalAlterar('Despesa', categoria.idCategoria)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar esta categoria"></i></td>
 													<td><i class="fa fa-remove" (click)="inativar(categoria.idCategoria)" style="font-size: 18px; cursor: pointer;" title="Inativar esta categoria"></i></td>													
@@ -60,7 +63,7 @@
 
 												<tr *ngFor="let subcategoria of categoria.listaSubcategoria">
 													<td>
-														<i class="fa fa-share" style="padding-left: 10px; padding-right: 5px;"></i>
+														<i class="fa fa-share" style="padding-left: 25px; padding-right: 5px;"></i>
 														{{subcategoria.dsSubcategoria}}
 													</td>
 													<td></td>
@@ -116,15 +119,18 @@
 											</thead>
 											<tbody *ngFor="let categoria of listaReceita | filter : filtroCategoriaReceita">
 													<tr style="background: #f9f9f9;">
-														<td><b>{{categoria.dsCategoria}}</b></td>														
+														<td>
+															<i class="ion-pricetags" style="padding-left: 7px; padding-right: 5px;"></i>
+															<b>{{categoria.dsCategoria}}</b>
+														</td>														
 														<td><i class="fa fa-plus-square" (click)="abrirModalSubcategoria(categoria.idCategoria, categoria.dsCategoria)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Adicionar nova subcategoria"></i></td>
 														<td><i class="fa fa-edit" (click)="abrirModalAlterar('Receita', categoria.idCategoria)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar"></i></td>
 														<td><i class="fa fa-remove" (click)="inativar(categoria.idCategoria)" style="font-size: 18px; cursor: pointer;" title="Inativar"></i></td>
 													</tr>
 													
 													<tr *ngFor="let subcategoria of categoria.listaSubcategoria">
-														<td>
-															<i class="fa fa-share" style="padding-left: 10px; padding-right: 5px;"></i>
+														<td>															
+															<i class="fa fa-share" style="padding-left: 25px; padding-right: 5px;"></i>
 															{{subcategoria.dsSubcategoria}}
 														</td>
 														<td></td>

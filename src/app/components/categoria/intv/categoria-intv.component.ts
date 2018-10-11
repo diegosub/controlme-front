@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CategoriaService } from '../../../services/categoria/categoria.service';
 import { DialogService } from '../../../dialog-service';
 import { ResponseApi } from '../../../model/response-api';
+import { SubcategoriaService } from '../../../services/subcategoria/subcategoria.service';
+
 
 @Component({
   selector: 'app-categoria-intv',
@@ -23,11 +25,16 @@ export class CategoriaIntvComponent extends CrudController<Categoria, {new(): Ca
               public toastr: ToastrService,
               dialogService: DialogService,
               private categoriaService: CategoriaService,
+              private subcategoriaService: SubcategoriaService,
               private dialogRef: MatDialogRef<CategoriaIntvComponent>) {
       super(router, Categoria, toastr, dialogService, categoriaService);
   }
 
   ngOnInit() {
+    this.pesquisarInativos();
+  }
+
+  pesquisarInativos() {
     if(this.data.tipo != undefined){
       this.tipo = this.data.tipo;
       this.objeto.tpCategoria = this.tipo.substring(0,1).toUpperCase().toString();      
@@ -42,8 +49,24 @@ export class CategoriaIntvComponent extends CrudController<Categoria, {new(): Ca
     }
   }
 
+  ativarSubcategoria(id:string){
+    this.dialogService.confirm('Tem certeza que deseja inativar este registro?')
+      .then((candelete:boolean) => {
+          if(candelete){            
+            let status = true;
+            this.subcategoriaService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
+              this.executarPosAtivar();
+              this.msgSucesso('O registro foi ativado com sucesso.');             
+            } , err => {
+              this.tratarErro(err);              
+            });
+          }
+      });
+  }
+
   executarPosAtivar() {
-    this.fechar();
+    //this.fechar();
+    this.pesquisarInativos();
   }
 
   fechar() {
