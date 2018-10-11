@@ -8,8 +8,7 @@ export abstract class CrudService<Entity> implements GenericService<Entity> {
     
     constructor(public http: HttpClient) {}
     
-    get(id: any) {
-        alert(this.strArtefato());
+    get(id: any) {        
         return this.http.get(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/${id}`);
     }
     

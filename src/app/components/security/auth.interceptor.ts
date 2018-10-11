@@ -26,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
         if(this.util.isLoggedIn()){
             let token = localStorage.getItem("cmTkn");
-            
+            //console.log(token);
             authRequest = req.clone({
                 setHeaders: {
                     'Authorization' : token

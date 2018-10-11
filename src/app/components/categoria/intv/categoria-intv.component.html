@@ -9,17 +9,19 @@
                   <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" (click)="fechar()"><i class="pci-cross pci-circle"></i></button>
                       <h4 class="modal-title">
-                        <span>Categorias inativas</span>                           
+                        <span>Reativar Categoria / Subcategoria</span>                           
                       </h4>
                   </div>
 
+                  <perfect-scrollbar style="max-width: 600px; max-height: 400px;" >
                   <div class="modal-body">
+                        
                     <div class="table-responsive">
-                        <perfect-scrollbar style="max-width: 600px; max-height: 400px;" >
+                        
                             <table class="table table-hover table-vcenter" *ngIf="lista.length>0">
                                 <thead>
                                     <tr>
-                                        <th width="93%"></th>
+                                        <th width="93%" class="text-center" >Categorias / Subcategorias Inativas</th>
                                         <th></th>                                        
                                     </tr>
                                 </thead>
@@ -37,17 +39,19 @@
                                             <i class="fa fa-share" style="padding-left: 10px; padding-right: 5px;"></i>
                                             {{subcategoria.dsSubcategoria}}
                                         </td>
-                                        <td><i class="fa fa-check" *ngIf="subcategoria.fgAtivo == false && categoria.fgAtivo == true" (click)="ativar(categoria.idCategoria)" style="font-size: 16px; cursor: pointer;" title="Ativar categoria"></i></td> 
+                                        <td><i class="fa fa-check" *ngIf="subcategoria.fgAtivo == false && categoria.fgAtivo == true" (click)="ativarSubcategoria(subcategoria.idSubcategoria)" style="font-size: 16px; cursor: pointer;" title="Ativar categoria"></i></td> 
                                     </tr>
 
                                 </tbody>
                             </table>
-                        </perfect-scrollbar>
+                        
 
                         <span style="text-align: center;" *ngIf="lista.length==0">Não existe categoria inativa</span>
                     </div>		                       
+                
                   </div>
 
+                </perfect-scrollbar>
                   <div class="modal-footer">
                       <button class="btn btn-default" (click)="fechar()" data-dismiss="modal" type="button">Fechar</button>                      
                   </div>

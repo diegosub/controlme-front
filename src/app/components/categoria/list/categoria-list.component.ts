@@ -48,7 +48,7 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
 
   abrirModalInserir(tipo) {
     const dialogConfig = new MatDialogConfig();    
-    dialogConfig.data =  {tipo: tipo};
+    dialogConfig.data =  {tipo: tipo};    
     
     this.dialog.open(CategoriaFormComponent, dialogConfig)
                .afterClosed().subscribe(() => {
@@ -121,8 +121,7 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
   }
 
   popularListaDespesa() {
-    //PESQUISAR DESPESA
-    let flag: boolean;    
+    //PESQUISAR DESPESA  
     let categoriaDespesa = new Categoria();
     categoriaDespesa.tpCategoria = 'D';
     categoriaDespesa.fgAtivo = true;

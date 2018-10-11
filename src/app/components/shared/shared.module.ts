@@ -27,6 +27,10 @@ import { SubcategoriaService } from '../../services/subcategoria/subcategoria.se
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { CartaoListComponent } from '../cartao/list/cartao-list.component';
+import { CartaoTitleComponent } from '../cartao/title/cartao-title.component';
+import { CartaoFormComponent } from '../cartao/form/cartao-form.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -54,7 +58,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MatButtonModule,
         MatDialogModule,
         BrowserAnimationsModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        BsDatepickerModule.forRoot()
     ],
     declarations: [
         HomeComponent,
@@ -65,6 +70,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CategoriaFormComponent,
         CategoriaIntvComponent,
         SubcategoriaFormComponent,
+        CartaoFormComponent,
+        CartaoListComponent,
+        CartaoTitleComponent,
         FooterComponent,
         NotfoundComponent,
         FilterPipe
