@@ -25,19 +25,23 @@
                                         #dsCategoria="ngModel" required>           
                             </div>
                             
-                            <div class="col-sm-12">                                
-                                <label class="control-label">Data de Fechamento da Fatura</label>                                    
-                                <input type="text"
-									   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-										 [(ngModel)]="objeto.dtCadastro"
-										 name="dtCadastro"
-										 #dtCadastro="ngModel"
-										 maxlength="10"
-					           class="form-control"
-										 placeholder="dd/mm/aaaa"
-										 required
-										 style="text-align:right;"
-					           bsDatepicker>
+                            
+                            <div class="col-sm-6">                                
+                                <label class="control-label">Dia do Fechamento da Fatura</label>                                    
+                                <input type="text" autocomplete="off"
+                                       [(ngModel)]="objeto.nrDiaCorte" style="width: 120px;"
+                                        name="nrDiaCorte" class="form-control" soNumero
+                                        id="inputNrDiaCorte" placeholder="entre 1 e 31"
+                                        #nrDiaCorte="ngModel" maxlength="2" required>
+                            </div>
+
+                            <div class="col-sm-6">                                
+                                <label class="control-label">Dia do Vencimento</label>                                    
+                                <input type="text" autocomplete="off"
+                                       [(ngModel)]="objeto.nrDiaVencimento" style="width: 120px;"
+                                        name="nrDiaVencimento" class="form-control" soNumero
+                                        id="inputNrDiaVencimento" placeholder="entre 1 e 31"
+                                        #nrDiaCorte="ngModel" maxlength="2" required>
                             </div>
                         </div>                        
                   </div>

@@ -5,17 +5,10 @@ import { CategoriaService } from '../../../services/categoria/categoria.service'
 import { Router } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
-import { ResponseApi } from '../../../model/response-api';
 import { DialogService } from '../../../dialog-service';
-import { SubcategoriaFormComponent } from '../../subcategoria/form/subcategoria-form.component';
-import { SubcategoriaService } from '../../../services/subcategoria/subcategoria.service';
 import { Cartao } from '../../../model/cartao/cartao';
 import { CartaoService } from '../../../services/cartao/cartao.service';
 import { CartaoFormComponent } from '../form/cartao-form.component';
-
-@Pipe({
-  name: 'searchfilter'
- })
 
 @Component({
   selector: 'app-cartao-list',
@@ -37,7 +30,12 @@ export class CartaoListComponent extends CrudController<Cartao, {new(): Cartao}>
   }
 
   popularListaCartao() {
+    this.pesquisar();
+    console.log(this.lista);
+  }
 
+  completarPesquisar() {
+    this.objeto.fgAtivo = true;
   }
 
   abrirModalInserir() {    

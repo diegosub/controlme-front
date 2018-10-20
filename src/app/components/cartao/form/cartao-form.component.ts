@@ -27,16 +27,23 @@ export class CartaoFormComponent extends CrudController<Cartao, {new(): Cartao}>
   }
 
   ngOnInit() {
-    
 
-    if(this.data.objeto != undefined){
-      this.objeto = this.data.objeto;      
+  }
+
+  validarInserir() {
+    if(this.objeto.nrDiaCorte < 1
+                    || this.objeto.nrDiaCorte > 30) {
+      this.msgErro("O Dia do Fechamento da Fatura deve estar entre o dia 1 e 30.");
+      return false;
     }
 
-    alert('oi');
+    if(this.objeto.nrDiaVencimento < 1
+                    || this.objeto.nrDiaVencimento > 30) {
+      this.msgErro("O Dia do Vencimento deve estar entre o dia 1 e 30.");
+      return false;
+    }
 
-    this.objeto.dtCadastro = new Date();
-    alert(this.objeto.dtCadastro);
+    return true;
   }
 
   executarPosInserir() {

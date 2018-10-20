@@ -31,16 +31,19 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
   }
 
   inserir() {
-    this.completarInserir();
 
-    this.service.inserir(this.objeto).subscribe((responseApi:ResponseApi) => {
+    if(this.validarInserir()) {
+      this.completarInserir();
 
-      this.executarPosInserir();
+      this.service.inserir(this.objeto).subscribe((responseApi:ResponseApi) => {
 
-      this.msgSucesso('O registro foi cadastrado com sucesso.');
-    } , err => {      
-      this.tratarErro(err);
-    });
+        this.executarPosInserir();
+
+        this.msgSucesso('O registro foi cadastrado com sucesso.');
+      } , err => {      
+        this.tratarErro(err);
+      });
+    }
   }
 
   alterar() {
@@ -57,9 +60,11 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
   }
 
   pesquisar() {
+    this.completarPesquisar();
     this.service.pesquisar(this.objeto)
                 .subscribe((responseApi:ResponseApi) => {
       this.lista = responseApi['data'];
+      console.log(this.lista);
       //if(this.lista.length > 0) {
       //  this.setPage(1);
       //}else{
@@ -131,9 +136,11 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
     };
   }
 
+  public validarInserir():boolean{return true}
   completarInserir(){}
   executarPosInserir(){}  
   completarAlterar(){}
+  completarPesquisar(){}
   executarPosAlterar(){}
   executarPosInativar(){}
   executarPosAtivar(){}
@@ -150,6 +157,10 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
 
   msgSucesso(msg) {
     this.toastr.success(msg);
+  }
+
+  msgErro(msg) {
+    this.toastr.error(msg);
   }
 
 }

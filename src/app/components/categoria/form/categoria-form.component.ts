@@ -27,7 +27,6 @@ export class CategoriaFormComponent extends CrudController<Categoria, {new(): Ca
   }
 
   ngOnInit() {
-    alert(this.data);
     if(this.data.tipo != undefined){
       this.tipo = this.data.tipo;
       this.objeto.tpCategoria = this.tipo.substring(0,1).toUpperCase().toString();

@@ -3,44 +3,40 @@
 <div id="page-content">
   <div class="row">
 	 
-	<div class="eq-height">
-		<div class="col-sm-4 eq-box-sm">
-			<div class="panel" (click)="abrirModalInserir()">
+	<div class="eq-height" *ngFor="let cartao of lista">
+		<div class="col-sm-4 eq-box-sm" *ngFor="let sub of cartao.listaCartao">
+
+			<div class="panel" (click)="abrirModalInserir()" *ngIf="sub.fgControle == 'S'">
 				<div class="panel-heading">
-					<h3 class="panel-title"></h3>					
+					<h3 class="panel-title"></h3>
+				</div>
+				<div class="panel-body" style="text-align: center;">
+						<h3 class="panel-title">{{sub.dsCartao}}</h3>
+				</div>
+				<div class="panel-footer" style="text-align: center;"></div>
+			</div>
+
+
+			<div class="panel" (click)="abrirModalInserir()" *ngIf="sub.fgControle == 'A'">
+				<div class="panel-heading">
+					<h3 class="panel-title"></h3>
 				</div>
 				<div class="panel-body" style="text-align: center;">
 					<i class="ion-plus-round" style="font-size: 30px"></i>
 				</div>
 				<div class="panel-footer" style="text-align: center;">Adicionar novo cartão</div>
 			</div>
-		</div>
-	
 
-		<div class="col-sm-4 eq-box-sm">
-			<div class="panel" style="background: transparent;">
-				<a href="#" id="demo-editable-dob" data-type="combodate" data-value="1984-05-15" data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY" data-pk="1"  data-title="Select Date of birth"></a>           
-			</div>
-		</div>
-
-		<div class="col-sm-4 eq-box-sm">
-			<div class="panel">
-				<div class="panel-body">
-					diego
+			<div class="col-sm-4 eq-box-sm" *ngIf="sub.fgControle == 'N'">
+				<div class="panel" style="background: transparent;">
+					<a href="#" id="demo-editable-dob" data-type="combodate" data-value="1984-05-15" data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY" data-pk="1"  data-title="Select Date of birth"></a>           
 				</div>
 			</div>
+
 		</div>
-
-		<div class="col-sm-4 eq-box-sm">
-			<div class="panel">
-				<div class="panel-body">
-					diego
-				</div>
-			</div>
-		</div>	
-
 
 	</div>	
+
   </div>
 </div>
 
