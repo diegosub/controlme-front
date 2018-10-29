@@ -1,5 +1,5 @@
 import { OnInit, Pipe } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CrudService } from '../../services/shared/crud.service';
 import { ResponseApi } from '../../model/response-api';
 import { ToastrService } from 'ngx-toastr';
@@ -64,7 +64,6 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
     this.service.pesquisar(this.objeto)
                 .subscribe((responseApi:ResponseApi) => {
       this.lista = responseApi['data'];
-      console.log(this.lista);
       //if(this.lista.length > 0) {
       //  this.setPage(1);
       //}else{
@@ -153,6 +152,16 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
         this.toastr.error('Ocorreu um erro insesperado em nosso servidor, favor tentar novamente.', 'Oops!');
       }
     }
+  }
+
+  getCodigoUsuarioLogado()
+  {
+    return this.getUsuarioLogado().idUsuario;
+  }
+
+  getUsuarioLogado()
+  {
+    return JSON.parse(localStorage.getItem("cmUsr"));
   }
 
   msgSucesso(msg) {

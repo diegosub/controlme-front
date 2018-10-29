@@ -2,12 +2,12 @@ import { HOST_CONTROLME } from '../controlme.api';
 import { Injectable } from '@angular/core';
 import { CrudService } from '../shared/crud.service';
 import { HttpClient} from '@angular/common/http';
-import { Cartao } from '../../model/cartao/cartao';
+import { Conta } from '../../model/conta/conta';
 
 
 
 @Injectable()
-export class CartaoService extends CrudService<Cartao> {
+export class ContaService extends CrudService<Conta> {
   
   constructor(http: HttpClient){
     super(http);
@@ -18,12 +18,12 @@ export class CartaoService extends CrudService<Cartao> {
     return this.http.get(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/setarPrincipal/${id}`);
   }
 
-  pesquisarInativos(cartao: Cartao) {
-    return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/pesquisarInativos`, cartao);
+  pesquisarInativos(conta: Conta) {
+    return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/pesquisarInativos`, conta);
   }
 
   strArtefato(): string {    
-    return "cartao";
+    return "conta";
   }
 
 }

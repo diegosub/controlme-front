@@ -1,37 +1,38 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import { CrudController } from '../../generic/crud-controller';
-import { Categoria } from '../../../model/categoria/categoria';
-import { CategoriaService } from '../../../services/categoria/categoria.service';
 import { Router } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../../dialog-service';
-import { Cartao } from '../../../model/cartao/cartao';
-import { CartaoService } from '../../../services/cartao/cartao.service';
-import { CartaoFormComponent } from '../form/cartao-form.component';
+//import { ContaFormComponent } from '../form/conta-form.component';
 import { ResponseApi } from '../../../model/response-api';
-import { CartaoIntvComponent } from '../intv/cartao-intv.component';
+//import { ContaIntvComponent } from '../intv/conta-intv.component';
+import { Conta } from '../../../model/conta/conta';
+import { ContaService } from '../../../services/conta/conta.service';
+import { ContaFormComponent } from '../form/conta-form.component';
+import { ContaIntvComponent } from '../intv/conta-intv.component';
+
 
 @Component({
-  selector: 'app-cartao-list',
-  templateUrl: './cartao-list.component.html',
-  styleUrls: ['./cartao-list.component.css']
+  selector: 'app-conta-list',
+  templateUrl: './conta-list.component.html',
+  styleUrls: ['./conta-list.component.css']
 })
-export class CartaoListComponent extends CrudController<Cartao, {new(): Cartao}> implements OnInit {
+export class ContaListComponent extends CrudController<Conta, {new(): Conta}> implements OnInit {
 
   constructor(public router: Router,
               private dialog: MatDialog,
               public dialogService: DialogService,
               public toastr: ToastrService,
-              private cartaoService: CartaoService) {
-    super(router, Cartao, toastr, dialogService, cartaoService);
+              private contaService: ContaService) {
+    super(router, Conta, toastr, dialogService, contaService);
   }
 
   ngOnInit() {
-    this.popularListaCartao();
+    this.popularListaConta();
   }
 
-  popularListaCartao() {
+  popularListaConta() {
     this.pesquisar();
   }
 
@@ -43,23 +44,23 @@ export class CartaoListComponent extends CrudController<Cartao, {new(): Cartao}>
   abrirModalInserir() {    
     const dialogConfig = new MatDialogConfig();
     
-    this.dialog.open(CartaoFormComponent, dialogConfig)
+    this.dialog.open(ContaFormComponent, dialogConfig)
                 .afterClosed().subscribe(() => {
-      this.popularListaCartao();
+      this.popularListaConta();
     });  
   }
 
   abrirModalAlterar(codigo) {
     if(codigo != undefined) {
-      this.cartaoService.get(codigo)
+      this.contaService.get(codigo)
                 .subscribe((responseApi:ResponseApi) => {
                   this.objeto = responseApi['data']; 
                   const dialogConfig = new MatDialogConfig();    
                   dialogConfig.data =  {objeto: this.objeto};
     
-                  this.dialog.open(CartaoFormComponent, dialogConfig)
+                  this.dialog.open(ContaFormComponent, dialogConfig)
                             .afterClosed().subscribe(() => {
-                    this.popularListaCartao();
+                    this.popularListaConta();
                   });  
                   
       } , err => {
@@ -71,21 +72,21 @@ export class CartaoListComponent extends CrudController<Cartao, {new(): Cartao}>
   abrirModalInativos() {    
     const dialogConfig = new MatDialogConfig();
 
-    this.dialog.open(CartaoIntvComponent, dialogConfig)
+    this.dialog.open(ContaIntvComponent, dialogConfig)
                           .afterClosed().subscribe(() => {
-      this.popularListaCartao()
+      this.popularListaConta()
     });  
   }
 
   setarPrincipal(codigo) { 
-    this.dialogService.confirm('Tem certeza que deseja marcar este cartão como principal?')
+    this.dialogService.confirm('Tem certeza que deseja marcar esta conta como principal?')
       .then((candelete:boolean) => {
           if(candelete){
-            this.cartaoService.setarPrincipal(codigo).subscribe((responseApi:ResponseApi) => {
+            this.contaService.setarPrincipal(codigo).subscribe((responseApi:ResponseApi) => {
               this.objeto = responseApi['data'];
-              this.popularListaCartao();
+              this.popularListaConta();
 
-              this.msgSucesso('Seu cartão principal foi alterado com sucesso.');  
+              this.msgSucesso('Sua conta principal foi alterado com sucesso.');  
             } , err => {
               this.tratarErro(err);
             });
@@ -94,7 +95,7 @@ export class CartaoListComponent extends CrudController<Cartao, {new(): Cartao}>
   }
 
   executarPosInativar() {
-    this.popularListaCartao();
+    this.popularListaConta();
   }
 
 }

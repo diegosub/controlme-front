@@ -1,0 +1,70 @@
+<form #form="ngForm" class="form-horizontal" novalidate>
+<div class="panel panel-trans">
+  <div class="panel-body demo-nifty-modal">
+
+      <!--Static Examplel-->
+      <div class="modal">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" (click)="fechar()"><i class="pci-cross pci-circle"></i></button>
+                      <h4 class="modal-title">
+                          <span *ngIf="objeto.idConta == null">Cadastrar</span> 
+                          <span *ngIf="objeto.idConta != null">Alterar</span> 
+                          Conta</h4>
+                  </div>
+
+                  <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">                                
+                                <label class="control-label">Descrição</label>                                    
+                                <input type="text" autocomplete="off"
+                                       [(ngModel)]="objeto.dsConta"
+                                        name="dsConta" class="form-control"
+                                        id="inputDsConta" placeholder="Informe a descrição da conta"
+                                        #dsCategoria="ngModel" required>           
+                            </div>
+                        </div>  
+
+                        <div class="row">
+                            <div class="col-sm-6">                                
+                                <label class="control-label">Tipo de Conta</label>                                    
+                                <select class="form-control" [(ngModel)]="objeto.idTipoConta" name="idTipoConta" #idTipoConta="ngModel" required>
+                                    <option value="0">- Selecione um Tipo de Conta -</option>
+                                    <option *ngFor="let tipoConta of listaTipoConta" [ngValue]="tipoConta.vlDominioNumber">{{tipoConta.dsDominio}}</option>
+                                </select>        
+                            </div>
+
+                            <div class="col-sm-6">                                
+                                <label class="control-label">Saldo</label>                                    
+                                <input type="text"
+		          					[(ngModel)]="objeto.vlSaldo"
+                                    name="vlSaldo"
+                                    class="form-control"
+                                    id="inputVlSaldo"
+                                    placeholder="R$ 00,00"
+                                    #vlSaldo="ngModel"
+                                    currencyMask
+                                    maxlength="14"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+		                    required/>  
+                            </div>
+                        </div>
+                        
+                        
+    
+
+                  </div>
+
+                  <div class="modal-footer">
+                      <button class="btn btn-default" (click)="fechar()" data-dismiss="modal" type="button">Fechar</button>
+                      <button class="btn btn-primary" (click)="inserir()" type="button" *ngIf="objeto.idConta == null" [disabled]="!form.valid">Cadastrar</button>
+                      <button class="btn btn-primary" (click)="alterar()" type="button" *ngIf="objeto.idConta != null" [disabled]="!form.valid">Alterar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
+</form>

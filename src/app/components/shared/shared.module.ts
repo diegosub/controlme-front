@@ -31,6 +31,16 @@ import { CartaoListComponent } from '../cartao/list/cartao-list.component';
 import { CartaoTitleComponent } from '../cartao/title/cartao-title.component';
 import { CartaoFormComponent } from '../cartao/form/cartao-form.component';
 import { SoNumberDirective } from '../../diretivas/so-number.directive';
+import { CartaoIntvComponent } from '../cartao/intv/cartao-intv.component';
+import { ContaListComponent } from '../conta/list/conta-list.component';
+import { ContaFormComponent } from '../conta/form/conta-form.component';
+import { ContaService } from '../../services/conta/conta.service';
+
+import { CurrencyMaskModule } from "ng2-currency-mask";
+import { DominioService } from '../../services/dominio/dominio.service';
+import { ContaTitleComponent } from '../conta/title/conta-title.component';
+import { ContaIntvComponent } from '../conta/intv/conta-intv.component';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -57,7 +67,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MatIconModule,
         MatButtonModule,
         MatDialogModule,
-        BrowserAnimationsModule,
+        BrowserAnimationsModule, 
+        CurrencyMaskModule,       
         ToastrModule.forRoot()
     ],
     declarations: [
@@ -72,6 +83,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CartaoFormComponent,
         CartaoListComponent,
         CartaoTitleComponent,
+        CartaoIntvComponent,
+        ContaFormComponent,
+        ContaListComponent,
+        ContaTitleComponent,
+        ContaIntvComponent,
         FooterComponent,
         NotfoundComponent,
         FilterPipe,
@@ -82,6 +98,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       DialogService,
       CategoriaService,
       CartaoService,
+      ContaService,
+      DominioService,
       SubcategoriaService,
       {
         provide: HTTP_INTERCEPTORS,

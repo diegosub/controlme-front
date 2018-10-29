@@ -1,0 +1,55 @@
+<form #form="ngForm" class="form-horizontal" novalidate>
+<div class="panel panel-trans">
+  <div class="panel-body demo-nifty-modal">
+
+      <!--Static Examplel-->
+      <div class="modal">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" (click)="fechar()"><i class="pci-cross pci-circle"></i></button>
+                      <h4 class="modal-title">
+                        <span>Reativar Cartão</span>                           
+                      </h4>
+                  </div>
+
+                  <perfect-scrollbar style="max-width: 600px; max-height: 400px;" >
+                  <div class="modal-body">
+                        
+                    <div class="table-responsive">
+                        
+                            <table class="table table-hover table-vcenter" *ngIf="lista.length>0">
+                                <thead>
+                                    <tr>
+                                        <th width="93%" class="text-center" >Cartões Inativos</th>
+                                        <th></th>                                        
+                                    </tr>
+                                </thead>
+                                
+                                <tbody *ngFor="let cartao of lista">
+                                    <tr style="background: #f9f9f9;">
+                                        <td><b>{{cartao.dsCartao}}</b></td>
+                                        <td>
+                                            <i class="fa fa-check" (click)="ativar(cartao.idCartao)" style="font-size: 16px; cursor: pointer;" title="Ativar cartao"></i>
+                                        </td> 
+                                    </tr>
+                                </tbody>
+                            </table>
+                        
+
+                        <span style="text-align: center;" *ngIf="lista.length==0">Não existe cartão inativo</span>
+                    </div>		                       
+                
+                  </div>
+
+                </perfect-scrollbar>
+                  <div class="modal-footer">
+                      <button class="btn btn-default" (click)="fechar()" data-dismiss="modal" type="button">Fechar</button>                      
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
+</form>

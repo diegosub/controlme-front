@@ -6,6 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../../dialog-service';
 import { Cartao } from '../../../model/cartao/cartao';
 import { CartaoService } from '../../../services/cartao/cartao.service';
+import { Dominio } from '../../../model/dominio/dominio';
+import { DominioService } from '../../../services/dominio/dominio.service';
+import { ResponseApi } from '../../../model/response-api';
 
 @Component({
   selector: 'app-cartao-form',
@@ -14,7 +17,6 @@ import { CartaoService } from '../../../services/cartao/cartao.service';
 })
 export class CartaoFormComponent extends CrudController<Cartao, {new(): Cartao}> implements OnInit {
 
-  @ViewChild('dsCategoria') private elementRef: ElementRef;
   tipo: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
@@ -27,7 +29,9 @@ export class CartaoFormComponent extends CrudController<Cartao, {new(): Cartao}>
   }
 
   ngOnInit() {
-
+    if(this.data != null && this.data.objeto != undefined){
+      this.objeto = this.data.objeto;      
+    }
   }
 
   validarInserir() {

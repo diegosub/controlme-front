@@ -125,6 +125,7 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
     let categoriaDespesa = new Categoria();
     categoriaDespesa.tpCategoria = 'D';
     categoriaDespesa.fgAtivo = true;
+    categoriaDespesa.idUsuario = this.getCodigoUsuarioLogado();
     this.categoriaService.pesquisar(categoriaDespesa)
                          .subscribe((responseApi:ResponseApi) => {
         this.listaDespesa =  responseApi['data'];
@@ -138,6 +139,7 @@ export class CategoriaListComponent extends CrudController<Categoria, {new(): Ca
     let categoriaReceita = new Categoria();
     categoriaReceita.tpCategoria = 'R';
     categoriaReceita.fgAtivo = true;
+    categoriaReceita.idUsuario = this.getCodigoUsuarioLogado();
     this.categoriaService.pesquisar(categoriaReceita)
                          .subscribe((responseApi:ResponseApi) => {
         this.listaReceita =  responseApi['data'];

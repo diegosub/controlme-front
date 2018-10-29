@@ -5,7 +5,8 @@ export class Cartao {
     nrDiaCorte: Number; 
     nrDiaVencimento: Number; 
     idUsuario: Number;    
-    fgAtivo: boolean;    
+    fgAtivo: boolean;
+    fgPrincipal: boolean;
     dtCadastro: Date;    
     dtAlteracao: Date; 
     fgControle: string;   
