@@ -2,6 +2,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 
+import {NgxMaskModule} from 'ngx-mask'
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule } from '@angular/forms';
 import { DialogService } from '../../dialog-service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -16,7 +18,7 @@ import { CategoriaListComponent } from '../categoria/list/categoria-list.compone
 import { NotfoundComponent } from './notfound/notfound.component';
 import { CategoriaService } from '../../services/categoria/categoria.service';
 import { CategoriaFormComponent } from '../categoria/form/categoria-form.component';
-import { MatDialogModule, MatToolbarModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
+import { MatDialogModule, MatToolbarModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
 import { ToastrModule } from 'ngx-toastr';
 import { PagerService } from '../../services/pager.service';
 import { FilterPipe } from '../generic/filter';
@@ -40,6 +42,12 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 import { DominioService } from '../../services/dominio/dominio.service';
 import { ContaTitleComponent } from '../conta/title/conta-title.component';
 import { ContaIntvComponent } from '../conta/intv/conta-intv.component';
+import { TransferenciaComponent } from '../transferencia/transferencia.component';
+import { TransferenciaTitleComponent } from '../transferencia/title/transferencia-title.component';
+import { TransferenciaSaveComponent } from '../transferencia/save/transferencia-save.component';
+import { TransferenciaService } from '../../services/transferencia/transferencia.service';
+
+
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -68,7 +76,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MatButtonModule,
         MatDialogModule,
         BrowserAnimationsModule, 
-        CurrencyMaskModule,       
+        CurrencyMaskModule,
+        MatDatepickerModule, 
+        MatNativeDateModule,
+        BsDatepickerModule.forRoot(),
+        NgxMaskModule.forRoot(),
         ToastrModule.forRoot()
     ],
     declarations: [
@@ -88,6 +100,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ContaListComponent,
         ContaTitleComponent,
         ContaIntvComponent,
+        TransferenciaTitleComponent,
+        TransferenciaSaveComponent,
+        TransferenciaComponent,
         FooterComponent,
         NotfoundComponent,
         FilterPipe,
@@ -101,6 +116,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       ContaService,
       DominioService,
       SubcategoriaService,
+      TransferenciaService,
       {
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,
@@ -109,7 +125,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       {
         provide: PERFECT_SCROLLBAR_CONFIG,
         useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-      }
+      },
+      {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
     ]
 })
 export class SharedModule { }

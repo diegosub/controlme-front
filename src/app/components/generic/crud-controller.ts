@@ -15,6 +15,7 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
   lista = [];
   pager: any = {};
   pagedItems: any[];
+  linha: string;
   
   constructor(public router: Router,
               private type: CT,                          
@@ -152,6 +153,14 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
         this.toastr.error('Ocorreu um erro insesperado em nosso servidor, favor tentar novamente.', 'Oops!');
       }
     }
+  }
+
+  mon() {
+    this.linha = 'over';
+  }
+
+  mof() {
+    this.linha = '';
   }
 
   getCodigoUsuarioLogado()

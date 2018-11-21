@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CrudController } from '../../generic/crud-controller';
-import { Cartao } from '../../../model/cartao/cartao';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../../dialog-service';

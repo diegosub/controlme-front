@@ -22,6 +22,10 @@ export class ContaService extends CrudService<Conta> {
     return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/pesquisarInativos`, conta);
   }
 
+  listarContas(conta: Conta) {
+    return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/listarContas`, conta);
+  }
+
   strArtefato(): string {    
     return "conta";
   }

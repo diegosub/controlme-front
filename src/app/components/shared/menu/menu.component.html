@@ -38,7 +38,7 @@
 
                                 <ul id="mainnav-menu" class="list-group">
 
-          						            <li class="list-header">Navegação</li>
+          						  <li class="list-header">Navegação</li>
 
                                   <li>
                                       <a [routerLink]="['/']">
@@ -47,12 +47,15 @@
                                       </a>
                                   </li>
 
+                                  <li class="list-divider"></li>
+
+
                                   <li>
-          						                <a [routerLink]="['/categoria-list']">
-          						                    <i class="pli-numbering-list"></i>
-          						                    <span class="menu-title">Categorias</span>
-          						                </a>
-          						            </li>
+                                        <a [routerLink]="['/categoria-list']">
+                                            <i class="pli-numbering-list"></i>
+                                            <span class="menu-title">Categorias</span>
+                                        </a>
+                                  </li>
 
                                   <li>
                                     <a [routerLink]="['/cartao-list']">
@@ -68,23 +71,33 @@
                                     </a>
                                   </li>
 
-                                  <li>
-          						                <a href="helper-classes.html">
-          						                    <i class="pli-financial"></i>
-          						                    <span class="menu-title">Receitas</span>
-          						                </a>
-          						            </li>
+                                  <li class="list-divider"></li>
 
                                   <li>
-          						                <a href="helper-classes.html">
-          						                    <i class="pli-dollar"></i>
-          						                    <span class="menu-title">Despesas</span>
-          						                </a>
-          						            </li>
+                                    <a [routerLink]="['/transferencia']">
+                                        <i class="fa fa-refresh"></i>
+                                        <span class="menu-title">Transfências</span>
+                                    </a>
+                                 </li>
 
-          						            <li class="list-divider"></li>
+                                  
+                                  <li>
+                                        <a href="helper-classes.html">
+                                            <i class="pli-financial"></i>
+                                            <span class="menu-title">Receitas</span>
+                                        </a>
+                                  </li>
 
-          						            <li class="list-header">Mais...</li>
+                                  <li>
+                                        <a href="helper-classes.html">
+                                            <i class="pli-dollar"></i>
+                                            <span class="menu-title">Despesas</span>
+                                        </a>
+                                  </li>
+
+          						  <li class="list-divider"></li>
+
+          						  <li class="list-header">Mais...</li>
 
                                   <li>
                                       <a href="helper-classes.html">

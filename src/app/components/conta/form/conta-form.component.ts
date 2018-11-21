@@ -40,7 +40,6 @@ export class ContaFormComponent extends CrudController<Conta, {new(): Conta}> im
       this.objeto.idTipoConta = 0;
     }
 
-    alert(this.objeto.idTipoConta)
   }
 
   validarInserir() {
