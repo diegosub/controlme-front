@@ -4,6 +4,7 @@ import { CrudService } from '../../services/shared/crud.service';
 import { ResponseApi } from '../../model/response-api';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../dialog-service';
+import { IMyDrpOptions } from 'mydaterangepicker';
 
 export class CrudController<Entity, CT extends { new(item?: any): Entity }> implements OnInit {
 
@@ -180,5 +181,23 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
   msgErro(msg) {
     this.toastr.error(msg);
   }
+
+  myDateRangePickerOptions: IMyDrpOptions = {
+    // other options...
+    dateFormat: 'dd/mm/yyyy',
+    firstDayOfWeek: 'su',
+    height: '32px',
+    editableDateRangeField: false,
+    openSelectorOnInputClick: true,
+    showClearBtn: false,
+    showClearDateRangeBtn: false,
+    markCurrentDay: true,
+    markCurrentYear: true,
+    markCurrentMonth: true,
+    monthSelector: true,
+    minYear: 2018,
+    dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sab'},
+    monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' }
+};
 
 }

@@ -46,6 +46,7 @@ import { TransferenciaComponent } from '../transferencia/transferencia.component
 import { TransferenciaTitleComponent } from '../transferencia/title/transferencia-title.component';
 import { TransferenciaSaveComponent } from '../transferencia/save/transferencia-save.component';
 import { TransferenciaService } from '../../services/transferencia/transferencia.service';
+import { MyDateRangePickerModule } from 'mydaterangepicker';
 
 
 
@@ -79,6 +80,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CurrencyMaskModule,
         MatDatepickerModule, 
         MatNativeDateModule,
+        MyDateRangePickerModule,
         BsDatepickerModule.forRoot(),
         NgxMaskModule.forRoot(),
         ToastrModule.forRoot()

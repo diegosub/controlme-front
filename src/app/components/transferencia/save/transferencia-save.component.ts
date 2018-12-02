@@ -8,7 +8,7 @@ import { DialogService } from '../../../dialog-service';
 import { ContaService } from '../../../services/conta/conta.service';
 import { TransferenciaService } from '../../../services/transferencia/transferencia.service';
 import { ResponseApi } from '../../../model/response-api';
-import { MatDialogRef, MatDatepickerModule } from '@angular/material';
+import { MatDialogRef, MatDatepickerModule, MAT_DIALOG_DATA } from '@angular/material';
 
 
 declare var $ :any;
@@ -23,7 +23,8 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
   listaConta = [];
   maxDate = new Date();
 
-  constructor(public router: Router,
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any,
+              public router: Router,
               public toastr: ToastrService,
               dialogService: DialogService,
               private contaService: ContaService,
@@ -37,6 +38,10 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
 
     this.objeto.idContaOrigem = 0;
     this.objeto.idContaDestino = 0;
+
+    if(this.data.objeto != undefined){
+      this.objeto = this.data.objeto;      
+    }
 
   }
 
@@ -62,7 +67,7 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
 
         this.executarPosInserir();
 
-        this.msgSucesso('O registro foi cadastrado com sucesso.');
+        this.msgSucesso('A transferência foi cadastrada com sucesso.');
       } , err => {      
         this.tratarErro(err);
       });
@@ -115,9 +120,12 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
 
 
   completarInserir() {
-    this.objeto.fgAtivo = true;
     this.objeto.dtCadastro = new Date();
     this.objeto.idUsuario = this.getCodigoUsuarioLogado();
+  }
+
+  completarAlterar() {
+    this.objeto.dtAlteracao = new Date();
   }
 
   executarPosInserir() {

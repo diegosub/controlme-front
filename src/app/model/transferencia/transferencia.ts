@@ -1,4 +1,5 @@
 import { Conta } from "../conta/conta";
+import { FiltroTransferencia } from "./filtro/filtro-transferencia";
 
 export class Transferencia {
     
@@ -8,15 +9,17 @@ export class Transferencia {
     idContaDestino: Number;  
     vlTransferencia: Number;   
     strVlTransferencia: Number; 
-    dtCadastro: Date;    
+    dtCadastro: Date;
+    dtAlteracao: Date;
     dtTransferencia: String;
     nrDia: Number;
     fgTipo: boolean; 
     fgTransferenciaFixa: boolean;
     dsObservacao: string;
-    fgAtivo: boolean;
 
     contaOrigem: Conta;
     contaDestino: Conta;
+
+    filtro: FiltroTransferencia;
 
 }

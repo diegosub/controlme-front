@@ -5,11 +5,12 @@ import { Conta } from '../../model/conta/conta';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../dialog-service';
-import { ContaService } from '../../services/conta/conta.service';
 import { TransferenciaService } from '../../services/transferencia/transferencia.service';
 import { ResponseApi } from '../../model/response-api';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { TransferenciaSaveComponent } from './save/transferencia-save.component';
+import {IMyDrpOptions, IMyDateRangeModel} from 'mydaterangepicker';
+import { FiltroTransferencia } from '../../model/transferencia/filtro/filtro-transferencia';
 
 
 @Component({
@@ -20,35 +21,71 @@ import { TransferenciaSaveComponent } from './save/transferencia-save.component'
 export class TransferenciaComponent extends CrudController<Transferencia, {new(): Transferencia}> implements OnInit {
 
   listaConta = [];
+  tpTransferencia:string;
+
+  private periodo: any;
 
   constructor(public router: Router,
               public toastr: ToastrService,
               private dialog: MatDialog,
               dialogService: DialogService,
-              private contaService: ContaService,
               private transferenciaService: TransferenciaService) {
       super(router, Transferencia, toastr, dialogService, transferenciaService);
   }
 
   ngOnInit() {
+    this.resetFiltros();
     this.pesquisarTransferencia();
+  } 
 
-    this.objeto.idContaOrigem = 0;
-    this.objeto.idContaDestino = 0;
+  resetFiltros() {
+    this.periodo = {beginDate: {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()},
+                      endDate: {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()}};
+    this.objeto.filtro = new FiltroTransferencia();
+    this.objeto.filtro.dtTransferenciaInicio = new Date();
+    this.objeto.filtro.dtTransferenciaFim = new Date();
+    this.periodo.beginDate.year = new Date().getFullYear();
+    this.periodo.beginDate.month = new Date().getMonth() + 1;
+    this.periodo.beginDate.day = new Date().getDate();
+    
+    this.periodo.endDate =  {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()};
+    //this.objeto.idContaOrigem = 0;
+    //this.objeto.idContaDestino = 0;
+    this.tpTransferencia = "N";
   }
 
-  pesquisarTransferencia() {
-    let transferencia: Transferencia = new Transferencia();
-    transferencia.fgAtivo = true;
-    transferencia.idUsuario = this.getCodigoUsuarioLogado();
 
-    this.transferenciaService.pesquisar(transferencia)
+  pesquisarTransferencia() {
+    
+    this.objeto.idUsuario = this.getCodigoUsuarioLogado();
+    this.objeto.filtro = this.objeto.filtro;
+  
+    this.transferenciaService.pesquisar(this.objeto)
                 .subscribe((responseApi:ResponseApi) => {
       this.lista = responseApi['data'];
     } , err => {
       this.tratarErro(err);
     });
+  }
 
+  abrirModalAlterar(codigo) {
+    if(codigo != undefined) {
+      this.transferenciaService.get(codigo)
+                .subscribe((responseApi:ResponseApi) => {
+                  this.objeto = responseApi['data']; 
+                  const dialogConfig = new MatDialogConfig();    
+                  dialogConfig.data =  {objeto: this.objeto};
+    
+                  this.dialog.open(TransferenciaSaveComponent, dialogConfig)
+                            .afterClosed().subscribe(() => {
+                    this.resetFiltros();
+                    this.pesquisarTransferencia();
+                  });  
+                  
+      } , err => {
+        this.tratarErro(err);
+      });
+    }
   }
 
   abrirModalInserir(tipo) {
@@ -57,10 +94,32 @@ export class TransferenciaComponent extends CrudController<Transferencia, {new()
     
     this.dialog.open(TransferenciaSaveComponent, dialogConfig)
                .afterClosed().subscribe(() => {
-    
-      //popular lista de transferencias
-
+      this.resetFiltros();
+      this.pesquisarTransferencia();
     });  
+  }
+
+  excluirDefinitivamente(id:string){
+    this.dialogService.confirm('Tem certeza que deseja excluir definitivamente esta transferência?')
+      .then((candelete:boolean) => {
+          if(candelete){            
+            this.transferenciaService.excluirDefinitivamente(id).subscribe((responseApi:ResponseApi) => {
+              this.resetFiltros();
+              this.pesquisarTransferencia();
+              this.msgSucesso('A transferência foi excluída definitivamente do sistema.');             
+            } , err => {
+              this.tratarErro(err);              
+            });
+          }
+      });
+  }
+
+  selecionarPeriodoFiltro(event: IMyDateRangeModel) {
+    this.objeto.filtro = new FiltroTransferencia(); 
+    this.objeto.filtro.dtTransferenciaInicio = new Date(event.beginDate.year, event.beginDate.month-1, event.beginDate.day);
+    this.objeto.filtro.dtTransferenciaFim = new Date(event.endDate.year, event.endDate.month-1, event.endDate.day);
+    
+    this.pesquisarTransferencia();
   }
 
 }

@@ -43,71 +43,71 @@
 // // }
 
 
-// function formataData(evt, campo) 
-// {
-// 	if (soNumero(evt, campo))
-// 	{
-// 		var unicode = (evt.which) ? evt.which : evt.keyCode;
+function formataData(evt, campo) 
+{
+	if (soNumero(evt, campo))
+	{
+		var unicode = (evt.which) ? evt.which : evt.keyCode;
 
-// 		vr = campo.value;
-// 		vr = vr.replace( ".", "" );
-// 		vr = vr.replace( "-", "" );
-// 		vr = vr.replace( "/", "" );
-// 		vr = vr.replace( "/", "" );
-// 		vr = vr.replace( "/", "" );
-// 		tam = vr.length + 1;
+		vr = campo.value;
+		vr = vr.replace( ".", "" );
+		vr = vr.replace( "-", "" );
+		vr = vr.replace( "/", "" );
+		vr = vr.replace( "/", "" );
+		vr = vr.replace( "/", "" );
+		tam = vr.length + 1;
 		
-// 		if (unicode >= 48 && unicode <= 57)
-// 		{
-// 			if (tam > 2 && tam < 5)
-// 				campo.value = vr.substr(0, 2) + '/' + vr.substr(2, tam);
-// 			if (tam >= 5 && tam <= 10)
-// 				campo.value = vr.substr(0, 2) + '/' + vr.substr(2, 2) + '/' + vr.substr(4, 4); 
-// 		}
-// 		return true;
-// 	}
-// 	return false;
-// }
+		if (unicode >= 48 && unicode <= 57)
+		{
+			if (tam > 2 && tam < 5)
+				campo.value = vr.substr(0, 2) + '/' + vr.substr(2, tam);
+			if (tam >= 5 && tam <= 10)
+				campo.value = vr.substr(0, 2) + '/' + vr.substr(2, 2) + '/' + vr.substr(4, 4); 
+		}
+		return true;
+	}
+	return false;
+}
 
-// function soNumero(evt, campo)
-// {
-// 	if (navigator.appCodeName == 'Mozilla' && (navigator.appName == 'Netscape' || navigator.appName == 'Opera'))
-// 	{
-// 		if (evt.which)
-// 		{
-// 			if ((evt.which < 48 || evt.which > 57) && evt.which != 8 && evt.which != 9)
-// 			{
-// 				if(navigator.appName == 'Opera') // Opera
-// 				{
-// 					if((evt.which == 86 || evt.which == 67) && evt.ctrlKey) // Ctrl + V ou Ctrl + C
-// 					{
-// 						return true;
-// 					}
-// 				}
-// 				else // Firefox, Chrome, Safari
-// 				{
-// 					if((evt.which == 118 || evt.which == 99) && evt.ctrlKey) // Ctrl + V ou Ctrl + C
-// 					{
-// 						return true;
-// 					}
-// 				}
+function soNumero(evt, campo)
+{
+	if (navigator.appCodeName == 'Mozilla' && (navigator.appName == 'Netscape' || navigator.appName == 'Opera'))
+	{
+		if (evt.which)
+		{
+			if ((evt.which < 48 || evt.which > 57) && evt.which != 8 && evt.which != 9)
+			{
+				if(navigator.appName == 'Opera') // Opera
+				{
+					if((evt.which == 86 || evt.which == 67) && evt.ctrlKey) // Ctrl + V ou Ctrl + C
+					{
+						return true;
+					}
+				}
+				else // Firefox, Chrome, Safari
+				{
+					if((evt.which == 118 || evt.which == 99) && evt.ctrlKey) // Ctrl + V ou Ctrl + C
+					{
+						return true;
+					}
+				}
 				
-// 				campo = '';
-// 				return false;
-// 			}
-// 		}
-// 	}
-// 	else // IE
-// 	{
-// 		if (evt.keyCode < 48 || evt.keyCode > 57)
-// 		{
-// 			campo = '';
-// 			return false;
-// 		}
-// 	}
+				campo = '';
+				return false;
+			}
+		}
+	}
+	else // IE
+	{
+		if (evt.keyCode < 48 || evt.keyCode > 57)
+		{
+			campo = '';
+			return false;
+		}
+	}
 	
-// 	return true;
-// }
+	return true;
+}
 
   $(function(){
     $('.table-striped tbody tr')

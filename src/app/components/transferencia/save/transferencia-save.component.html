@@ -9,8 +9,8 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" (click)="fechar()"><i class="pci-cross pci-circle"></i></button>
                             <h4 class="modal-title">
-                                <span *ngIf="objeto.idCategoria == null">Cadastrar</span> 
-                                <span *ngIf="objeto.idCategoria != null">Alterar</span> 
+                                <span *ngIf="objeto.idTransferencia == null">Cadastrar</span> 
+                                <span *ngIf="objeto.idTransferencia != null">Alterar</span> 
                                 Transferência</h4>
                         </div>
 
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col-sm-4" style="text-align: center;">
                                     <label class="control-label" style="color: white;">.</label>
-                                    <div class="checkbox">
+                                    <div class="checkbox" *ngIf="objeto.idTransferencia == null">
                                         <input id="demo-inline-form-checkbox" (click)="clearResult()"
                                                [checked]="fgTransferenciaFixa" [(ngModel)]="objeto.fgTransferenciaFixa" #fgTransferenciaFix="ngModel"
                                                class="magic-checkbox" type="checkbox" name="fgTransferenciaFixa">
@@ -59,7 +59,7 @@
                                 <div class="col-sm-4" *ngIf="!objeto.fgTransferenciaFixa">
                                     <label class="control-label">Data da Transferência</label>
                                     <div class="input-group date">
-                                        <input matInput [matDatepicker]="picker" (click)="picker.open()" [(ngModel)]="objeto.dtTransferencia" name="dtTransferencia"
+                                        <input matInput [matDatepicker]="picker" onkeypress="return formataData(event, this);" (click)="picker.open()" [(ngModel)]="objeto.dtTransferencia" name="dtTransferencia"
                                                class="form-control" [max]="maxDate" maxlength="10" #dtTransferencia="ngModel">
                                         <span class="input-group-addon cal" (click)="picker.open()"><i class="demo-pli-calendar-4"></i></span>
                                         <mat-datepicker-toggle style="display: none;" matSuffix [for]="picker" class="input-group-addon cal"></mat-datepicker-toggle>
@@ -90,8 +90,8 @@
                         
                         <div class="panel-footer text-right">
                             <button class="btn btn-default" (click)="fechar()" data-dismiss="modal" type="button">Fechar</button>
-                            <button class="btn btn-primary" (click)="inserirTransferencia()" type="button" *ngIf="objeto.idCategoria == null" [disabled]="!form.valid">Cadastrar</button>
-                            <button class="btn btn-primary" (click)="alterar()" type="button" *ngIf="objeto.idCategoria != null" [disabled]="!form.valid">Alterar</button>
+                            <button class="btn btn-primary" (click)="inserirTransferencia()" type="button" *ngIf="objeto.idTransferencia == null" [disabled]="!form.valid">Cadastrar</button>
+                            <button class="btn btn-primary" (click)="alterar()" type="button" *ngIf="objeto.idTransferencia != null" [disabled]="!form.valid">Alterar</button>
                         </div>
                                             
                                                 <!--===================================================-->

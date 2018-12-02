@@ -132,7 +132,7 @@
 															{{subcategoria.dsSubcategoria}}
 														</td>
 														<td></td>
-														<td><i class="ion-edit"></i></td>
+														<td><i class="ion-edit" (click)="abrirModalAlterarSubcategoria(subcategoria.idSubcategoria)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar esta subcategoria"></i></td>
 														<td><i class="ion-close" (click)="inativarSubcategoria(subcategoria.idSubcategoria)" style="font-size: 14px; cursor: pointer;" title="Inativar subcategoria"></i></td>
 													</tr>
 											</tbody>

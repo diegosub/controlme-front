@@ -18,6 +18,10 @@ export class TransferenciaService extends CrudService<Transferencia> {
     return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/inserirTransferencia`, transferencia);
   }
 
+  excluirDefinitivamente(id:string) {
+    return this.http.delete(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/${id}`);
+  }
+
   strArtefato(): string {    
     return "transferencia";
   }
