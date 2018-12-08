@@ -49,8 +49,14 @@
                                 </div>
                                 <div class="col-sm-4" style="text-align: center;">
                                     <label class="control-label" style="color: white;">.</label>
-                                    <div class="checkbox" *ngIf="objeto.idTransferencia == null">
+                                    <div class="checkbox" *ngIf="objeto.idTransferencia == null && objeto.idTransferenciaFixa == null">
                                         <input id="demo-inline-form-checkbox" (click)="clearResult()"
+                                               [checked]="fgTransferenciaFixa" [(ngModel)]="objeto.fgTransferenciaFixa" #fgTransferenciaFix="ngModel"
+                                               class="magic-checkbox" type="checkbox" name="fgTransferenciaFixa">
+                                        <label for="demo-inline-form-checkbox">Transferência Fixa</label>
+                                    </div>
+                                    <div class="checkbox" *ngIf="objeto.idTransferencia != null || objeto.idTransferenciaFixa != null">
+                                        <input id="demo-inline-form-checkbox" disabled="true"
                                                [checked]="fgTransferenciaFixa" [(ngModel)]="objeto.fgTransferenciaFixa" #fgTransferenciaFix="ngModel"
                                                class="magic-checkbox" type="checkbox" name="fgTransferenciaFixa">
                                         <label for="demo-inline-form-checkbox">Transferência Fixa</label>

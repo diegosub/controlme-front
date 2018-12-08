@@ -49,16 +49,18 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
   }
 
   alterar() {
-    this.completarAlterar();
+    if(this.validarAlterar()) {
+      this.completarAlterar();
 
-    this.service.alterar(this.objeto).subscribe((responseApi:ResponseApi) => {
+      this.service.alterar(this.objeto).subscribe((responseApi:ResponseApi) => {
 
-      this.executarPosAlterar();
+        this.executarPosAlterar();
 
-      this.msgSucesso('O registro foi alterado com sucesso.');
-    } , err => {      
-      this.tratarErro(err);
-    });
+        this.msgSucesso('O registro foi alterado com sucesso.');
+      } , err => {      
+        this.tratarErro(err);
+      });
+    }
   }
 
   pesquisar() {
@@ -138,6 +140,7 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
   }
 
   public validarInserir():boolean{return true}
+  public validarAlterar():boolean{return true}
   completarInserir(){}
   executarPosInserir(){}  
   completarAlterar(){}

@@ -3,8 +3,9 @@ import { FiltroTransferencia } from "./filtro/filtro-transferencia";
 
 export class Transferencia {
     
-    idTransferencia: Number;    
-    idUsuario: Number;    
+    idTransferencia: Number;
+    idTransferenciaFixa: Number;
+    idUsuario: Number;
     idContaOrigem: Number;
     idContaDestino: Number;  
     vlTransferencia: Number;   
@@ -13,7 +14,7 @@ export class Transferencia {
     dtAlteracao: Date;
     dtTransferencia: String;
     nrDia: Number;
-    fgTipo: boolean; 
+    fgAtivo: boolean;
     fgTransferenciaFixa: boolean;
     dsObservacao: string;
 

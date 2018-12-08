@@ -9,6 +9,7 @@ import { ContaService } from '../../../services/conta/conta.service';
 import { TransferenciaService } from '../../../services/transferencia/transferencia.service';
 import { ResponseApi } from '../../../model/response-api';
 import { MatDialogRef, MatDatepickerModule, MAT_DIALOG_DATA } from '@angular/material';
+import { TransferenciaFixaService } from '../../../services/transferencia/transferencia-fixa.service';
 
 
 declare var $ :any;
@@ -29,6 +30,7 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
               dialogService: DialogService,
               private contaService: ContaService,
               private transferenciaService: TransferenciaService,
+              private transferenciaFixaService: TransferenciaFixaService,
               private dialogRef: MatDialogRef<TransferenciaSaveComponent>) {
       super(router, Transferencia, toastr, dialogService, transferenciaService);
   }
@@ -74,9 +76,23 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
     }
   }
 
-  validarInserir() {
 
-    console.log(this.objeto);
+  alterarFixa() {
+    if(this.validarAlterar()) {
+      this.completarAlterar();
+
+      this.transferenciaFixaService.alterar(this.objeto).subscribe((responseApi:ResponseApi) => {
+
+        this.executarPosAlterar();
+
+        this.msgSucesso('A transferência fixa foi alterada com sucesso.');
+      } , err => {      
+        this.tratarErro(err);
+      });
+    }
+  }
+
+  validarInserir() {
 
     if(this.objeto.idContaOrigem == 0 || this.objeto.idContaOrigem == null) {
       this.msgErro("O campo Conta de Origem é obrigatório.");
@@ -113,6 +129,48 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
     return true;
   }
 
+  validarAlterar() {
+
+    if(this.objeto.idTransferencia == 0 || this.objeto.idTransferencia == null) {
+      this.msgErro("O campo Código da Transferência é obrigatório.");
+      return false;
+    }
+
+    if(this.objeto.idContaOrigem == 0 || this.objeto.idContaOrigem == null) {
+      this.msgErro("O campo Conta de Origem é obrigatório.");
+      return false;
+    }
+
+    if(this.objeto.idContaDestino == 0 || this.objeto.idContaDestino == null) {
+      this.msgErro("O campo Conta de Destino é obrigatório.");
+      return false;
+    }
+
+    if(this.objeto.idContaDestino == this.objeto.idContaOrigem) {
+      this.msgErro("A Conta de Destino não pode ser a mesma Conta de Origem.");
+      return false;
+    }
+
+    if(this.objeto.vlTransferencia <= 0 || this.objeto.vlTransferencia == null) {
+      this.msgErro("O campo Valor da Transferência deve ser maior que zero.");
+      return false;
+    }
+
+    if(this.objeto.fgTransferenciaFixa) {
+      if(this.objeto.nrDia == null || this.objeto.nrDia <= 0 || this.objeto.nrDia > 31) {
+        this.msgErro("O campo Dia da Transferência deve ser preencido com o valor entre 1 e 31.");
+        return false;
+      }
+    } else {
+      if(this.objeto.dtTransferencia == null) {
+        this.msgErro("O campo Data da Transferência é obrigatório.");
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   clearResult() {
     this.objeto.dtTransferencia = null;
     this.objeto.nrDia = null;
@@ -122,6 +180,10 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
   completarInserir() {
     this.objeto.dtCadastro = new Date();
     this.objeto.idUsuario = this.getCodigoUsuarioLogado();
+
+    if(this.objeto.fgTransferenciaFixa) {
+      this.objeto.fgAtivo = true;
+    }
   }
 
   completarAlterar() {

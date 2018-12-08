@@ -47,6 +47,7 @@ import { TransferenciaTitleComponent } from '../transferencia/title/transferenci
 import { TransferenciaSaveComponent } from '../transferencia/save/transferencia-save.component';
 import { TransferenciaService } from '../../services/transferencia/transferencia.service';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
+import { TransferenciaFixaService } from '../../services/transferencia/transferencia-fixa.service';
 
 
 
@@ -119,6 +120,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       DominioService,
       SubcategoriaService,
       TransferenciaService,
+      TransferenciaFixaService,
       {
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,

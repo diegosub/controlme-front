@@ -4,7 +4,7 @@
 <div id="page-content">
 
     <div class="panel">
-        
+    
         <!--Data Table-->
         <!--===================================================-->
         <div class="panel-body">
@@ -30,7 +30,9 @@
                
                 </div>
             </div>
-            <div class="table-responsive">
+
+            <!-- Transferencias -->
+            <div class="table-responsive" *ngIf="tpTransferencia == 'N'">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -43,7 +45,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr (mouseenter) ="mon()" (mouseleave) ="mof()" [ngClass]="linha" *ngFor="let transferencia of lista">
+                        <tr *ngFor="let transferencia of lista">
                             <td>{{transferencia.contaOrigem.dsConta}}</td>
                             <td>{{transferencia.contaDestino.dsConta}}</td>
                             <td>R$ {{transferencia.strVlTransferencia}}</td>
@@ -54,6 +56,37 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Transferencias Fixas -->
+            <div class="table-responsive" *ngIf="tpTransferencia == 'F'">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Conta de Origem (-)</th>
+                            <th>Conta de Destino (+)</th>
+                            <th width="15%">Valor</th>
+                            <th width="10%">Dia</th>
+                            <th width="12%">Tipo</th>
+                            <th width="4%"></th>
+                            <th width="4%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let transferencia of listaFixa">
+                            <td>{{transferencia.contaOrigem.dsConta}}</td>
+                            <td>{{transferencia.contaDestino.dsConta}}</td>
+                            <td>R$ {{transferencia.strVlTransferencia}}</td>
+                            <td>{{transferencia.nrDia }}</td>
+                            <td><b>Transf. Fixa</b></td>
+                            <td><i class="fa fa-edit" (click)="abrirModalAlterarFixa(transferencia.idTransferencia)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar"></i></td>
+                            <td><i class="fa fa-remove" (click)="excluirDefinitivamente(transferencia.idTransferencia)" style="font-size: 18px; cursor: pointer;" title="Excluir definitivamente"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
         </div>
         <!--===================================================-->
         <!--End Data Table-->

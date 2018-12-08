@@ -11,6 +11,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { TransferenciaSaveComponent } from './save/transferencia-save.component';
 import {IMyDrpOptions, IMyDateRangeModel} from 'mydaterangepicker';
 import { FiltroTransferencia } from '../../model/transferencia/filtro/filtro-transferencia';
+import { TransferenciaFixaService } from '../../services/transferencia/transferencia-fixa.service';
 
 
 @Component({
@@ -23,12 +24,15 @@ export class TransferenciaComponent extends CrudController<Transferencia, {new()
   listaConta = [];
   tpTransferencia:string;
 
+  listaFixa = [];
+
   private periodo: any;
 
   constructor(public router: Router,
               public toastr: ToastrService,
               private dialog: MatDialog,
               dialogService: DialogService,
+              private transferenciaFixaService: TransferenciaFixaService,
               private transferenciaService: TransferenciaService) {
       super(router, Transferencia, toastr, dialogService, transferenciaService);
   }
@@ -60,15 +64,66 @@ export class TransferenciaComponent extends CrudController<Transferencia, {new()
     this.objeto.idUsuario = this.getCodigoUsuarioLogado();
     this.objeto.filtro = this.objeto.filtro;
   
+    // Transferencia Normal
     this.transferenciaService.pesquisar(this.objeto)
                 .subscribe((responseApi:ResponseApi) => {
       this.lista = responseApi['data'];
     } , err => {
       this.tratarErro(err);
     });
+
+    //Transferencia Fixa
+    this.transferenciaFixaService.pesquisar(this.objeto)
+                .subscribe((responseApi:ResponseApi) => {
+      this.listaFixa = responseApi['data'];
+    } , err => {
+      this.tratarErro(err);
+    });
   }
 
   abrirModalAlterar(codigo) {
+    if(codigo != undefined) {
+      this.transferenciaService.get(codigo)
+                .subscribe((responseApi:ResponseApi) => {
+                  this.objeto = responseApi['data']; 
+                  const dialogConfig = new MatDialogConfig();    
+                  dialogConfig.data =  {objeto: this.objeto};
+    
+                  this.dialog.open(TransferenciaSaveComponent, dialogConfig)
+                            .afterClosed().subscribe(() => {
+                    this.resetFiltros();
+                    this.pesquisarTransferencia();
+                  });  
+                  
+      } , err => {
+        this.tratarErro(err);
+      });
+    }
+  }
+
+  abrirModalAlterarFixa(codigo) {
+    if(codigo != undefined) {
+      this.transferenciaFixaService.get(codigo)
+                .subscribe((responseApi:ResponseApi) => {
+                  this.objeto = responseApi['data']; 
+                  this.objeto.fgTransferenciaFixa = true;
+                  console.log(this.objeto);
+                  const dialogConfig = new MatDialogConfig();    
+                  dialogConfig.data =  {objeto: this.objeto};
+    
+                  this.dialog.open(TransferenciaSaveComponent, dialogConfig)
+                            .afterClosed().subscribe(() => {
+                    this.resetFiltros();
+                    this.pesquisarTransferencia();
+                  });  
+                  
+      } , err => {
+        this.tratarErro(err);
+      });
+    }
+  }
+
+  abrirModalFixaAlterar(codigo) {
     if(codigo != undefined) {
       this.transferenciaService.get(codigo)
                 .subscribe((responseApi:ResponseApi) => {
@@ -120,6 +175,8 @@ export class TransferenciaComponent extends CrudController<Transferencia, {new()
     this.objeto.filtro.dtTransferenciaFim = new Date(event.endDate.year, event.endDate.month-1, event.endDate.day);
     
     this.pesquisarTransferencia();
+
+    this.tpTransferencia = 'N';
   }
 
 }
