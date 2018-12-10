@@ -131,9 +131,16 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
 
   validarAlterar() {
 
-    if(this.objeto.idTransferencia == 0 || this.objeto.idTransferencia == null) {
-      this.msgErro("O campo Código da Transferência é obrigatório.");
-      return false;
+    if(this.objeto.fgTransferenciaFixa) {
+      if(this.objeto.idTransferenciaFixa == 0 || this.objeto.idTransferenciaFixa == null) {
+        this.msgErro("O campo Código da Transferência é obrigatório.");
+        return false;
+      }
+    } else {
+      if(this.objeto.idTransferencia == 0 || this.objeto.idTransferencia == null) {
+        this.msgErro("O campo Código da Transferência é obrigatório.");
+        return false;
+      }
     }
 
     if(this.objeto.idContaOrigem == 0 || this.objeto.idContaOrigem == null) {

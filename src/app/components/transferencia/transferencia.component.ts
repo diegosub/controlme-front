@@ -123,26 +123,6 @@ export class TransferenciaComponent extends CrudController<Transferencia, {new()
     }
   }
 
-  abrirModalFixaAlterar(codigo) {
-    if(codigo != undefined) {
-      this.transferenciaService.get(codigo)
-                .subscribe((responseApi:ResponseApi) => {
-                  this.objeto = responseApi['data']; 
-                  const dialogConfig = new MatDialogConfig();    
-                  dialogConfig.data =  {objeto: this.objeto};
-    
-                  this.dialog.open(TransferenciaSaveComponent, dialogConfig)
-                            .afterClosed().subscribe(() => {
-                    this.resetFiltros();
-                    this.pesquisarTransferencia();
-                  });  
-                  
-      } , err => {
-        this.tratarErro(err);
-      });
-    }
-  }
-
   abrirModalInserir(tipo) {
     const dialogConfig = new MatDialogConfig();    
     dialogConfig.data =  {tipo: tipo};   
@@ -162,6 +142,22 @@ export class TransferenciaComponent extends CrudController<Transferencia, {new()
               this.resetFiltros();
               this.pesquisarTransferencia();
               this.msgSucesso('A transferência foi excluída definitivamente do sistema.');             
+            } , err => {
+              this.tratarErro(err);              
+            });
+          }
+      });
+  }
+
+  inativarFixa(id:string){
+    this.dialogService.confirm('Tem certeza que deseja inativar esta transferência?')
+      .then((candelete:boolean) => {
+          if(candelete){            
+            let status = false;
+            this.transferenciaFixaService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {              
+              this.resetFiltros();
+              this.pesquisarTransferencia();
+              this.msgSucesso('A transferência foi inativada com sucesso.');             
             } , err => {
               this.tratarErro(err);              
             });
