@@ -12,7 +12,7 @@ export class Transferencia {
     strVlTransferencia: Number; 
     dtCadastro: Date;
     dtAlteracao: Date;
-    dtTransferencia: String;
+    dtTransferencia: Date;
     nrDia: Number;
     fgAtivo: boolean;
     fgTransferenciaFixa: boolean;

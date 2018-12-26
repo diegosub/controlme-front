@@ -48,6 +48,10 @@ import { TransferenciaSaveComponent } from '../transferencia/save/transferencia-
 import { TransferenciaService } from '../../services/transferencia/transferencia.service';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { TransferenciaFixaService } from '../../services/transferencia/transferencia-fixa.service';
+import { DespesaComponent } from '../despesa/despesa.component';
+import { DespesaTitleComponent } from '../despesa/title/despesa-title.component';
+import { DespesaService } from '../../services/despesa/despesa.service';
+import { DespesaSaveComponent } from '../despesa/save/despesa-save.component';
 
 
 
@@ -106,6 +110,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         TransferenciaTitleComponent,
         TransferenciaSaveComponent,
         TransferenciaComponent,
+        DespesaTitleComponent,
+        DespesaSaveComponent,
+        DespesaComponent,
         FooterComponent,
         NotfoundComponent,
         FilterPipe,
@@ -120,6 +127,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       DominioService,
       SubcategoriaService,
       TransferenciaService,
+      DespesaService,
       TransferenciaFixaService,
       {
         provide: HTTP_INTERCEPTORS,

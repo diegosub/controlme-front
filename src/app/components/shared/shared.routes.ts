@@ -14,6 +14,8 @@ import { ContaFormComponent } from '../conta/form/conta-form.component';
 import { ContaIntvComponent } from '../conta/intv/conta-intv.component';
 import { TransferenciaComponent } from '../transferencia/transferencia.component';
 import { TransferenciaSaveComponent } from '../transferencia/save/transferencia-save.component';
+import { DespesaComponent } from '../despesa/despesa.component';
+import { DespesaSaveComponent } from '../despesa/save/despesa-save.component';
 
 export const CONTENT_ROUTES: Routes = [
 
@@ -35,6 +37,9 @@ export const CONTENT_ROUTES: Routes = [
 
         { path : 'transferencia', component: TransferenciaComponent, canActivate: [AuthGuard]},
         { path : 'transferencia-save', component: TransferenciaSaveComponent, canActivate: [AuthGuard]},
+
+        { path : 'despesa', component: DespesaComponent, canActivate: [AuthGuard]},
+        { path : 'despesa-save', component: DespesaSaveComponent, canActivate: [AuthGuard]},
 
 
 ]

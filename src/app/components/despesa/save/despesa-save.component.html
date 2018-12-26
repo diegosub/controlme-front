@@ -1,0 +1,86 @@
+<form #form="ngForm" class="form-horizontal" novalidate>
+    <div class="panel panel-trans">
+        <div class="panel-body demo-nifty-modal">
+
+            <!--Static Examplel-->
+            <div class="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" (click)="fechar()"><i class="pci-cross pci-circle"></i></button>
+                            <h4 class="modal-title">
+                                <span *ngIf="objeto.idDespesa == null">Cadastrar</span> 
+                                <span *ngIf="objeto.idDespesa != null">Alterar</span> 
+                                Despesa</h4>
+                        </div>
+
+                        <div class="modal-body">                         
+                            <div class="row">
+                                <div class="col-sm-6">
+                                   
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">Conta</label>
+                                    <select class="form-control selectpicker" [(ngModel)]="objeto.idConta" name="idConta" #idConta="ngModel" required>
+                                        <option value="0">- Selecione a Conta -</option>
+                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}} (R$ {{conta.strVlSaldo}})</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            
+                            <div class="row">
+                                <div class="col-sm-6">                                
+                                    <label class="control-label">Valor</label>                                    
+                                    <input type="text"
+                                          [(ngModel)]="objeto.vlDespesa"
+                                        name="vlDespesa"
+                                        class="form-control"
+                                        id="inputVlDespesa"
+                                        placeholder="R$ 00,00"
+                                        #vlDespesa="ngModel"
+                                        currencyMask
+                                        maxlength="14"
+                                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
+                                        required/>  
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">Data</label>
+                                    <div class="input-group date">
+                                        <input matInput [matDatepicker]="picker" onkeypress="return formataData(event, this);" (click)="picker.open()" [(ngModel)]="objeto.dtDespesa" name="dtDespesa"
+                                               class="form-control" [max]="maxDate" maxlength="10" #dtDespesa="ngModel">
+                                        <span class="input-group-addon cal" (click)="picker.open()"><i class="demo-pli-calendar-4"></i></span>
+                                        <mat-datepicker-toggle style="display: none;" matSuffix [for]="picker" class="input-group-addon cal"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-12">
+                                        <label class="control-label">Observação</label>
+                                        <textarea rows="3" class="form-control" [(ngModel)]="objeto.dsObservacao" name="dsObservacao" #dsObservacao="ngModel" maxlength="200" placeholder="Escreva alguma observação adicional." ></textarea>
+                                
+                                </div>                            
+                            </div>
+                                
+                        </div>
+                        
+                        <div class="panel-footer text-right">
+                            <button class="btn btn-default" (click)="fechar()" data-dismiss="modal" type="button">Fechar</button>
+                            <button class="btn btn-primary" (click)="inserirTransferencia()" type="button" *ngIf="objeto.idTransferencia == null && objeto.idTransferenciaFixa == null" [disabled]="!form.valid">Cadastrar</button>
+                            <button class="btn btn-primary" (click)="alterar()" type="button" *ngIf="objeto.idTransferencia != null" [disabled]="!form.valid">Alterar</button>
+                            <button class="btn btn-primary" (click)="alterarFixa()" type="button" *ngIf="objeto.idTransferenciaFixa != null" [disabled]="!form.valid">Alterar</button>
+                        </div>
+                                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

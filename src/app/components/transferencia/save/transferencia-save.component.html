@@ -20,14 +20,14 @@
                                     <label class="control-label">Conta de Origem</label>
                                     <select class="form-control" [(ngModel)]="objeto.idContaOrigem" name="idContaOrigem" #idContaOrigem="ngModel" required>
                                         <option value="0">- Selecione a Conta de Origem -</option>
-                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}}</option>
+                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}} (R$ {{conta.strVlSaldo}})</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="control-label">Conta de Destino</label>
                                     <select class="form-control selectpicker" [(ngModel)]="objeto.idContaDestino" name="idContaDestino" #idContaDestino="ngModel" required>
                                         <option value="0">- Selecione a Conta de Destino -</option>
-                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}}</option>
+                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}} (R$ {{conta.strVlSaldo}})</option>
                                     </select>
                                 </div>
                             </div>
@@ -55,10 +55,10 @@
                                                class="magic-checkbox" type="checkbox" name="fgTransferenciaFixa">
                                         <label for="demo-inline-form-checkbox">Transferência Fixa</label>
                                     </div>
-                                    <div class="checkbox" *ngIf="objeto.idTransferencia != null || objeto.idTransferenciaFixa != null">
-                                        <input id="demo-inline-form-checkbox" disabled="true"
-                                               [checked]="fgTransferenciaFixa" [(ngModel)]="objeto.fgTransferenciaFixa" #fgTransferenciaFix="ngModel"
-                                               class="magic-checkbox" type="checkbox" name="fgTransferenciaFixa">
+                                    <div *ngIf="objeto.idTransferencia != null">                                        
+                                        <label for="demo-inline-form-checkbox">Transferência</label>
+                                    </div>
+                                    <div *ngIf="objeto.idTransferenciaFixa != null">                                       
                                         <label for="demo-inline-form-checkbox">Transferência Fixa</label>
                                     </div>
                                 </div>

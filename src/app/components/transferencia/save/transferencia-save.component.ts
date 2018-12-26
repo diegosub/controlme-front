@@ -42,7 +42,8 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
     this.objeto.idContaDestino = 0;
 
     if(this.data.objeto != undefined){
-      this.objeto = this.data.objeto;      
+      this.objeto = this.data.objeto;
+      this.objeto.dtTransferencia = new Date(this.objeto.dtTransferencia);
     }
 
   }
@@ -75,7 +76,6 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
       });
     }
   }
-
 
   alterarFixa() {
     if(this.validarAlterar()) {

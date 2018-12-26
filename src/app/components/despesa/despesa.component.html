@@ -1,0 +1,57 @@
+<app-despesa-title></app-despesa-title>
+
+<form #form="ngForm" class="form-horizontal" novalidate>
+<div id="page-content">
+
+    <div class="panel">
+    
+        <!--Data Table-->
+        <!--===================================================-->
+        <div class="panel-body">
+            <div class="pad-btm form-inline">
+                <div class="row">
+                    <div class="col-sm-6 table-toolbar-left">
+                        <button id="demo-btn-addrow" (click)="abrirModalInserir()" class="btn btn-primary"><i class="demo-pli-add"></i> Nova Despesa</button>
+                    </div>
+                    <div class="col-sm-6 table-toolbar-right">
+                        <div class="form-group">
+                            <my-date-range-picker name="mydaterange" [options]="myDateRangePickerOptions"
+                            [(ngModel)]="periodo" (dateRangeChanged)="selecionarPeriodoFiltro($event)"></my-date-range-picker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Despesas -->
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th width="15%">Valor</th>
+                            <th width="15%">Data</th>
+                            <th width="4%"></th>
+                            <th width="4%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let despesa of lista">
+                            <td>{{despesa.categoria.dsCategoria}}</td>
+                            <td>R$ {{transferencia.strVlTransferencia}}</td>
+                            <td><i class="demo-pli-calendar-4"></i> {{transferencia.dtTransferencia | date: 'dd/MM/yyyy'}}</td>
+                            <td><i class="fa fa-edit" (click)="abrirModalAlterar(despesa.idDespesa)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar"></i></td>
+                            <td><i class="fa fa-remove" (click)="excluir(despesa.idDespesa)" style="font-size: 18px; cursor: pointer;" title="Inativar"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+           
+        </div>
+        <!--===================================================-->
+        <!--End Data Table-->
+    
+    </div>
+
+</div>
+</form>
