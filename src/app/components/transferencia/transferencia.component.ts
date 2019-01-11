@@ -87,7 +87,7 @@ export class TransferenciaComponent extends CrudController<Transferencia, {new()
                 .subscribe((responseApi:ResponseApi) => {
                   this.objeto = responseApi['data']; 
                   const dialogConfig = new MatDialogConfig();    
-                  dialogConfig.data =  {objeto: this.objeto};
+                  dialogConfig.data =  {objeto: this.objeto};                  
     
                   this.dialog.open(TransferenciaSaveComponent, dialogConfig)
                             .afterClosed().subscribe(() => {
@@ -107,7 +107,6 @@ export class TransferenciaComponent extends CrudController<Transferencia, {new()
                 .subscribe((responseApi:ResponseApi) => {
                   this.objeto = responseApi['data']; 
                   this.objeto.fgTransferenciaFixa = true;
-                  console.log(this.objeto);
                   const dialogConfig = new MatDialogConfig();    
                   dialogConfig.data =  {objeto: this.objeto};
     

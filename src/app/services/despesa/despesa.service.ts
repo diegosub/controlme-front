@@ -14,6 +14,10 @@ export class DespesaService extends CrudService<Despesa> {
     this.strArtefato();    
   }
 
+  inativarDespesa(id:string) {
+    return this.http.delete(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/${id}`);
+  }
+
   strArtefato(): string {    
     return "despesa";
   }

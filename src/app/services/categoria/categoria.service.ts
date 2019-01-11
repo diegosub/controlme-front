@@ -17,6 +17,10 @@ export class CategoriaService extends CrudService<Categoria> {
   pesquisarInativos(categoria: Categoria) {
     return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/pesquisarInativos`, categoria);
   }
+
+  listarTodasAtivas(categoria: Categoria) {
+    return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/listarTodasAtivas`, categoria);
+  }
   
   strArtefato(): string {    
     return "categoria";

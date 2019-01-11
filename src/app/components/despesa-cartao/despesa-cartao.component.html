@@ -1,4 +1,4 @@
-<app-despesa-title></app-despesa-title>
+<app-despesa-cartao-title></app-despesa-cartao-title>
 
 <form #form="ngForm" class="form-horizontal" novalidate>
 <div id="page-content">
@@ -11,7 +11,7 @@
             <div class="pad-btm form-inline">
                 <div class="row">
                     <div class="col-sm-6 table-toolbar-left">
-                        <button id="demo-btn-addrow" (click)="abrirModalInserir()" class="btn btn-primary"><i class="demo-pli-add"></i> Nova Despesa</button>
+                        <button id="demo-btn-addrow" (click)="abrirModalInserir()" class="btn btn-primary"><i class="demo-pli-add"></i> Nova Despesa de Cartão</button>
                     </div>
                     <div class="col-sm-6 table-toolbar-right">
                         <div class="form-group">
@@ -28,7 +28,7 @@
                     <thead>
                         <tr>
                             <th>Categoria</th>
-                            <th>Conta</th>
+                            <th>Cartão</th>
                             <th width="15%">Valor</th>
                             <th width="15%">Data</th>
                             <th width="4%"></th>
@@ -36,16 +36,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let despesa of lista">
+                        <tr *ngFor="let despesaCartao of lista">
                             <td>
-                                {{despesa.categoria.dsCategoria}}
-                                <span *ngIf="despesa.subcategoria != null"> - {{despesa.subcategoria.dsSubcategoria}}</span>
-                            </td>
-                            <td>{{despesa.conta.dsConta}}</td>
-                            <td>R$ {{despesa.strVlDespesa}}</td>
-                            <td><i class="demo-pli-calendar-4"></i> {{despesa.dtDespesa | date: 'dd/MM/yyyy'}}</td>
-                            <td><i class="fa fa-edit" (click)="abrirModalAlterar(despesa.idDespesa)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar"></i></td>
-                            <td><i class="fa fa-remove" (click)="inativarDespesa(despesa.idDespesa)" style="font-size: 18px; cursor: pointer;" title="Inativar"></i></td>
+                                {{despesaCartao.categoria.dsCategoria}}
+                                <span *ngIf="despesaCartao.subcategoria != null"> - {{despesaCartao.subcategoria.dsSubcategoria}}</span>
+                            </td>                            
+                            <td>{{despesaCartao.cartao.dsCartao}}</td>
+                            <td>R$ {{despesaCartao.strVlDespesa}}</td>
+                            <td><i class="demo-pli-calendar-4"></i> {{despesaCartao.dtDespesa | date: 'dd/MM/yyyy'}}</td>
+                            <td><i class="fa fa-edit" (click)="abrirModalAlterar(despesaCartao.idDespesaCartao)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar"></i></td>
+                            <td><i class="fa fa-remove" (click)="inativar(despesaCartao.idDespesaCartao)" style="font-size: 18px; cursor: pointer;" title="Inativar"></i></td>
                         </tr>
                     </tbody>
                 </table>

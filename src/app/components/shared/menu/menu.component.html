@@ -38,17 +38,12 @@
 
                                 <ul id="mainnav-menu" class="list-group">
 
-          						  <li class="list-header">Navegação</li>
-
                                   <li>
                                       <a [routerLink]="['/']">
                                           <i class="pli-home"></i>
                                           <span class="menu-title">Home</span>
                                       </a>
                                   </li>
-
-                                  <li class="list-divider"></li>
-
 
                                   <li>
                                         <a [routerLink]="['/categoria-list']">
@@ -67,11 +62,9 @@
                                   <li>
                                     <a [routerLink]="['/conta-list']">
                                         <i class="ti-money"></i>
-                                        <span class="menu-title">Conta</span>
+                                        <span class="menu-title">Contas</span>
                                     </a>
                                   </li>
-
-                                  <li class="list-divider"></li>
 
                                   <li>
                                     <a [routerLink]="['/transferencia']">
@@ -79,7 +72,6 @@
                                         <span class="menu-title">Transfências</span>
                                     </a>
                                  </li>
-
                                   
                                   <li>
                                         <a href="helper-classes.html">
@@ -89,15 +81,21 @@
                                   </li>
 
                                   <li>
-                                        <a [routerLink]="['/despesa']">
-                                            <i class="pli-dollar"></i>
-                                            <span class="menu-title">Despesas</span>
-                                        </a>
-                                  </li>
+                                    <a href="#">
+                                        <i class="pli-dollar"></i>
+                                        <span class="menu-title">Despesas</span>
+                                        <i class="arrow"></i>
+                                    </a>
+                    
+                                    <!--Submenu-->
+                                    <ul class="collapse">
+                                        <li><a [routerLink]="['/despesa']">Nova</a></li>
+                                        <li><a [routerLink]="['/despesa-cartao']">Cartão</a></li>
+                                        <li><a [routerLink]="['/despesa']">Agendar</a></li>
+                                    </ul>
+                                </li>
 
-          						  <li class="list-divider"></li>
-
-          						  <li class="list-header">Mais...</li>
+                                  <li class="list-divider"></li>
 
                                   <li>
                                       <a href="helper-classes.html">

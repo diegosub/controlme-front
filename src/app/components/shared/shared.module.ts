@@ -52,6 +52,10 @@ import { DespesaComponent } from '../despesa/despesa.component';
 import { DespesaTitleComponent } from '../despesa/title/despesa-title.component';
 import { DespesaService } from '../../services/despesa/despesa.service';
 import { DespesaSaveComponent } from '../despesa/save/despesa-save.component';
+import { DespesaCartaoComponent } from '../despesa-cartao/despesa-cartao.component';
+import { DespesaCartaoSaveComponent } from '../despesa-cartao/save/despesa-cartao-save.component';
+import { DespesaCartaoTitleComponent } from '../despesa-cartao/title/despesa-cartao-title.component';
+import { DespesaCartaoService } from '../../services/despesa-cartao/despesa-cartao.service';
 
 
 
@@ -113,6 +117,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DespesaTitleComponent,
         DespesaSaveComponent,
         DespesaComponent,
+        DespesaCartaoTitleComponent,
+        DespesaCartaoSaveComponent,
+        DespesaCartaoComponent,
         FooterComponent,
         NotfoundComponent,
         FilterPipe,
@@ -128,6 +135,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       SubcategoriaService,
       TransferenciaService,
       DespesaService,
+      DespesaCartaoService,
       TransferenciaFixaService,
       {
         provide: HTTP_INTERCEPTORS,

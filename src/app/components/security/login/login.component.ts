@@ -3,6 +3,7 @@ import { Usuario } from '../../../model/usuario';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Router } from '@angular/router';
 import { CurrentUser } from '../../../model/current-user';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   public loading = false;
 
   constructor(private usuarioService: UsuarioService,
+              private location: Location,
               private router: Router){
   }
 
@@ -26,8 +28,8 @@ export class LoginComponent implements OnInit {
       .subscribe((userAuthentication: CurrentUser) => {
           localStorage.setItem("cmUsr", JSON.stringify(userAuthentication.usuario));
           localStorage.setItem("cmTkn", userAuthentication.token);
-          this.router.navigate(['/']);
           this.loading = true;
+          location.href = '/';
       } , err => {
           localStorage.removeItem("cmUsr");
           localStorage.removeItem("cmTkn");

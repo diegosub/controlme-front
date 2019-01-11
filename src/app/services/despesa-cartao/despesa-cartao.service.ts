@@ -1,25 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subcategoria } from '../../model/subcategoria/subcategoria';
 import { HOST_CONTROLME } from '../controlme.api';
 import { CrudService } from '../shared/crud.service';
+import { DespesaCartao } from '../../model/despesa-cartao/despesa-cartao';
 
 
 
 @Injectable()
-export class SubcategoriaService extends CrudService<Subcategoria> {
+export class DespesaCartaoService extends CrudService<DespesaCartao> {
   
   constructor(http: HttpClient){
     super(http);
     this.strArtefato();    
   }
 
-  listarTodasAtivas(subcategoria: Subcategoria) {
-    return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/listarTodasAtivas`, subcategoria);
+  inativarDespesaCartao(id:string) {
+    return this.http.delete(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/${id}`);
   }
 
   strArtefato(): string {    
-    return "subcategoria";
+    return "despesaCartao";
   }
 
 }

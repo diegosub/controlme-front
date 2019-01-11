@@ -4,21 +4,20 @@ import { Router } from '@angular/router';
 import { IMyDateRangeModel } from 'mydaterangepicker';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../dialog-service';
-import { Despesa } from '../../model/despesa/despesa';
 import { ResponseApi } from '../../model/response-api';
-import { FiltroTransferencia } from '../../model/transferencia/filtro/filtro-transferencia';
-import { DespesaService } from '../../services/despesa/despesa.service';
 import { CrudController } from '../generic/crud-controller';
 import { FiltroDespesa } from '../../model/despesa/filtro/filtro-despesa';
-import { DespesaSaveComponent } from './save/despesa-save.component';
+import { DespesaCartaoSaveComponent } from './save/despesa-cartao-save.component';
+import { DespesaCartao } from '../../model/despesa-cartao/despesa-cartao';
+import { DespesaCartaoService } from '../../services/despesa-cartao/despesa-cartao.service';
 
 
 @Component({
-  selector: 'app-despesa',
-  templateUrl: './despesa.component.html',
-  styleUrls: ['./despesa.component.css']
+  selector: 'app-despesa-cartao',
+  templateUrl: './despesa-cartao.component.html',
+  styleUrls: ['./despesa-cartao.component.css']
 })
-export class DespesaComponent extends CrudController<Despesa, {new(): Despesa}> implements OnInit {
+export class DespesaCartaoComponent extends CrudController<DespesaCartao, {new(): DespesaCartao}> implements OnInit {
 
   private periodo: any;
 
@@ -26,37 +25,37 @@ export class DespesaComponent extends CrudController<Despesa, {new(): Despesa}> 
               public toastr: ToastrService,
               private dialog: MatDialog,
               dialogService: DialogService,
-              private despesaService: DespesaService) {
-      super(router, Despesa, toastr, dialogService, despesaService);
+              private despesaCartaoService: DespesaCartaoService) {
+      super(router, DespesaCartao, toastr, dialogService, despesaCartaoService);
   }
 
   ngOnInit() {
     this.resetFiltros();
-    this.pesquisarDespesa();
+    this.pesquisarDespesaCartao();
   } 
 
   abrirModalInserir() {
     const dialogConfig = new MatDialogConfig();
     
-    this.dialog.open(DespesaSaveComponent, dialogConfig)
+    this.dialog.open(DespesaCartaoSaveComponent, dialogConfig)
                .afterClosed().subscribe(() => {
       this.resetFiltros();
-      this.pesquisarDespesa();
+      this.pesquisarDespesaCartao();
     });  
   }
 
   abrirModalAlterar(codigo) {
     if(codigo != undefined) {
-      this.despesaService.get(codigo)
+      this.despesaCartaoService.get(codigo)
                 .subscribe((responseApi:ResponseApi) => {
                   this.objeto = responseApi['data']; 
                   const dialogConfig = new MatDialogConfig();    
                   dialogConfig.data =  {objeto: this.objeto};
                       
-                  this.dialog.open(DespesaSaveComponent, dialogConfig)
+                  this.dialog.open(DespesaCartaoSaveComponent, dialogConfig)
                             .afterClosed().subscribe(() => {
                     this.resetFiltros();
-                    this.pesquisarDespesa();
+                    this.pesquisarDespesaCartao();
                   });  
                   
       } , err => {
@@ -78,12 +77,12 @@ export class DespesaComponent extends CrudController<Despesa, {new(): Despesa}> 
     this.periodo.endDate =  {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()};
   }
 
-  pesquisarDespesa() {    
+  pesquisarDespesaCartao() {    
     this.objeto.idUsuario = this.getCodigoUsuarioLogado();
     this.objeto.fgAtivo = true;
-    this.objeto.filtro = this.objeto.filtro;
+    //this.objeto.filtro = this.objeto.filtro;
  
-    this.despesaService.pesquisar(this.objeto)
+    this.despesaCartaoService.pesquisar(this.objeto)
                 .subscribe((responseApi:ResponseApi) => {
       this.lista = responseApi['data'];
     } , err => {
@@ -96,25 +95,11 @@ export class DespesaComponent extends CrudController<Despesa, {new(): Despesa}> 
     this.objeto.filtro.dtDespesaInicio = new Date(event.beginDate.year, event.beginDate.month-1, event.beginDate.day);
     this.objeto.filtro.dtDespesaFim = new Date(event.endDate.year, event.endDate.month-1, event.endDate.day);
     
-    this.pesquisarDespesa();
+    this.pesquisarDespesaCartao();
   }
 
-  inativarDespesa(id:string){
-    this.dialogService.confirm('Tem certeza que deseja inativar esta despesa?')
-      .then((candelete:boolean) => {
-          if(candelete){            
-            let status = false;
-            this.despesaService.inativarDespesa(id).subscribe((responseApi:ResponseApi) => {              
-             
-              this.resetFiltros();
-              this.pesquisarDespesa();
-
-              this.msgSucesso('A despesa foi inativada com sucesso.');             
-            } , err => {
-              this.tratarErro(err);              
-            });
-          }
-      });
+  executarPosInativar() {
+    this.pesquisarDespesaCartao();
   }
 
 }

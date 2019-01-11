@@ -9,9 +9,9 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" (click)="fechar()"><i class="pci-cross pci-circle"></i></button>
                             <h4 class="modal-title">
-                                <span *ngIf="objeto.idDespesa == null">Cadastrar</span> 
-                                <span *ngIf="objeto.idDespesa != null">Alterar</span> 
-                                Despesa</h4>
+                                <span *ngIf="objeto.idDespesaCartao == null">Cadastrar</span> 
+                                <span *ngIf="objeto.idDespesaCartao != null">Alterar</span> 
+                                Despesa de Cartão</h4>
                         </div>
 
                         <div class="modal-body">                         
@@ -35,10 +35,10 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="control-label">Conta <span style="color: #dc0808">*</span></label>
-                                    <select class="form-control selectpicker" [(ngModel)]="objeto.idConta" name="idConta" #idConta="ngModel" required>
-                                        <option value="0">- Selecione a Conta -</option>
-                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}} (R$ {{conta.strVlSaldo}})</option>
+                                    <label class="control-label">Cartão <span style="color: #dc0808">*</span></label>
+                                    <select class="form-control selectpicker" [(ngModel)]="objeto.idCartao" name="idCartao" #idCartao="ngModel" required>
+                                        <option value="0">- Selecione o Cartão -</option>
+                                        <option *ngFor="let cartao of listaCartao" [ngValue]="cartao.idCartao">{{cartao.dsCartao}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -93,8 +93,8 @@
                         
                         <div class="panel-footer text-right">
                             <button class="btn btn-default" (click)="fechar()" data-dismiss="modal" type="button">Fechar</button>
-                            <button class="btn btn-primary" (click)="inserir()" type="button" *ngIf="objeto.idDespesa == null" [disabled]="!form.valid">Cadastrar</button>
-                            <button class="btn btn-primary" (click)="alterar()" type="button" *ngIf="objeto.idDespesa != null" [disabled]="!form.valid">Alterar</button>
+                            <button class="btn btn-primary" (click)="inserir()" type="button" *ngIf="objeto.idDespesaCartao == null" [disabled]="!form.valid">Cadastrar</button>
+                            <button class="btn btn-primary" (click)="alterar()" type="button" *ngIf="objeto.idDespesaCartao != null" [disabled]="!form.valid">Alterar</button>
                         </div>
                                             
                     </div>

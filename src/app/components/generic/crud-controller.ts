@@ -159,13 +159,7 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
     }
   }
 
-  mon() {
-    this.linha = 'over';
-  }
 
-  mof() {
-    this.linha = '';
-  }
 
   getCodigoUsuarioLogado()
   {

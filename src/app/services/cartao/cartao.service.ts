@@ -22,6 +22,10 @@ export class CartaoService extends CrudService<Cartao> {
     return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/pesquisarInativos`, cartao);
   }
 
+  listarCartoes(cartao: Cartao) {
+    return this.http.post(`${HOST_CONTROLME}/api/`+this.strArtefato()+`/listarCartoes`, cartao);
+  }
+
   strArtefato(): string {    
     return "cartao";
   }

@@ -1,21 +1,22 @@
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from '../home/home.component';
-import { ModuleWithProviders } from '@angular/core';
-import { AuthGuard } from '../security/auth.guard';
-import { CategoriaListComponent } from '../categoria/list/categoria-list.component';
-import { CategoriaFormComponent } from '../categoria/form/categoria-form.component';
-import { CategoriaIntvComponent } from '../categoria/intv/categoria-intv.component';
-import { SubcategoriaFormComponent } from '../subcategoria/form/subcategoria-form.component';
-import { CartaoListComponent } from '../cartao/list/cartao-list.component';
+import { Routes } from '@angular/router';
 import { CartaoFormComponent } from '../cartao/form/cartao-form.component';
 import { CartaoIntvComponent } from '../cartao/intv/cartao-intv.component';
-import { ContaListComponent } from '../conta/list/conta-list.component';
+import { CartaoListComponent } from '../cartao/list/cartao-list.component';
+import { CategoriaFormComponent } from '../categoria/form/categoria-form.component';
+import { CategoriaIntvComponent } from '../categoria/intv/categoria-intv.component';
+import { CategoriaListComponent } from '../categoria/list/categoria-list.component';
 import { ContaFormComponent } from '../conta/form/conta-form.component';
 import { ContaIntvComponent } from '../conta/intv/conta-intv.component';
-import { TransferenciaComponent } from '../transferencia/transferencia.component';
-import { TransferenciaSaveComponent } from '../transferencia/save/transferencia-save.component';
+import { ContaListComponent } from '../conta/list/conta-list.component';
 import { DespesaComponent } from '../despesa/despesa.component';
 import { DespesaSaveComponent } from '../despesa/save/despesa-save.component';
+import { HomeComponent } from '../home/home.component';
+import { AuthGuard } from '../security/auth.guard';
+import { SubcategoriaFormComponent } from '../subcategoria/form/subcategoria-form.component';
+import { TransferenciaSaveComponent } from '../transferencia/save/transferencia-save.component';
+import { TransferenciaComponent } from '../transferencia/transferencia.component';
+import { DespesaCartaoComponent } from '../despesa-cartao/despesa-cartao.component';
+import { DespesaCartaoSaveComponent } from '../despesa-cartao/save/despesa-cartao-save.component';
 
 export const CONTENT_ROUTES: Routes = [
 
@@ -40,6 +41,9 @@ export const CONTENT_ROUTES: Routes = [
 
         { path : 'despesa', component: DespesaComponent, canActivate: [AuthGuard]},
         { path : 'despesa-save', component: DespesaSaveComponent, canActivate: [AuthGuard]},
+
+        { path : 'despesa-cartao', component: DespesaCartaoComponent, canActivate: [AuthGuard]},
+        { path : 'despesa-cartao-save', component: DespesaCartaoSaveComponent, canActivate: [AuthGuard]},
 
 
 ]

@@ -42,8 +42,8 @@ export class TransferenciaSaveComponent extends CrudController<Transferencia, {n
     this.objeto.idContaDestino = 0;
 
     if(this.data.objeto != undefined){
-      this.objeto = this.data.objeto;
-      this.objeto.dtTransferencia = new Date(this.objeto.dtTransferencia);
+      this.objeto = this.data.objeto;      
+      this.objeto.dtTransferencia = new Date(this.objeto.dtTransferencia);     
     }
 
   }

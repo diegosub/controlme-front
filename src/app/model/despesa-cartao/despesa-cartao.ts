@@ -1,14 +1,14 @@
-import { FiltroDespesa } from "./filtro/filtro-despesa";
+import { FiltroDespesaCartao } from "./filtro/filtro-despesa-cartao";
 import { Categoria } from "../categoria/categoria";
 import { Subcategoria } from "../subcategoria/subcategoria";
 import { Conta } from "../conta/conta";
 
-export class Despesa {
+export class DespesaCartao {
     
-    idDespesa: Number;
+    idDespesaCartao: Number;
     idCategoria: Number;
     idSubcategoria: Number;
-    idConta: Number;
+    idCartao: Number;
     vlDespesa: Number;
     strVlDespesa: string;
     dtDespesa: Date;
@@ -22,6 +22,6 @@ export class Despesa {
     subcategoria: Subcategoria;
     conta: Conta;
 
-    filtro: FiltroDespesa;
+    filtro: FiltroDespesaCartao;
 
 }
