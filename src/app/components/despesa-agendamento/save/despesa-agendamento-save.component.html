@@ -1,0 +1,121 @@
+<form #form="ngForm" class="form-horizontal" novalidate>
+    <div class="panel panel-trans">
+        <div class="panel-body demo-nifty-modal">
+
+            <!--Static Examplel-->
+            <div class="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" (click)="fechar()"><i class="pci-cross pci-circle"></i></button>
+                            <h4 class="modal-title">
+                                <span *ngIf="objeto.idDespesaCartao == null">Cadastrar</span> 
+                                <span *ngIf="objeto.idDespesaCartao != null">Alterar</span> 
+                                Agendamento de Despesa</h4>
+                        </div>
+
+                        <div class="modal-body">                         
+                            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="control-label">Categoria <span style="color: #dc0808">*</span> </label>
+                                    <select class="form-control selectpicker" (change)="atualizarSubcategoria()" [(ngModel)]="objeto.idCategoria" name="idCategoria" #idCategoria="ngModel" required>
+                                        <option value="0">- Selecione a Categoria -</option>
+                                        <option *ngFor="let categoria of listaCategoria" [ngValue]="categoria.idCategoria">{{categoria.dsCategoria}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label class="control-label">Subcategoria</label>
+                                    <select class="form-control selectpicker" [(ngModel)]="objeto.idSubcategoria" name="idSubcategoria" #idSubcategoria="ngModel" required>
+                                        <option value="0">- Selecione a Subcategoria -</option>
+                                        <option *ngFor="let subcategoria of listaSubcategoria" [ngValue]="subcategoria.idSubcategoria">{{subcategoria.dsSubcategoria}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                                                       
+                            <div class="row">
+                                <div class="col-sm-6">                                
+                                    <label class="control-label">Valor <span style="color: #dc0808">*</span></label>                                    
+                                    <input type="text" autocomplete="off"
+                                          [(ngModel)]="objeto.vlDespesa"
+                                        name="vlDespesa"
+                                        class="form-control"
+                                        id="inputVlDespesa"
+                                        placeholder="R$ 00,00"
+                                        #vlDespesa="ngModel"
+                                        currencyMask
+                                        maxlength="14"
+                                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
+                                        required/>  
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">Data <span style="color: #dc0808">*</span></label>
+                                    <div class="input-group date">
+                                        <input matInput [matDatepicker]="picker" onkeypress="return formataData(event, this);" (click)="picker.open()" [(ngModel)]="objeto.dtDespesa" name="dtDespesa"
+                                               class="form-control" [max]="maxDate" maxlength="10" #dtDespesa="ngModel">
+                                        <span class="input-group-addon cal" (click)="picker.open()"><i class="demo-pli-calendar-4"></i></span>
+                                        <mat-datepicker-toggle style="display: none;" matSuffix [for]="picker" class="input-group-addon cal"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                    <div class="col-sm-5">     
+                                        <label class="control-label">Tipo de Agendamento <span style="color: #dc0808">*</span></label>
+                                        <div class="radio">
+                                            <mat-radio-group class="magic-radio" [(ngModel)]="objeto.tpDespesaAgh" name="tpDespesaAgh" >
+                                                <mat-radio-button value="F">Fixa</mat-radio-button>
+                                                <mat-radio-button value="P">Repetir</mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-sm-4" *ngIf='objeto.tpDespesaAgh == "P"'>    
+                                        <label class="control-label">Período <span style="color: #dc0808">*</span> </label>
+                                        <select class="form-control selectpicker" [(ngModel)]="objeto.idPeriodo" name="idPeriodo" #idPeriodo="ngModel" required>
+                                            <option *ngFor="let periodo of listaPeriodo" [ngValue]="periodo.vlDominioNumber">{{periodo.dsDominio}}</option>
+                                        </select>
+                                    </div> 
+    
+                                    <div class="col-sm-3" *ngIf='objeto.tpDespesaAgh == "P"'>    
+                                            <label class="control-label">Quantidade</label> 
+                                                <input type="text" autocomplete="off" soNumero
+                                                [(ngModel)]="objeto.nrPeriodo" name="nrPeriodo"
+                                                      class="form-control"  id="inputNrPeriodo"
+                                                placeholder="Entre 2 e 99" #nrPeriodo="ngModel"
+                                                  maxlength="2" required/> 
+                                        </div> 
+                                </div>
+    
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                        <label class="control-label">Observação</label>
+                                        <textarea rows="3" class="form-control" [(ngModel)]="objeto.dsObservacao" name="dsObservacao" #dsObservacao="ngModel" maxlength="200" placeholder="Escreva alguma observação adicional." ></textarea>
+                                
+                                </div>                            
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                        <label class="control-label" style="font-size: 11px">Obs: Todos os campos com <span style="color: #dc0808">*</span> são obrigatórios</label>                                        
+                                </div>                            
+                            </div>
+                                
+                        </div>
+                        
+                        <div class="panel-footer text-right">
+                            <button class="btn btn-default" (click)="fechar()" data-dismiss="modal" type="button">Fechar</button>
+                            <button class="btn btn-primary" (click)="inserir()" type="button" *ngIf="objeto.idDespesaCartao == null" [disabled]="!form.valid">Cadastrar</button>
+                            <button class="btn btn-primary" (click)="alterar()" type="button" *ngIf="objeto.idDespesaCartao != null" [disabled]="!form.valid">Alterar</button>
+                        </div>
+                                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

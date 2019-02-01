@@ -18,7 +18,7 @@ import { CategoriaListComponent } from '../categoria/list/categoria-list.compone
 import { NotfoundComponent } from './notfound/notfound.component';
 import { CategoriaService } from '../../services/categoria/categoria.service';
 import { CategoriaFormComponent } from '../categoria/form/categoria-form.component';
-import { MatDialogModule, MatToolbarModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
+import { MatDialogModule, MatRadioButton, MatToolbarModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatRadioGroup, MatRadioModule } from '@angular/material';
 import { ToastrModule } from 'ngx-toastr';
 import { PagerService } from '../../services/pager.service';
 import { FilterPipe } from '../generic/filter';
@@ -56,6 +56,10 @@ import { DespesaCartaoComponent } from '../despesa-cartao/despesa-cartao.compone
 import { DespesaCartaoSaveComponent } from '../despesa-cartao/save/despesa-cartao-save.component';
 import { DespesaCartaoTitleComponent } from '../despesa-cartao/title/despesa-cartao-title.component';
 import { DespesaCartaoService } from '../../services/despesa-cartao/despesa-cartao.service';
+import { DespesaAgendamentoComponent } from '../despesa-agendamento/despesa-agendamento.component';
+import { DespesaAgendamentoHeaderService } from '../../services/despesa-agendamento/despesa-agendamento-header.service';
+import { DespesaAgendamentoTitleComponent } from '../despesa-agendamento/title/despesa-agendamento-title.component';
+import { DespesaAgendamentoSaveComponent } from '../despesa-agendamento/save/despesa-agendamento-save.component';
 
 
 
@@ -89,6 +93,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CurrencyMaskModule,
         MatDatepickerModule, 
         MatNativeDateModule,
+        MatRadioModule,
         MyDateRangePickerModule,
         BsDatepickerModule.forRoot(),
         NgxMaskModule.forRoot(),
@@ -120,6 +125,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DespesaCartaoTitleComponent,
         DespesaCartaoSaveComponent,
         DespesaCartaoComponent,
+        DespesaAgendamentoComponent,
+        DespesaAgendamentoSaveComponent,
+        DespesaAgendamentoTitleComponent,
         FooterComponent,
         NotfoundComponent,
         FilterPipe,
@@ -136,6 +144,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       TransferenciaService,
       DespesaService,
       DespesaCartaoService,
+      DespesaAgendamentoHeaderService,
       TransferenciaFixaService,
       {
         provide: HTTP_INTERCEPTORS,

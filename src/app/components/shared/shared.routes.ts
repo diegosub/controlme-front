@@ -17,6 +17,8 @@ import { TransferenciaSaveComponent } from '../transferencia/save/transferencia-
 import { TransferenciaComponent } from '../transferencia/transferencia.component';
 import { DespesaCartaoComponent } from '../despesa-cartao/despesa-cartao.component';
 import { DespesaCartaoSaveComponent } from '../despesa-cartao/save/despesa-cartao-save.component';
+import { DespesaAgendamentoSaveComponent } from '../despesa-agendamento/save/despesa-agendamento-save.component';
+import { DespesaAgendamentoComponent } from '../despesa-agendamento/despesa-agendamento.component';
 
 export const CONTENT_ROUTES: Routes = [
 
@@ -45,5 +47,7 @@ export const CONTENT_ROUTES: Routes = [
         { path : 'despesa-cartao', component: DespesaCartaoComponent, canActivate: [AuthGuard]},
         { path : 'despesa-cartao-save', component: DespesaCartaoSaveComponent, canActivate: [AuthGuard]},
 
+        { path : 'despesa-agendamento', component: DespesaAgendamentoComponent, canActivate: [AuthGuard]},
+        { path : 'despesa-agendamento-save', component: DespesaAgendamentoSaveComponent, canActivate: [AuthGuard]},
 
 ]

@@ -1,0 +1,9 @@
+.cal {
+    background-color: #c1c1c14d !important;
+    color: #0a3a54 !important;
+    cursor: pointer !important;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
