@@ -38,7 +38,7 @@
                                     <label class="control-label">Conta <span style="color: #dc0808">*</span></label>
                                     <select class="form-control selectpicker" [(ngModel)]="objeto.idConta" name="idConta" #idConta="ngModel" required>
                                         <option value="0">- Selecione a Conta -</option>
-                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}} (R$ {{conta.strVlSaldo}})</option>
+                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}} (R$ {{conta.vlSaldo | moeda}})</option>
                                     </select>
                                 </div>
                             </div>

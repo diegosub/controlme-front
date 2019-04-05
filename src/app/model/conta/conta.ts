@@ -10,6 +10,5 @@ export class Conta {
     dtAlteracao: Date; 
     fgControle: string;
     fgPrincipal: boolean;
-    strVlSaldo: string;
 
 }

@@ -51,7 +51,7 @@ export class DespesaAgendamentoSaveComponent extends CrudController<DespesaAgend
 
     this.objeto.idCategoria = 0;
     this.objeto.idSubcategoria = 0;
-    this.objeto.tpDespesaAgh = "P";
+    this.objeto.nrParcelas = 1;
     this.objeto.idPeriodo = 3;    //mes
            
     if(this.data != null && this.data.objeto != undefined){
@@ -71,7 +71,7 @@ export class DespesaAgendamentoSaveComponent extends CrudController<DespesaAgend
 
   pesquisarPeriodo() {
     let dominio: Dominio = new Dominio();
-    dominio.dsCampo = 'ID_PERIODO';
+    dominio.dsCampo = 'ID_PERIODO_AGH';
 
     this.dominioService.pesquisarPorCampo(dominio)
                 .subscribe((responseApi:ResponseApi) => {

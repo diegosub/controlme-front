@@ -60,6 +60,7 @@ import { DespesaAgendamentoComponent } from '../despesa-agendamento/despesa-agen
 import { DespesaAgendamentoHeaderService } from '../../services/despesa-agendamento/despesa-agendamento-header.service';
 import { DespesaAgendamentoTitleComponent } from '../despesa-agendamento/title/despesa-agendamento-title.component';
 import { DespesaAgendamentoSaveComponent } from '../despesa-agendamento/save/despesa-agendamento-save.component';
+import { Moeda } from '../../pipes/moeda';
 
 
 
@@ -73,7 +74,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       HeaderComponent,
       MenuComponent,      
       FooterComponent,    
-      CommonModule
+      CommonModule,
+      Moeda,
     ],
     imports: [
         PerfectScrollbarModule,
@@ -103,6 +105,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HomeComponent,
         HeaderComponent,
         MenuComponent,
+        Moeda,
         CategoriaListComponent,
         CategoriaTitleComponent,
         CategoriaFormComponent,

@@ -62,32 +62,22 @@
                             </div>
 
                             <div class="row">
-                                    <div class="col-sm-5">     
-                                        <label class="control-label">Tipo de Agendamento <span style="color: #dc0808">*</span></label>
-                                        <div class="radio">
-                                            <mat-radio-group class="magic-radio" [(ngModel)]="objeto.tpDespesaAgh" name="tpDespesaAgh" >
-                                                <mat-radio-button value="F">Fixa</mat-radio-button>
-                                                <mat-radio-button value="P">Repetir</mat-radio-button>
-                                            </mat-radio-group>
-                                        </div>
-                                    </div>
+
+                                <div class="col-sm-6">    
+                                    <label class="control-label">Nº de Parcelas</label> 
+                                        <input type="text" autocomplete="off" soNumero [(ngModel)]="objeto.nrParcelas" name="nrParcelas"
+                                               class="form-control"  id="inputNrParcelas" placeholder="Entre 2 e 99" #nrParcelas="ngModel"
+                                               maxlength="2" required/> 
+                                </div> 
     
-                                    <div class="col-sm-4" *ngIf='objeto.tpDespesaAgh == "P"'>    
-                                        <label class="control-label">Período <span style="color: #dc0808">*</span> </label>
-                                        <select class="form-control selectpicker" [(ngModel)]="objeto.idPeriodo" name="idPeriodo" #idPeriodo="ngModel" required>
-                                            <option *ngFor="let periodo of listaPeriodo" [ngValue]="periodo.vlDominioNumber">{{periodo.dsDominio}}</option>
-                                        </select>
-                                    </div> 
+                                <div class="col-sm-6" *ngIf="objeto.nrParcelas > 1">    
+                                    <label class="control-label">Tipo de Parcela <span style="color: #dc0808">*</span> </label>
+                                    <select class="form-control selectpicker" [(ngModel)]="objeto.idPeriodo" name="idPeriodo" #idPeriodo="ngModel" required>
+                                        <option *ngFor="let periodo of listaPeriodo" [ngValue]="periodo.vlDominioNumber">{{periodo.dsDominio}}</option>
+                                    </select>
+                                </div> 
     
-                                    <div class="col-sm-3" *ngIf='objeto.tpDespesaAgh == "P"'>    
-                                            <label class="control-label">Quantidade</label> 
-                                                <input type="text" autocomplete="off" soNumero
-                                                [(ngModel)]="objeto.nrPeriodo" name="nrPeriodo"
-                                                      class="form-control"  id="inputNrPeriodo"
-                                                placeholder="Entre 2 e 99" #nrPeriodo="ngModel"
-                                                  maxlength="2" required/> 
-                                        </div> 
-                                </div>
+                            </div>
     
 
                             <div class="row">
