@@ -9,12 +9,20 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" (click)="fechar()"><i class="pci-cross pci-circle"></i></button>
                             <h4 class="modal-title">
-                                <span *ngIf="objeto.idDespesaCartao == null">Cadastrar</span> 
-                                <span *ngIf="objeto.idDespesaCartao != null">Alterar</span> 
-                                Agendamento de Despesa</h4>
+                                <span *ngIf="objeto.idDespesaFixa == null">Cadastrar</span> 
+                                <span *ngIf="objeto.idDespesaFixa != null">Alterar</span> 
+                                Despesa Fixa</h4>
                         </div>
 
                         <div class="modal-body">                         
+                            
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label class="control-label">Descrição <span style="color: #dc0808">*</span> </label>
+                                    <input type="text" autocomplete="off" [(ngModel)]="objeto.dsDespesaFixa" name="dsDespesaFixa" class="form-control" 
+                                           id="inputDsDespesaFixa" placeholder="Informe a descrição da despesa fixa" #dsDespesaFixa="ngModel" required>   
+                                </div>
+                            </div>
                             
                             <div class="row">
                                 <div class="col-sm-6">
@@ -24,7 +32,7 @@
                                         <option *ngFor="let categoria of listaCategoria" [ngValue]="categoria.idCategoria">{{categoria.dsCategoria}}</option>
                                     </select>
                                 </div>
-
+                                
                                 <div class="col-sm-6">
                                     <label class="control-label">Subcategoria</label>
                                     <select class="form-control selectpicker" [(ngModel)]="objeto.idSubcategoria" name="idSubcategoria" #idSubcategoria="ngModel" required>
@@ -33,53 +41,34 @@
                                     </select>
                                 </div>
                             </div>
-                                                       
+
+                            
                             <div class="row">
                                 <div class="col-sm-6">                                
-                                    <label class="control-label">Valor <span style="color: #dc0808">*</span></label>                                    
+                                    <label class="control-label">Valor Base<span style="color: #dc0808">*</span></label>                                    
                                     <input type="text" autocomplete="off"
-                                          [(ngModel)]="objeto.vlDespesaAgh"
-                                        name="vlDespesaAgh"
+                                          [(ngModel)]="objeto.vlDespesa"
+                                        name="vlDespesa"
                                         class="form-control"
                                         id="inputVlDespesa"
                                         placeholder="R$ 00,00"
-                                        #vlDespesaAgh="ngModel"
+                                        #vlDespesa="ngModel"
                                         currencyMask
                                         maxlength="14"
                                         [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
                                         required/>  
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="control-label">Data <span style="color: #dc0808">*</span></label>
-                                    <div class="input-group date">
-                                        <input matInput [matDatepicker]="picker" onkeypress="return formataData(event, this);" (click)="picker.open()" [(ngModel)]="objeto.dtInicio" name="dtInicio"
-                                               class="form-control" maxlength="10" #dtInicio="ngModel" [min]="minDate">
-                                        <span class="input-group-addon cal" (click)="picker.open()"><i class="demo-pli-calendar-4"></i></span>
-                                        <mat-datepicker-toggle style="display: none;" matSuffix [for]="picker" class="input-group-addon cal"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
-                                    </div>
+                                    <label class="control-label">Dia do Vencimento <span style="color: #dc0808">*</span></label>
+                                    <input type="text" autocomplete="off" soNumero [(ngModel)]="objeto.nrDiaVencimento" name="nrDiaVencimento" class="form-control"  
+                                           id="inputNrDiaVencimento" placeholder="Entre 1 e 31" #nrDiaVencimento="ngModel" maxlength="2" required/> 
                                 </div>
                             </div>
 
                             <div class="row">
-
-                                <div class="col-sm-6">    
-                                    <label class="control-label">Nº de Parcelas <span style="color: #dc0808">*</span></label> 
-                                        <input type="text" autocomplete="off" soNumero [(ngModel)]="objeto.nrParcelas" name="nrParcelas"
-                                               class="form-control"  id="inputNrParcelas" placeholder="Entre 2 e 99" #nrParcelas="ngModel"
-                                               maxlength="2" required/> 
-                                </div> 
-    
-                                <div class="col-sm-6" *ngIf="objeto.nrParcelas > 1">    
-                                    <label class="control-label">Tipo de Parcela <span style="color: #dc0808">*</span> </label>
-                                    <select class="form-control selectpicker" [(ngModel)]="objeto.idPeriodoAgh" name="idPeriodoAgh" #idPeriodoAgh="ngModel" required>
-                                        <option *ngFor="let periodo of listaPeriodo" [ngValue]="periodo.vlDominioNumber">{{periodo.dsDominio}}</option>
-                                    </select>
-                                </div> 
-    
+                                
                             </div>
-    
-
+                            
                             <div class="row">
                                 <div class="col-sm-12">
                                         <label class="control-label">Observação</label>
@@ -98,8 +87,8 @@
                         
                         <div class="panel-footer text-right">
                             <button class="btn btn-default" (click)="fechar()" data-dismiss="modal" type="button">Fechar</button>
-                            <button class="btn btn-primary" (click)="inserir()" type="button" *ngIf="objeto.idDespesaAgh == null" [disabled]="!form.valid">Cadastrar</button>
-                            <button class="btn btn-primary" (click)="alterar()" type="button" *ngIf="objeto.idDespesaAgh != null" [disabled]="!form.valid">{{objeto.idDespecaAgh}}Alterar</button>
+                            <button class="btn btn-primary" (click)="inserir()" type="button" *ngIf="objeto.idDespesaFixa == null" [disabled]="!form.valid">Cadastrar</button>
+                            <button class="btn btn-primary" (click)="alterar()" type="button" *ngIf="objeto.idDespesaFixa != null" [disabled]="!form.valid">Alterar</button>
                         </div>
                                             
                     </div>

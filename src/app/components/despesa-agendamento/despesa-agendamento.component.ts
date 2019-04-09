@@ -3,9 +3,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import { IMyDateRangeModel } from 'mydaterangepicker';
 import { ToastrService } from 'ngx-toastr';
+import { FiltroDespesaAgendamentoHeader } from '../../model/despesa-agendamento/filtro/filtro-despesa-agendamento-header';
 import { DialogService } from '../../dialog-service';
 import { DespesaAgendamentoHeader } from '../../model/despesa-agendamento/despesa-agendamento-header';
-import { FiltroDespesa } from '../../model/despesa/filtro/filtro-despesa';
 import { ResponseApi } from '../../model/response-api';
 import { DespesaAgendamentoHeaderService } from '../../services/despesa-agendamento/despesa-agendamento-header.service';
 import { CrudController } from '../generic/crud-controller';
@@ -49,6 +49,7 @@ export class DespesaAgendamentoComponent extends CrudController<DespesaAgendamen
       this.despesaAgendamentoHeaderService.get(codigo)
                 .subscribe((responseApi:ResponseApi) => {
                   this.objeto = responseApi['data']; 
+                  console.log(this.objeto);
                   const dialogConfig = new MatDialogConfig();    
                   dialogConfig.data =  {objeto: this.objeto};
                       
@@ -67,9 +68,9 @@ export class DespesaAgendamentoComponent extends CrudController<DespesaAgendamen
   resetFiltros() {
     this.periodo = {beginDate: {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()},
                       endDate: {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()}};
-    this.objeto.filtro = new FiltroDespesa();
-    this.objeto.filtro.dtDespesaInicio = new Date();
-    this.objeto.filtro.dtDespesaFim = new Date();
+    this.objeto.filtro = new FiltroDespesaAgendamentoHeader();
+    this.objeto.filtro.dtInicioInicio = new Date();
+    this.objeto.filtro.dtInicioFim = new Date();
     this.periodo.beginDate.year = new Date().getFullYear();
     this.periodo.beginDate.month = new Date().getMonth() + 1;
     this.periodo.beginDate.day = new Date().getDate();
@@ -80,6 +81,7 @@ export class DespesaAgendamentoComponent extends CrudController<DespesaAgendamen
   pesquisarDespesaAgendamento() {    
     this.objeto.idUsuario = this.getCodigoUsuarioLogado();
     this.objeto.fgAtivo = true;
+    this.objeto.filtro = this.objeto.filtro;
  
     this.despesaAgendamentoHeaderService.pesquisar(this.objeto)
                 .subscribe((responseApi:ResponseApi) => {
@@ -89,11 +91,28 @@ export class DespesaAgendamentoComponent extends CrudController<DespesaAgendamen
     });
   }
 
-  
+  inativarDespesaAgendamento(id:string){
+    this.dialogService.confirm('Tem certeza que deseja inativar este agendamento?')
+      .then((candelete:boolean) => {
+          if(candelete){            
+            let status = false;
+            this.despesaAgendamentoHeaderService.inativarDespesaAgendamento(id).subscribe((responseApi:ResponseApi) => {              
+             
+              this.resetFiltros();
+              this.pesquisarDespesaAgendamento();
+
+              this.msgSucesso('O agendamento foi inativada com sucesso.');             
+            } , err => {
+              this.tratarErro(err);              
+            });
+          }
+      });
+  }
+
   selecionarPeriodoFiltro(event: IMyDateRangeModel) {
-    this.objeto.filtro = new FiltroDespesa(); 
-    this.objeto.filtro.dtDespesaInicio = new Date(event.beginDate.year, event.beginDate.month-1, event.beginDate.day);
-    this.objeto.filtro.dtDespesaFim = new Date(event.endDate.year, event.endDate.month-1, event.endDate.day);
+    this.objeto.filtro = new FiltroDespesaAgendamentoHeader(); 
+    this.objeto.filtro.dtInicioInicio = new Date(event.beginDate.year, event.beginDate.month-1, event.beginDate.day);
+    this.objeto.filtro.dtInicioFim = new Date(event.endDate.year, event.endDate.month-1, event.endDate.day);
     
     this.pesquisarDespesaAgendamento();
   }

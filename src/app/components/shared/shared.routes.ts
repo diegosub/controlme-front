@@ -19,6 +19,8 @@ import { DespesaCartaoComponent } from '../despesa-cartao/despesa-cartao.compone
 import { DespesaCartaoSaveComponent } from '../despesa-cartao/save/despesa-cartao-save.component';
 import { DespesaAgendamentoSaveComponent } from '../despesa-agendamento/save/despesa-agendamento-save.component';
 import { DespesaAgendamentoComponent } from '../despesa-agendamento/despesa-agendamento.component';
+import { DespesaFixaComponent } from '../despesa-fixa/despesa-fixa.component';
+import { DespesaFixaSaveComponent } from '../despesa-fixa/save/despesa-fixa-save.component';
 
 export const CONTENT_ROUTES: Routes = [
 
@@ -49,5 +51,8 @@ export const CONTENT_ROUTES: Routes = [
 
         { path : 'despesa-agendamento', component: DespesaAgendamentoComponent, canActivate: [AuthGuard]},
         { path : 'despesa-agendamento-save', component: DespesaAgendamentoSaveComponent, canActivate: [AuthGuard]},
+
+        { path : 'despesa-fixa', component: DespesaFixaComponent, canActivate: [AuthGuard]},
+        { path : 'despesa-fixa-save', component: DespesaFixaSaveComponent, canActivate: [AuthGuard]},
 
 ]

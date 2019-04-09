@@ -61,6 +61,10 @@ import { DespesaAgendamentoHeaderService } from '../../services/despesa-agendame
 import { DespesaAgendamentoTitleComponent } from '../despesa-agendamento/title/despesa-agendamento-title.component';
 import { DespesaAgendamentoSaveComponent } from '../despesa-agendamento/save/despesa-agendamento-save.component';
 import { Moeda } from '../../pipes/moeda';
+import { DespesaFixaComponent } from '../despesa-fixa/despesa-fixa.component';
+import { DespesaFixaTitleComponent } from '../despesa-fixa/title/despesa-fixa-title.component';
+import { DespesaFixaService } from '../../services/despesa-fixa/despesa-fixa.service';
+import { DespesaFixaSaveComponent } from '../despesa-fixa/save/despesa-fixa-save.component';
 
 
 
@@ -131,6 +135,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DespesaAgendamentoComponent,
         DespesaAgendamentoSaveComponent,
         DespesaAgendamentoTitleComponent,
+        DespesaFixaComponent,
+        DespesaFixaSaveComponent,
+        DespesaFixaTitleComponent,
         FooterComponent,
         NotfoundComponent,
         FilterPipe,
@@ -147,6 +154,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       TransferenciaService,
       DespesaService,
       DespesaCartaoService,
+      DespesaFixaService,
       DespesaAgendamentoHeaderService,
       TransferenciaFixaService,
       {

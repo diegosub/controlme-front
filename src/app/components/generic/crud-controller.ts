@@ -159,8 +159,6 @@ export class CrudController<Entity, CT extends { new(item?: any): Entity }> impl
     }
   }
 
-
-
   getCodigoUsuarioLogado()
   {
     return this.getUsuarioLogado().idUsuario;

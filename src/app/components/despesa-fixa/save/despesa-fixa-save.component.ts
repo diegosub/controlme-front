@@ -4,14 +4,12 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../../dialog-service';
 import { Categoria } from '../../../model/categoria/categoria';
-import { DespesaAgendamentoHeader } from '../../../model/despesa-agendamento/despesa-agendamento-header';
-import { Dominio } from '../../../model/dominio/dominio';
+import { DespesaFixa } from '../../../model/despesa-fixa/despesa-fixa';
 import { ResponseApi } from '../../../model/response-api';
 import { Subcategoria } from '../../../model/subcategoria/subcategoria';
-import { CartaoService } from '../../../services/cartao/cartao.service';
 import { CategoriaService } from '../../../services/categoria/categoria.service';
-import { DespesaAgendamentoHeaderService } from '../../../services/despesa-agendamento/despesa-agendamento-header.service';
-import { DominioService } from '../../../services/dominio/dominio.service';
+import { ContaService } from '../../../services/conta/conta.service';
+import { DespesaFixaService } from '../../../services/despesa-fixa/despesa-fixa.service';
 import { SubcategoriaService } from '../../../services/subcategoria/subcategoria.service';
 import { CrudController } from '../../generic/crud-controller';
 
@@ -19,44 +17,35 @@ import { CrudController } from '../../generic/crud-controller';
 declare var $ :any;
 
 @Component({
-  selector: 'app-despesa-agendamento-save',
-  templateUrl: './despesa-agendamento-save.component.html',
-  styleUrls: ['./despesa-agendamento-save.component.css']
+  selector: 'app-despesa-fixa-save',
+  templateUrl: './despesa-fixa-save.component.html',
+  styleUrls: ['./despesa-fixa-save.component.css']
 })
-export class DespesaAgendamentoSaveComponent extends CrudController<DespesaAgendamentoHeader, {new(): DespesaAgendamentoHeader}> implements OnInit {
+export class DespesaFixaSaveComponent extends CrudController<DespesaFixa, {new(): DespesaFixa}> implements OnInit {
 
-  listaCartao = [];
+  listaConta = [];
   listaCategoria = [];
   listaSubcategoria = [];
-  listaPeriodo = [];
-  minDate; 
+  maxDate = new Date();
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
               public router: Router,
               public toastr: ToastrService,
               dialogService: DialogService,
-              private dominioService: DominioService,
-              private cartaoService: CartaoService,
+              private contaService: ContaService,
               private categoriaService: CategoriaService,
               private subcategoriaService: SubcategoriaService,
-              private despesaAgendamentoHeaderService: DespesaAgendamentoHeaderService,
-              private dialogRef: MatDialogRef<DespesaAgendamentoSaveComponent>) {
-      super(router, DespesaAgendamentoHeader, toastr, dialogService, despesaAgendamentoHeaderService);
+              private despesaService: DespesaFixaService,
+              private dialogRef: MatDialogRef<DespesaFixaSaveComponent>) {
+      super(router, DespesaFixa, toastr, dialogService, despesaService);
   }
 
   ngOnInit() {
 
-    let data = new Date();
-    data.setDate(data.getDate() + 1);
-    this.minDate = data;
-
     this.pesquisarCategoria();
-    this.pesquisarPeriodo();
 
     this.objeto.idCategoria = 0;
     this.objeto.idSubcategoria = 0;
-    this.objeto.nrParcelas = 1;
-    this.objeto.idPeriodoAgh = 3;    //mes
            
     if(this.data != null && this.data.objeto != undefined){
       this.objeto = this.data.objeto;
@@ -66,27 +55,8 @@ export class DespesaAgendamentoSaveComponent extends CrudController<DespesaAgend
       }
 
       this.pesquisarSubcategoria();    
-      this.objeto.dtInicio = new Date(this.objeto.dtInicio);      
-    } else {
-      this.objeto.dtInicio = data;
     }
 
-  }
-
-  pesquisarPeriodo() {
-    let dominio: Dominio = new Dominio();
-    dominio.dsCampo = 'ID_PERIODO_AGH';
-
-    this.dominioService.pesquisarPorCampo(dominio)
-                .subscribe((responseApi:ResponseApi) => {
-      this.listaPeriodo = responseApi['data']; 
-      
-      this.listaPeriodo.forEach(element => {
-        element.vlDominioNumber = parseInt(element.vlDominio);
-      });
-    } , err => {
-      this.tratarErro(err);
-    });
   }
 
   pesquisarCategoria() {
@@ -122,24 +92,23 @@ export class DespesaAgendamentoSaveComponent extends CrudController<DespesaAgend
 
   validarInserir() {
 
+    if(this.objeto.dsDespesaFixa == '' || this.objeto.dsDespesaFixa == null) {
+      this.msgErro("O campo Descrição é obrigatório.");
+      return false;
+    }
 
     if(this.objeto.idCategoria == 0 || this.objeto.idCategoria == null) {
       this.msgErro("O campo Categoria é obrigatório.");
       return false;
     }
-   
-    if(this.objeto.vlDespesaAgh == 0 || this.objeto.vlDespesaAgh == null) {
-      this.msgErro("O campo Valor é obrigatório.");
+
+    if(this.objeto.vlDespesa == 0 || this.objeto.vlDespesa == null) {
+      this.msgErro("O campo Valor Base é obrigatório.");
       return false;
     }
 
-    if(this.objeto.dtInicio == null) {
-      this.msgErro("O campo Data é obrigatório.");
-      return false;
-    }
-
-    if(this.objeto.nrParcelas == null || this.objeto.nrParcelas <= 0) {
-      this.msgErro("O campo Nº de Parcelas é obrigatório.");
+    if(this.objeto.nrDiaVencimento == null) {
+      this.msgErro("O campo Dia do Vencimento é obrigatório.");
       return false;
     }
 
@@ -148,8 +117,7 @@ export class DespesaAgendamentoSaveComponent extends CrudController<DespesaAgend
 
   validarAlterar() {
 
-
-    if(this.objeto.idDespesaAgh == 0 || this.objeto.idDespesaAgh == null) {
+    if(this.objeto.idDespesaFixa == 0 || this.objeto.idDespesaFixa == null) {
       this.msgErro("O campo Código é obrigatório.");
       return false;
     }
@@ -163,12 +131,10 @@ export class DespesaAgendamentoSaveComponent extends CrudController<DespesaAgend
     this.objeto.dtCadastro = new Date();
     this.objeto.idUsuario = this.getCodigoUsuarioLogado();
     this.objeto.fgAtivo = true;
-    this.objeto.idPeriodoAgh = (this.objeto.nrParcelas <= 1) ? null : this.objeto.idPeriodoAgh;
   }
 
   completarAlterar() {
     this.objeto.dtAlteracao = new Date();
-    this.objeto.idPeriodoAgh = (this.objeto.nrParcelas <= 1) ? null : this.objeto.idPeriodoAgh;
   }
 
   executarPosInserir() {
