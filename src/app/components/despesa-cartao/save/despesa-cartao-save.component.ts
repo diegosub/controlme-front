@@ -3,21 +3,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../../dialog-service';
-import { Despesa } from '../../../model/despesa/despesa';
-import { DespesaService } from '../../../services/despesa/despesa.service';
-import { CrudController } from '../../generic/crud-controller';
-import { Conta } from '../../../model/conta/conta';
-import { ContaService } from '../../../services/conta/conta.service';
-import { ResponseApi } from '../../../model/response-api';
-import { Categoria } from '../../../model/categoria/categoria';
-import { CategoriaService } from '../../../services/categoria/categoria.service';
-import { SubcategoriaService } from '../../../services/subcategoria/subcategoria.service';
-import { Subcategoria } from '../../../model/subcategoria/subcategoria';
-import { Observable } from 'rxjs';
-import { DespesaCartao } from '../../../model/despesa-cartao/despesa-cartao';
-import { DespesaCartaoService } from '../../../services/despesa-cartao/despesa-cartao.service';
 import { Cartao } from '../../../model/cartao/cartao';
+import { Categoria } from '../../../model/categoria/categoria';
+import { ResponseApi } from '../../../model/response-api';
+import { Subcategoria } from '../../../model/subcategoria/subcategoria';
 import { CartaoService } from '../../../services/cartao/cartao.service';
+import { CategoriaService } from '../../../services/categoria/categoria.service';
+import { DespesaCartaoService } from '../../../services/despesa-cartao/despesa-cartao.service';
+import { SubcategoriaService } from '../../../services/subcategoria/subcategoria.service';
+import { CrudController } from '../../generic/crud-controller';
+import { DespesaCch } from '../../../model/despesa-cartao/despesa-cch';
 
 
 declare var $ :any;
@@ -27,7 +22,7 @@ declare var $ :any;
   templateUrl: './despesa-cartao-save.component.html',
   styleUrls: ['./despesa-cartao-save.component.css']
 })
-export class DespesaCartaoSaveComponent extends CrudController<DespesaCartao, {new(): DespesaCartao}> implements OnInit {
+export class DespesaCartaoSaveComponent extends CrudController<DespesaCch, {new(): DespesaCch}> implements OnInit {
 
   listaCartao = [];
   listaCategoria = [];
@@ -43,7 +38,7 @@ export class DespesaCartaoSaveComponent extends CrudController<DespesaCartao, {n
               private subcategoriaService: SubcategoriaService,
               private despesaCartaoService: DespesaCartaoService,
               private dialogRef: MatDialogRef<DespesaCartaoSaveComponent>) {
-      super(router, DespesaCartao, toastr, dialogService, despesaCartaoService);
+      super(router, DespesaCch, toastr, dialogService, despesaCartaoService);
   }
 
   ngOnInit() {
@@ -54,6 +49,7 @@ export class DespesaCartaoSaveComponent extends CrudController<DespesaCartao, {n
     this.objeto.idCategoria = 0;
     this.objeto.idCartao = 0;
     this.objeto.idSubcategoria = 0;
+    this.objeto.nrParcelas = 1;
            
     if(this.data != null && this.data.objeto != undefined){
       this.objeto = this.data.objeto;
@@ -133,13 +129,18 @@ export class DespesaCartaoSaveComponent extends CrudController<DespesaCartao, {n
       return false;
     }
 
+    if(this.objeto.dtDespesa == null) {
+      this.msgErro("O campo Data da Compra é obrigatório.");
+      return false;
+    }
+
     if(this.objeto.vlDespesa == 0 || this.objeto.vlDespesa == null) {
       this.msgErro("O campo Valor é obrigatório.");
       return false;
     }
 
-    if(this.objeto.dtDespesa == null) {
-      this.msgErro("O campo Data é obrigatório.");
+    if(this.objeto.nrParcelas == null || this.objeto.nrParcelas <= 0) {
+      this.msgErro("O campo Nº de Parcelas é obrigatório.");
       return false;
     }
 
@@ -149,7 +150,7 @@ export class DespesaCartaoSaveComponent extends CrudController<DespesaCartao, {n
   validarAlterar() {
 
 
-    if(this.objeto.idDespesaCartao == 0 || this.objeto.idDespesaCartao == null) {
+    if(this.objeto.idDespesaCch == 0 || this.objeto.idDespesaCch == null) {
       this.msgErro("O campo Código é obrigatório.");
       return false;
     }
@@ -164,15 +165,21 @@ export class DespesaCartaoSaveComponent extends CrudController<DespesaCartao, {n
       return false;
     }
 
+    if(this.objeto.dtDespesa == null) {
+      this.msgErro("O campo Data da Compra é obrigatório.");
+      return false;
+    }
+
     if(this.objeto.vlDespesa == 0 || this.objeto.vlDespesa == null) {
       this.msgErro("O campo Valor é obrigatório.");
       return false;
     }
 
-    if(this.objeto.dtDespesa == null) {
-      this.msgErro("O campo Data é obrigatório.");
+    if(this.objeto.nrParcelas == null || this.objeto.nrParcelas <= 0) {
+      this.msgErro("O campo Nº de Parcelas é obrigatório.");
       return false;
     }
+
     return true;
   }
 

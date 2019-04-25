@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { IMyDateRangeModel } from 'mydaterangepicker';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../dialog-service';
-import { ResponseApi } from '../../model/response-api';
-import { CrudController } from '../generic/crud-controller';
 import { FiltroDespesa } from '../../model/despesa/filtro/filtro-despesa';
-import { DespesaCartaoSaveComponent } from './save/despesa-cartao-save.component';
-import { DespesaCartao } from '../../model/despesa-cartao/despesa-cartao';
+import { ResponseApi } from '../../model/response-api';
 import { DespesaCartaoService } from '../../services/despesa-cartao/despesa-cartao.service';
+import { CrudController } from '../generic/crud-controller';
+import { DespesaCartaoSaveComponent } from './save/despesa-cartao-save.component';
+import { DespesaCch } from '../../model/despesa-cartao/despesa-cch';
 
 
 @Component({
@@ -17,7 +17,7 @@ import { DespesaCartaoService } from '../../services/despesa-cartao/despesa-cart
   templateUrl: './despesa-cartao.component.html',
   styleUrls: ['./despesa-cartao.component.css']
 })
-export class DespesaCartaoComponent extends CrudController<DespesaCartao, {new(): DespesaCartao}> implements OnInit {
+export class DespesaCartaoComponent extends CrudController<DespesaCch, {new(): DespesaCch}> implements OnInit {
 
   private periodo: any;
 
@@ -26,7 +26,7 @@ export class DespesaCartaoComponent extends CrudController<DespesaCartao, {new()
               private dialog: MatDialog,
               dialogService: DialogService,
               private despesaCartaoService: DespesaCartaoService) {
-      super(router, DespesaCartao, toastr, dialogService, despesaCartaoService);
+      super(router, DespesaCch, toastr, dialogService, despesaCartaoService);
   }
 
   ngOnInit() {

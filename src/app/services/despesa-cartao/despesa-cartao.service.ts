@@ -2,12 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HOST_CONTROLME } from '../controlme.api';
 import { CrudService } from '../shared/crud.service';
-import { DespesaCartao } from '../../model/despesa-cartao/despesa-cartao';
+import { DespesaCch } from '../../model/despesa-cartao/despesa-cch';
 
 
 
 @Injectable()
-export class DespesaCartaoService extends CrudService<DespesaCartao> {
+export class DespesaCartaoService extends CrudService<DespesaCch> {
   
   constructor(http: HttpClient){
     super(http);

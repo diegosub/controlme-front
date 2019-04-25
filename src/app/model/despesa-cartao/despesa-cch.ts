@@ -3,9 +3,9 @@ import { Categoria } from "../categoria/categoria";
 import { Subcategoria } from "../subcategoria/subcategoria";
 import { Conta } from "../conta/conta";
 
-export class DespesaCartao {
+export class DespesaCch {
     
-    idDespesaCartao: Number;
+    idDespesaCch: Number;
     idCategoria: Number;
     idSubcategoria: Number;
     idCartao: Number;
@@ -13,6 +13,7 @@ export class DespesaCartao {
     strVlDespesa: string;
     dtDespesa: Date;
     dsObservacao: string;
+    nrParcelas: Number;
     idUsuario: Number;
     fgAtivo: boolean;    
     dtCadastro: Date;    

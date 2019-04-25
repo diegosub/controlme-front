@@ -29,8 +29,9 @@
                         <tr>
                             <th>Categoria</th>
                             <th>Cartão</th>
+                            <th width="15%">Data da Compra</th>
                             <th width="15%">Valor</th>
-                            <th width="15%">Data</th>
+                            <th width="15%">Nº de Parcelas</th>
                             <th width="4%"></th>
                             <th width="4%"></th>
                         </tr>
@@ -42,10 +43,11 @@
                                 <span *ngIf="despesaCartao.subcategoria != null"> - {{despesaCartao.subcategoria.dsSubcategoria}}</span>
                             </td>                            
                             <td>{{despesaCartao.cartao.dsCartao}}</td>
-                            <td>R$ {{despesaCartao.strVlDespesa}}</td>
                             <td><i class="demo-pli-calendar-4"></i> {{despesaCartao.dtDespesa | date: 'dd/MM/yyyy'}}</td>
-                            <td><i class="fa fa-edit" (click)="abrirModalAlterar(despesaCartao.idDespesaCartao)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar"></i></td>
-                            <td><i class="fa fa-remove" (click)="inativar(despesaCartao.idDespesaCartao)" style="font-size: 18px; cursor: pointer;" title="Inativar"></i></td>
+                            <td>R$ {{despesaCartao.strVlDespesa}}</td>
+                            <td>{{despesaCartao.nrParcelas}}</td>
+                            <td><i class="fa fa-edit" (click)="abrirModalAlterar(despesaCartao.idDespesaCch)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar"></i></td>
+                            <td><i class="fa fa-remove" (click)="inativar(despesaCartao.idDespesaCch)" style="font-size: 18px; cursor: pointer;" title="Inativar"></i></td>
                         </tr>
                     </tbody>
                 </table>
