@@ -20,14 +20,14 @@
                                     <label class="control-label">Conta de Origem</label>
                                     <select class="form-control" [(ngModel)]="objeto.idContaOrigem" name="idContaOrigem" #idContaOrigem="ngModel" required>
                                         <option value="0">- Selecione a Conta de Origem -</option>
-                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}} (R$ {{conta.strVlSaldo}})</option>
+                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}} ({{conta.vlSaldo | moeda}})</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="control-label">Conta de Destino</label>
                                     <select class="form-control selectpicker" [(ngModel)]="objeto.idContaDestino" name="idContaDestino" #idContaDestino="ngModel" required>
                                         <option value="0">- Selecione a Conta de Destino -</option>
-                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}} (R$ {{conta.strVlSaldo}})</option>
+                                        <option *ngFor="let conta of listaConta" [ngValue]="conta.idConta">{{conta.dsConta}} ({{conta.vlSaldo | moeda}})</option>
                                     </select>
                                 </div>
                             </div>

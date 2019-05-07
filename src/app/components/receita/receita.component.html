@@ -1,4 +1,4 @@
-<app-despesa-cartao-title></app-despesa-cartao-title>
+<app-receita-title></app-receita-title>
 
 <form #form="ngForm" class="form-horizontal" novalidate>
 <div id="page-content">
@@ -11,7 +11,7 @@
             <div class="pad-btm form-inline">
                 <div class="row">
                     <div class="col-sm-6 table-toolbar-left">
-                        <button id="demo-btn-addrow" (click)="abrirModalInserir()" class="btn btn-primary"><i class="demo-pli-add"></i> Nova Despesa de Cartão</button>
+                        <button id="demo-btn-addrow" (click)="abrirModalInserir()" class="btn btn-primary"><i class="demo-pli-add"></i> Nova Receita</button>
                     </div>
                     <div class="col-sm-6 table-toolbar-right">
                         <div class="form-group">
@@ -22,32 +22,30 @@
                 </div>
             </div>
 
-            <!-- Despesas -->
+            <!-- Receitas -->
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>Categoria</th>
-                            <th>Cartão</th>
-                            <th width="15%">Data da Compra</th>
+                            <th>Conta</th>
                             <th width="15%">Valor</th>
-                            <th width="15%">Nº de Parcelas</th>
+                            <th width="15%">Data</th>
                             <th width="4%"></th>
                             <th width="4%"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let despesaCartao of lista">
+                        <tr *ngFor="let receita of lista">
                             <td>
-                                {{despesaCartao.categoria.dsCategoria}}
-                                <span *ngIf="despesaCartao.subcategoria != null"> - {{despesaCartao.subcategoria.dsSubcategoria}}</span>
-                            </td>                            
-                            <td>{{despesaCartao.cartao.dsCartao}}</td>
-                            <td><i class="demo-pli-calendar-4"></i> {{despesaCartao.dtDespesa | date: 'dd/MM/yyyy'}}</td>
-                            <td>R$ {{despesaCartao.vlDespesa | moeda}}</td>
-                            <td>{{despesaCartao.nrParcelas}}</td>
-                            <td><i class="fa fa-edit" (click)="abrirModalAlterar(despesaCartao.idDespesaCch)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar"></i></td>
-                            <td><i class="fa fa-remove" (click)="inativar(despesaCartao.idDespesaCch)" style="font-size: 18px; cursor: pointer;" title="Inativar"></i></td>
+                                {{receita.categoria.dsCategoria}}
+                                <span *ngIf="receita.subcategoria != null"> - {{receita.subcategoria.dsSubcategoria}}</span>
+                            </td>
+                            <td>{{receita.conta.dsConta}}</td>
+                            <td>{{receita.vlReceita | moeda}}</td>
+                            <td><i class="demo-pli-calendar-4"></i> {{receita.dtReceita | date: 'dd/MM/yyyy'}}</td>
+                            <td><i class="fa fa-edit" (click)="abrirModalAlterar(receita.idReceita)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar"></i></td>
+                            <td><i class="fa fa-remove" (click)="inativarReceita(receita.idReceita)" style="font-size: 18px; cursor: pointer;" title="Inativar"></i></td>
                         </tr>
                     </tbody>
                 </table>

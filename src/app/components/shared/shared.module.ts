@@ -18,7 +18,7 @@ import { CategoriaListComponent } from '../categoria/list/categoria-list.compone
 import { NotfoundComponent } from './notfound/notfound.component';
 import { CategoriaService } from '../../services/categoria/categoria.service';
 import { CategoriaFormComponent } from '../categoria/form/categoria-form.component';
-import { MatDialogModule, MatRadioButton, MatToolbarModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatRadioGroup, MatRadioModule } from '@angular/material';
+import { MatDialogModule, MatToolbarModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatRadioGroup, MatRadioModule } from '@angular/material';
 import { ToastrModule } from 'ngx-toastr';
 import { PagerService } from '../../services/pager.service';
 import { FilterPipe } from '../generic/filter';
@@ -65,6 +65,18 @@ import { DespesaFixaComponent } from '../despesa-fixa/despesa-fixa.component';
 import { DespesaFixaTitleComponent } from '../despesa-fixa/title/despesa-fixa-title.component';
 import { DespesaFixaService } from '../../services/despesa-fixa/despesa-fixa.service';
 import { DespesaFixaSaveComponent } from '../despesa-fixa/save/despesa-fixa-save.component';
+import { ReceitaService } from '../../services/receita/receita.service';
+import { ReceitaComponent } from '../receita/receita.component';
+import { ReceitaTitleComponent } from '../receita/title/receita-title.component';
+import { ReceitaSaveComponent } from '../receita/save/receita-save.component';
+import { ReceitaAgendamentoTitleComponent } from '../receita-agendamento/title/receita-agendamento-title.component';
+import { ReceitaAgendamentoSaveComponent } from '../receita-agendamento/save/receita-agendamento-save.component';
+import { ReceitaAgendamentoComponent } from '../receita-agendamento/receita-agendamento.component';
+import { ReceitaAgendamentoHeaderService } from '../../services/receita-agendamento/receita-agendamento-header.service';
+import { ReceitaFixaComponent } from '../receita-fixa/receita-fixa.component';
+import { ReceitaFixaSaveComponent } from '../receita-fixa/save/receita-fixa-save.component';
+import { ReceitaFixaTitleComponent } from '../receita-fixa/title/receita-fixa-title.component';
+import { ReceitaFixaService } from '../../services/receita-fixa/receita-fixa.service';
 
 
 
@@ -138,6 +150,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DespesaFixaComponent,
         DespesaFixaSaveComponent,
         DespesaFixaTitleComponent,
+        ReceitaTitleComponent,
+        ReceitaSaveComponent,
+        ReceitaComponent,
+        ReceitaAgendamentoTitleComponent,
+        ReceitaAgendamentoSaveComponent,
+        ReceitaAgendamentoComponent,
+        ReceitaFixaComponent,
+        ReceitaFixaSaveComponent,
+        ReceitaFixaTitleComponent,
         FooterComponent,
         NotfoundComponent,
         FilterPipe,
@@ -156,6 +177,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       DespesaCartaoService,
       DespesaFixaService,
       DespesaAgendamentoHeaderService,
+      ReceitaService,
+      ReceitaAgendamentoHeaderService,
+      ReceitaFixaService,
       TransferenciaFixaService,
       {
         provide: HTTP_INTERCEPTORS,

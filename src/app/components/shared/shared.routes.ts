@@ -21,6 +21,12 @@ import { DespesaAgendamentoSaveComponent } from '../despesa-agendamento/save/des
 import { DespesaAgendamentoComponent } from '../despesa-agendamento/despesa-agendamento.component';
 import { DespesaFixaComponent } from '../despesa-fixa/despesa-fixa.component';
 import { DespesaFixaSaveComponent } from '../despesa-fixa/save/despesa-fixa-save.component';
+import { ReceitaComponent } from '../receita/receita.component';
+import { ReceitaSaveComponent } from '../receita/save/receita-save.component';
+import { ReceitaAgendamentoSaveComponent } from '../receita-agendamento/save/receita-agendamento-save.component';
+import { ReceitaAgendamentoComponent } from '../receita-agendamento/receita-agendamento.component';
+import { ReceitaFixaComponent } from '../receita-fixa/receita-fixa.component';
+import { ReceitaFixaSaveComponent } from '../receita-fixa/save/receita-fixa-save.component';
 
 export const CONTENT_ROUTES: Routes = [
 
@@ -52,7 +58,17 @@ export const CONTENT_ROUTES: Routes = [
         { path : 'despesa-agendamento', component: DespesaAgendamentoComponent, canActivate: [AuthGuard]},
         { path : 'despesa-agendamento-save', component: DespesaAgendamentoSaveComponent, canActivate: [AuthGuard]},
 
+        { path : 'receita-agendamento', component: ReceitaAgendamentoComponent, canActivate: [AuthGuard]},
+        { path : 'receita-agendamento-save', component: ReceitaAgendamentoSaveComponent, canActivate: [AuthGuard]},
+
         { path : 'despesa-fixa', component: DespesaFixaComponent, canActivate: [AuthGuard]},
         { path : 'despesa-fixa-save', component: DespesaFixaSaveComponent, canActivate: [AuthGuard]},
+
+        { path : 'receita-fixa', component: ReceitaFixaComponent, canActivate: [AuthGuard]},
+        { path : 'receita-fixa-save', component: ReceitaFixaSaveComponent, canActivate: [AuthGuard]},
+
+        { path : 'receita', component: ReceitaComponent, canActivate: [AuthGuard]},
+        { path : 'receita-save', component: ReceitaSaveComponent, canActivate: [AuthGuard]},
+
 
 ]

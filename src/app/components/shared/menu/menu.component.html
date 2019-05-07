@@ -48,48 +48,56 @@
                                   <li routerLinkActive="active-sub active">
                                         <a [routerLink]="['/categoria-list']">
                                             <i class="pli-numbering-list"></i>
-                                            <span class="menu-title">Categorias</span>
+                                            <span class="menu-title">Categoria</span>
                                         </a>
                                   </li>
 
                                   <li routerLinkActive="active-sub active">
                                     <a [routerLink]="['/cartao-list']">
                                         <i class="demo-pli-credit-card-2"></i>
-                                        <span class="menu-title">Cartões</span>
+                                        <span class="menu-title">Cartão</span>
                                     </a>
                                   </li>
                                        
                                   <li routerLinkActive="active-sub active">
                                     <a [routerLink]="['/conta-list']">
                                         <i class="ti-money"></i>
-                                        <span class="menu-title">Contas</span>
+                                        <span class="menu-title">Conta</span>
                                     </a>
                                   </li>
 
                                   <li routerLinkActive="active-sub active">
                                     <a [routerLink]="['/transferencia']">
                                         <i class="fa fa-refresh"></i>
-                                        <span class="menu-title">Transfências</span>
+                                        <span class="menu-title">Transfência</span>
                                     </a>
                                  </li>
                                   
                                   <li routerLinkActive="active-sub active">
                                         <a href="helper-classes.html">
                                             <i class="pli-financial"></i>
-                                            <span class="menu-title">Receitas</span>
+                                            <span class="menu-title">Receita</span>
+                                            <i class="arrow"></i>
                                         </a>
+
+                                        <!--Submenu-->
+                                    <ul class="collapse">
+                                        <li routerLinkActive="active-link"><a [routerLink]="['/receita']">Crédito</a></li>
+                                        <li routerLinkActive="active-link"><a [routerLink]="['/receita-agendamento']">Agendamento</a></li>
+                                        <li routerLinkActive="active-link"><a [routerLink]="['/receita-fixa']">Fixas</a></li>
+                                    </ul>
                                   </li>
 
                                   <li routerLinkActive="active-sub active">
                                     <a href="#">
                                         <i class="pli-dollar"></i>
-                                        <span class="menu-title">Despesas</span>
+                                        <span class="menu-title">Despesa</span>
                                         <i class="arrow"></i>
                                     </a>
                     
                                     <!--Submenu-->
                                     <ul class="collapse">
-                                        <li routerLinkActive="active-link"><a [routerLink]="['/despesa']">Nova</a></li>
+                                        <li routerLinkActive="active-link"><a [routerLink]="['/despesa']">Débito</a></li>
                                         <li routerLinkActive="active-link"><a [routerLink]="['/despesa-cartao']">Cartão</a></li>
                                         <li routerLinkActive="active-link"><a [routerLink]="['/despesa-agendamento']">Agendamento</a></li>
                                         <li routerLinkActive="active-link"><a [routerLink]="['/despesa-fixa']">Fixas</a></li>
