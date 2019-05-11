@@ -24,7 +24,7 @@
                             <th>Descricao</th>
                             <th>Categoria</th>
                             <th width="15%">Valor Base</th>
-                            <th width="15%">Dia Vencimento</th>
+                            <th width="15%">Dia Receita</th>
                             <th width="4%"></th>
                             <th width="4%"></th>
                         </tr>
@@ -37,7 +37,7 @@
                                 <span *ngIf="receitaFixa.subcategoria != null"> - {{receitaFixa.subcategoria.dsSubcategoria}}</span>
                             </td>                            
                             <td>{{receitaFixa.vlReceita | moeda}}</td>
-                            <td>{{receitaFixa.nrDiaVencimento}}</td>
+                            <td>{{receitaFixa.nrDiaReceita}}</td>
                             <td><i class="fa fa-edit" (click)="abrirModalAlterar(receitaFixa.idReceitaFixa)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Editar"></i></td>
                             <td><i class="fa fa-remove" (click)="inativar(receitaFixa.idReceitaFixa)" style="font-size: 18px; cursor: pointer;" title="Inativar"></i></td>
                         </tr>

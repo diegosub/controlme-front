@@ -112,6 +112,11 @@ export class DespesaFixaSaveComponent extends CrudController<DespesaFixa, {new()
       return false;
     }
 
+    if(this.objeto.nrDiaVencimento < 1 || this.objeto.nrDiaVencimento > 31) {
+      this.msgErro("O campo Dia do Vencimento é deve ser informado no intervalo entre 1 e 31.");
+      return false;
+    }
+
     return true;
   }
 
@@ -122,9 +127,7 @@ export class DespesaFixaSaveComponent extends CrudController<DespesaFixa, {new()
       return false;
     }
 
-    this.validarInserir();
-
-    return true;
+    return this.validarInserir();
   }
 
   completarInserir() {
