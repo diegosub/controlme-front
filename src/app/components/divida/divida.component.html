@@ -1,0 +1,80 @@
+<app-divida-title></app-divida-title>
+
+<form #form="ngForm" class="form-horizontal" novalidate>
+<div id="page-content">
+
+    <div class="panel">
+    
+        <!--Data Table-->
+        <!--===================================================-->
+        <div class="panel-body">
+            <div class="pad-btm form-inline">
+                <div class="row">
+                    <div class="col-sm-6 table-toolbar-left">
+                        <label>Mes/Ano: </label>
+                        <select [(ngModel)]="nrMes" name="mes" class="form-control" style="width: 100px;" (change)="pesquisarDivida()">
+                            <option *ngFor="let mes of listaMes" [ngValue]="mes.vlDominio">{{mes.vlDominio}} - {{mes.dsDominio}}</option>
+                        </select>
+                        <select [(ngModel)]="nrAno" name="ano" class="form-control" style="width: 80px;" (change)="pesquisarDivida()">
+                            <option *ngFor="let ano of listaAno" [ngValue]="ano">{{ano}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-6 table-toolbar-right">
+                            
+                            <button class="btn btn-lg btn-default btn-active-success" disabled>
+                                Total: <b class="text-primary text-semibold">{{vlTotal | moeda}}</b>
+                            </button>
+                            
+                        </div>
+                </div>
+            </div>
+
+            <!-- Despesas -->
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Tipo</th>
+                            <th>Situação</th>
+                            <th width="15%">Vencimento</th>
+                            <th width="10%">Dias à Vencer</th>
+                            <th width="15%">Valor</th>
+                            <th width="5%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let divida of lista">
+                            <td><b>{{divida.dsDespesa}}</b></td>
+                            <td>
+                                <span class="text-purple text-semibold" *ngIf="divida.dsTipo == 'CARTAO'">{{divida.dsTipo}}</span>
+                                <span class="text-info text-semibold" *ngIf="divida.dsTipo == 'FIXA'">{{divida.dsTipo}}</span>
+                                <span class="text-mint text-semibold" *ngIf="divida.dsTipo == 'AGENDAMENTO'">{{divida.dsTipo}}</span>
+                            </td>
+                            <td *ngIf='divida.fgDespesaPaga'><div class="label label-table label-success">Paga</div></td>
+                            <td *ngIf='!divida.fgDespesaPaga'><div class="label label-table label-warning">Pendente</div></td>
+                            <td><i class="demo-pli-calendar-4"></i> {{divida.dtVencimento | date: 'dd/MM/yyyy'}}</td>
+                            <td style="text-align: left">
+                                <span class="text-success text-semibold" *ngIf="divida.nrDiaDiferenca > 0">{{divida.nrDiaDiferenca}} dias</span>
+                                <span class="text-danger text-semibold" *ngIf="divida.nrDiaDiferenca < 0">{{divida.nrDiaDiferenca}} dias</span>
+                                <span class="text-warning text-semibold" *ngIf="divida.nrDiaDiferenca == 0">{{divida.nrDiaDiferenca}} dias</span>
+                            </td>
+                            <td>{{divida.vlDespesa | moeda}}</td>
+                            <td>
+                                <i *ngIf="divida.fgPodePagar && !divida.fgDespesaPaga" class="fa fa-handshake-o" (click)="abrirModalAlterar(divida.idDespesa)" style="font-size: 16px; cursor: pointer; vertical-align: bottom;" title="Realizar Pagamento"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+           
+        </div>
+        <!--===================================================-->
+        <!--End Data Table-->
+    
+    </div>
+
+</div>
+</form>

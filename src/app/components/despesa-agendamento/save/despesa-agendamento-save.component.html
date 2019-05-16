@@ -17,6 +17,14 @@
                         <div class="modal-body">                         
                             
                             <div class="row">
+                                <div class="col-sm-12">
+                                    <label class="control-label">Descrição <span style="color: #dc0808">*</span> </label>
+                                    <input type="text" autocomplete="off" [(ngModel)]="objeto.dsDespesaAgh" name="dsDespesaAgh" class="form-control" 
+                                           id="inputDsDespesaAgh" placeholder="Informe a descrição do agendamento" #dsDespesaAgh="ngModel" required>   
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-sm-6">
                                     <label class="control-label">Categoria <span style="color: #dc0808">*</span> </label>
                                     <select class="form-control selectpicker" (change)="atualizarSubcategoria()" [(ngModel)]="objeto.idCategoria" name="idCategoria" #idCategoria="ngModel" required>

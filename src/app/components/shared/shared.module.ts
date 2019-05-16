@@ -77,6 +77,9 @@ import { ReceitaFixaComponent } from '../receita-fixa/receita-fixa.component';
 import { ReceitaFixaSaveComponent } from '../receita-fixa/save/receita-fixa-save.component';
 import { ReceitaFixaTitleComponent } from '../receita-fixa/title/receita-fixa-title.component';
 import { ReceitaFixaService } from '../../services/receita-fixa/receita-fixa.service';
+import { DividaComponent } from '../divida/divida.component';
+import { DividaService } from '../../services/divida/divida.service';
+import { DividaTitleComponent } from '../divida/title/divida-title.component';
 
 
 
@@ -159,6 +162,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ReceitaFixaComponent,
         ReceitaFixaSaveComponent,
         ReceitaFixaTitleComponent,
+        DividaComponent,
+        DividaTitleComponent,
         FooterComponent,
         NotfoundComponent,
         FilterPipe,
@@ -180,6 +185,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       ReceitaService,
       ReceitaAgendamentoHeaderService,
       ReceitaFixaService,
+      DividaService,
       TransferenciaFixaService,
       {
         provide: HTTP_INTERCEPTORS,

@@ -122,6 +122,10 @@ export class DespesaAgendamentoSaveComponent extends CrudController<DespesaAgend
 
   validarInserir() {
 
+    if(this.objeto.dsDespesaAgh == null || this.objeto.dsDespesaAgh == '') {
+      this.msgErro("O campo Categoria é obrigatório.");
+      return false;
+    }
 
     if(this.objeto.idCategoria == 0 || this.objeto.idCategoria == null) {
       this.msgErro("O campo Categoria é obrigatório.");
@@ -154,9 +158,8 @@ export class DespesaAgendamentoSaveComponent extends CrudController<DespesaAgend
       return false;
     }
 
-    this.validarInserir();
+    return this.validarInserir();
 
-    return true;
   }
 
   completarInserir() {

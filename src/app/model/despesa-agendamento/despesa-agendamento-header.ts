@@ -6,6 +6,7 @@ import { Conta } from "../conta/conta";
 export class DespesaAgendamentoHeader {
     
     idDespesaAgh: Number;
+    dsDespesaAgh: string;
     idCategoria: Number;
     idSubcategoria: Number;
     idConta: Number;
@@ -17,7 +18,7 @@ export class DespesaAgendamentoHeader {
     fgAtivo: boolean;    
     dtCadastro: Date;    
     dtAlteracao: Date;
-    dsObservacao: String;
+    dsObservacao: string;
     idPeriodoAgh: Number;
 
     categoria: Categoria;

@@ -27,6 +27,7 @@ import { ReceitaAgendamentoSaveComponent } from '../receita-agendamento/save/rec
 import { ReceitaAgendamentoComponent } from '../receita-agendamento/receita-agendamento.component';
 import { ReceitaFixaComponent } from '../receita-fixa/receita-fixa.component';
 import { ReceitaFixaSaveComponent } from '../receita-fixa/save/receita-fixa-save.component';
+import { DividaComponent } from '../divida/divida.component';
 
 export const CONTENT_ROUTES: Routes = [
 
@@ -70,5 +71,5 @@ export const CONTENT_ROUTES: Routes = [
         { path : 'receita', component: ReceitaComponent, canActivate: [AuthGuard]},
         { path : 'receita-save', component: ReceitaSaveComponent, canActivate: [AuthGuard]},
 
-
+        { path : 'divida', component: DividaComponent, canActivate: [AuthGuard]},
 ]
